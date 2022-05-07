@@ -127,7 +127,7 @@
                       <select type="number" id="warehouseId" name="warehouseId" formControlName="warehouseId" class="form-control">    
                           <option value="50">اختر المصنع/ المخزن</option>
                           <option *ngFor="let warehouse of warehousesList" [ngValue]="warehouse.id"> 
-                            {{warehouse.name}}
+                            {{warehouse.name}} 
                           </option>
                       </select> 
                       <div *ngIf="!getWarehouseItemId(i).valid && (getWarehouseItemId(i).dirty ||getWarehouseItemId(i).touched)">
