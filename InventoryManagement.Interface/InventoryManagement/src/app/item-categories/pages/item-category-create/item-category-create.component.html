@@ -1,0 +1,126 @@
+<form [formGroup]="itemCategoryForm" (ngSubmit)="onSubmit()" novalidate>
+<div class="row">
+  
+    <div class="col-md-4">
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">معلومات الصنف</h3>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label for="name">اسم الصنف</label>
+            <input type="text" id="name" name="name" formControlName="name" class="form-control">
+            <div *ngIf="!name.valid && (name.dirty ||name.touched)">
+              <div class="alert alert-danger ">
+                يرجى ادخال الاسم بالشكل الصحيح!!
+                <div [hidden]="!name?.errors.required">
+                  الاسم مطلوب
+                </div>
+                <div [hidden]="!name?.errors.NotEmpty">
+                  الاسم فارغ !!
+                </div>
+                <div [hidden]="!name?.errors.minlength">
+                  عدد الأحرف يجب أن لا يقل عن {{name?.errors.minlength?.requiredLength}}
+                </div>
+                <div [hidden]="!name.errors.maxlength">
+                  عدد الأحرف يجب أن لا يزيد عن {{name.errors.maxlength?.requiredLength}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="description">وصف الصنف</label>
+            <textarea id="description" name="description" formControlName="description" class="form-control" rows="4"></textarea>
+            <div *ngIf="!description.valid && (description.dirty ||description.touched)">
+              <div class="alert alert-danger ">
+                يرجى ادخال الوصف بالشكل الصحيح!!
+                
+                <div [hidden]="!description.errors.maxlength">
+                  عدد الأحرف يجب أن لا يزيد عن {{description.errors.maxlength?.requiredLength}}
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+    </div>
+    <div class="col-md-8">
+      <div class="card card-secondary">
+        <div class="card-header">
+          <h3 class="card-title">الأصناف الفرعية</h3>
+        </div>
+        <div class="card-body">
+           
+          <div formArrayName="childCategories">
+            <div *ngFor="let childCategory of childCategories.controls; let i=index"  >
+              <div [formGroupName]="i" class="row" style="border-style:groove; border-color: beige; padding-top: 15px; margin-bottom: 10px;">
+                <div class="form-group col-md-3">
+                  <input type="text" id="name" name="name" formControlName="name" class="form-control" placeholder="اسم الصنف">
+                  <div *ngIf="!getChildCategoryName(i).valid && (getChildCategoryName(i).dirty ||getChildCategoryName(i).touched)">
+                    <div class="alert alert-danger ">
+                      يرجى ادخال الاسم بالشكل الصحيح!!
+                      <div [hidden]="!getChildCategoryName(i).errors.required">
+                        الاسم مطلوب
+                      </div>
+                      <div [hidden]="!getChildCategoryName(i).errors.NotEmpty">
+                        الاسم فارغ !!
+                      </div>
+                      <div [hidden]="!getChildCategoryName(i).errors.minlength">
+                        عدد الأحرف يجب أن لا يقل عن {{getChildCategoryName(i).errors.minlength?.requiredLength}}
+                      </div>
+                      <div [hidden]="!getChildCategoryName(i).errors.maxlength">
+                        عدد الأحرف يجب أن لا يزيد عن {{getChildCategoryName(i).errors.maxlength?.requiredLength}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group col-md-7">
+                  <textarea id="description" name="description" formControlName="description" class="form-control" rows="1" placeholder="وصف الصنف"></textarea>
+                  <div *ngIf="!getChildCategoryDescription(i).valid && (getChildCategoryDescription(i).dirty ||getChildCategoryDescription(i).touched)">
+                    <div class="alert alert-danger ">
+                      يرجى ادخال الوصف بالشكل الصحيح!!
+                      
+                      <div [hidden]="!getChildCategoryDescription(i).errors.maxlength">
+                        عدد الأحرف يجب أن لا يزيد عن {{getChildCategoryDescription(i).errors.maxlength?.requiredLength}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group col-md-2">
+                  <button (click)="removeChildCategory(i)" type="button" class="btn btn-tool" >
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              
+            </div>
+            <div class="row">
+              <a (click)="addNewChildCategory()"   class="btn btn-outline-success ">إضافة</a>
+            </div>
+          </div>
+         
+          
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+    </div>
+ 
+  </div>
+  <div class="row">
+    <div class="col-4">
+    </div>
+    <div class="col-4">
+      <input type="submit" [disabled]="!itemCategoryForm.valid" value="إضافة الصنف الجديد" class="btn btn-success ">
+    </div>
+    <div class="col-4">
+    </div>
+  
+  </div>
+</form>
+
+<br>
+<br>

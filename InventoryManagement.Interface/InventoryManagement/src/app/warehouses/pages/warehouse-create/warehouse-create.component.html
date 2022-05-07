@@ -1,0 +1,55 @@
+<div class="row">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-8">
+      <div class="card card-secondary">
+        <div class="card-header">
+          <h3 class="card-title">إضافة مصنع/ مخزن جديد</h3>
+        </div>
+        <div class="card-body">
+            <form #warehouseForm="ngForm" (ngSubmit)="onSubmit(warehouseForm)" novalidate>
+                <div class="form-group">
+                    <label for="name">اسم المصنع/ المخزن</label>
+                    <input type="text" id="name" name="name" #name="ngModel" [(ngModel)]="warehouseForCreation.name" required minlength=4 maxlength=50 AppNotEmptyValidator class="form-control">
+                    <div *ngIf="!name?.valid && (name?.dirty || name?.touched)">
+                        <div class="alert alert-danger ">
+                            يرجى ادخال الاسم بالشكل الصحيح!!
+                            <div *ngIf="name.errors.required">
+                                الاسم مطلوب
+                             </div>
+                             <div *ngIf="name.errors.NotEmpty">
+                                 الاسم فارغ !!
+                              </div>
+                             <div *ngIf="name.errors.minlength">
+                               عدد الأحرف يجب أن لا يقل عن {{name.errors.minlength.requiredLength}}
+                             </div>
+                          </div>                     
+                        </div>
+                </div>
+                  <div class="form-group">
+                    <label for="description">وصف المصنع/ المخزن</label>
+                    <textarea id="description" name="description" [(ngModel)]="warehouseForCreation.description" maxlength="500" class="form-control" rows="4"></textarea>
+                  </div>
+                  <div class="form-group">
+        
+                      <input [disabled]="!warehouseForm.valid" type="submit" value="إضافة المصنع/ المخزن" class="btn btn-success">
+                  </div>
+
+            </form>
+
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+    </div>
+    <div class="col-md-2">
+    </div>
+    
+  </div>
+  <pre>Value : {{warehouseForm.value | json }} </pre>
+<pre>Valid : {{warehouseForm.valid}} </pre>
+<pre>Touched : {{warehouseForm.touched  }} </pre>
+<pre>Submitted : {{warehouseForm.submitted  }} </pre>
+  <br>
+  <br>
+  

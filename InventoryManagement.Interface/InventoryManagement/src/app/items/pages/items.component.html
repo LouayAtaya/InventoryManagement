@@ -1,0 +1,73 @@
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">قائمة  المنتجات</h3>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <table id="example1" class="table table-bordered table-striped">
+              <thead>
+              <tr>
+                <th>رقم المنتج</th> 
+                <th>المعرف الخاص</th>
+                <th>اسم المنتج</th>
+                <th>الوصف</th>
+                <th>السعر</th>
+                <th>الكمية الاجمالية</th>
+                <th>نوع المنتج</th>
+                <th>مفعل/ غير مفعل</th>
+                <th>تاريخ البدء</th>
+              </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of items">
+                  <td>{{item.id}}</td>
+                  <td>{{item.code}}</td>
+                  <td>{{item.name}}</td>
+                  <td>{{item.description}}</td>
+                  <td>{{item.price}}</td>
+                  <td>{{item.totalQuantity}}</td>
+                  <td>{{item.itemCategoryName}}</td>
+                  <td> 
+                    <div *ngIf="item.isActive; else elseBlock">
+                        مفعل
+                    </div>
+                    <ng-template #elseBlock>
+                        غير مفعل
+                    </ng-template>
+                    </td>
+                  <td>{{item.createdAt|date:'medium'}}</td>
+                  <td> 
+                    <a type="button" class="btn btn-block btn-info btn-sm">عرض التفاصيل</a>
+                    <a type="button" class="btn btn-block btn-warning btn-sm">تعديل</a>
+                    <a type="button" class="btn btn-block btn-danger btn-sm">حذف</a>
+                  </td>
+  
+                 
+                </tr>
+             
+              
+              </tbody>
+              <tfoot>
+              <tr>
+                <th>رقم المنتج</th> 
+                <th>المعرف الخاص</th>
+                <th>اسم المنتج</th>
+                <th>الوصف</th>
+                <th>السعر</th>
+                <th>الكمية الاجمالية</th>
+                <th>نوع المنتج</th>
+                <th>مفعل/ غير مفعل</th>
+                <th>تاريخ البدء</th>
+              </tr>
+              </tfoot>
+            </table>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+      </div>
+  </div>

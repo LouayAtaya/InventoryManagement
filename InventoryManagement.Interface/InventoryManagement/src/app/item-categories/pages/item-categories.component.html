@@ -1,0 +1,57 @@
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">قائمة الأصناف</h3>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <table id="example1" class="table table-bordered table-striped">
+              <thead>
+              <tr>
+                <th>رقم الصنف</th> 
+                <th>اسم الصنف</th>
+                <th>الوصف</th>
+                <th>مفعل/ غير مفعل</th>
+                <th>تاريخ البدء</th>
+              </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let itemCategory of itemCategories">
+                  <td>{{itemCategory.id}}</td>
+                  <td>{{itemCategory.name}}</td>
+                  <td>{{itemCategory.description}}</td>
+                  <td> 
+                    <div *ngIf="itemCategory.isActive; else elseBlock">
+                        مفعل
+                    </div>
+                    <ng-template #elseBlock>
+                        غير مفعل
+                    </ng-template>
+                  </td>
+                  <td>{{itemCategory.createdAt|date:'medium'}}</td>
+                  <td> 
+                    <a type="button" class="btn btn-block btn-info btn-sm">عرض التفاصيل</a>
+                    <a type="button" class="btn btn-block btn-warning btn-sm">تعديل</a>
+                    <a type="button" class="btn btn-block btn-danger btn-sm">حذف</a>
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot>
+              <tr>
+                <th>رقم الصنف</th> 
+                <th>اسم الصنف</th>
+                <th>الوصف</th>
+                <th>مفعل/ غير مفعل</th>
+                <th>تاريخ البدء</th>
+              </tr>
+              </tfoot>
+            </table>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+      </div>
+  </div>
