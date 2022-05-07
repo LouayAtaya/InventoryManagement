@@ -51,6 +51,7 @@ namespace InventoryManagement.Services
             await this._repositoryWrapper.SaveAsync();
 
             return this._mapper.Map<WarehouseDto>(warehouse);
+
         }
 
         public async Task UpdateWarehouseAsync(int warehouseId, WarehouseForUpdateDto warehouseForUpdateDto)
