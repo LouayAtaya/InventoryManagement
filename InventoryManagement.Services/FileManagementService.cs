@@ -13,19 +13,37 @@ namespace InventoryManagement.Services
 {
     public class FileManagementService : IFileManagementService
     {
-        private readonly IConfiguration _config;
-
-        public FileManagementService(IConfiguration configuration)
+        public async Task<string> UploadFile(IFormFile formFile, string folderName)
         {
-            _config = configuration;
-        }
-
-        public async Task<List<String>> uploadFiles(IFormFileCollection formFiles)
-        {
-            var folderName = _config["CategoryFileUpload"];
+            //var folderName = _config["CategoryFileUpload"];
             var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
 
-            if (formFiles.Any(f => f.Length == 0))
+            HandleFormFileErrors(formFile);
+
+            if (!Directory.Exists(pathToSave))
+            {
+                Directory.CreateDirectory(pathToSave);
+            }
+
+            var savedFileName=await this.SaveFormFile(formFile, pathToSave);
+            
+            var fileDbPath = Path.Combine(folderName, savedFileName);
+
+            return fileDbPath;
+        }
+
+        public async Task<List<String>> UploadFiles(IEnumerable<IFormFile> formFiles, string folderName)
+        {
+            //var folderName = _config["CategoryFileUpload"];
+            var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+
+            foreach(var formFile in formFiles)
+            {
+                this.HandleFormFileErrors(formFile);
+            }
+
+            #region 
+            /*if (formFiles.Any(f => f.Length == 0))
             {
                 throw new Exception("file length 0");
             }
@@ -35,7 +53,8 @@ namespace InventoryManagement.Services
             {
                 throw new Exception("file is exe");
 
-            }
+            } */
+            #endregion
 
             if (!Directory.Exists(pathToSave))
             {
@@ -46,36 +65,57 @@ namespace InventoryManagement.Services
 
             foreach (var formFile in formFiles)
             {
-                var fileName = ContentDispositionHeaderValue.Parse(formFile.ContentDisposition).FileName.Trim('"');
-                var fileNameWithOutExtension = Path.GetFileNameWithoutExtension(fileName);
-                var fileExtension = Path.GetExtension(fileName);
 
-                var fullPath = Path.Combine(pathToSave, fileName);
-                var dbPath = Path.Combine(folderName, fileName);
-
-                if (File.Exists(fullPath))
-                {
-                    int counter = 1;
-                    string tempFileName = "";
-                    while (File.Exists(fullPath))
-                    {
-                        tempFileName = fileNameWithOutExtension + "(" + counter + ")" + fileExtension;
-                        fullPath = Path.Combine(pathToSave, tempFileName);
-                        dbPath = Path.Combine(folderName, tempFileName);
-
-                        counter++;
-                    }
-                }
+                var dbPath = await this.SaveFormFile(formFile, pathToSave);
 
                 dbPaths.Add(dbPath);
-
-                using (var stream = new FileStream(fullPath, FileMode.Create))
-                {
-                    await formFile.CopyToAsync(stream);
-                }
-
             }
             return dbPaths;
         }
+
+        private void HandleFormFileErrors(IFormFile formFile)
+        {
+            if (formFile.Length == 0)
+            {
+                throw new Exception("file length 0");
+            }
+
+            if (Path.GetExtension(formFile.FileName).ToLower().Equals(".exe"))
+            {
+                throw new Exception("file is exe");
+            }
+        }
+
+        private async Task<string> SaveFormFile(IFormFile formFile, string pathToSave)
+        {
+            var fileName = ContentDispositionHeaderValue.Parse(formFile.ContentDisposition).FileName.Trim('"');
+            var fileNameWithOutExtension = Path.GetFileNameWithoutExtension(fileName);
+            var fileExtension = Path.GetExtension(fileName);
+
+            var fullPath = Path.Combine(pathToSave, fileName);
+
+            if (File.Exists(fullPath))
+            {
+                int counter = 1;
+                
+                while (File.Exists(fullPath))
+                {
+                    fileName = fileNameWithOutExtension + "(" + counter + ")" + fileExtension;
+                    fullPath = Path.Combine(pathToSave, fileName);
+
+                    counter++;
+                }
+            }
+
+            using (var stream = new FileStream(fullPath, FileMode.Create))
+            {
+                await formFile.CopyToAsync(stream);
+            }
+
+            return fileName;
+        }
+
+
+
     }
 }

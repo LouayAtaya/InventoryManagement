@@ -20,7 +20,7 @@ namespace InventoryManagement.Services
 
         private readonly Lazy<IFileManagementService> _fileManagementService;
 
-        public ServiceManager(IRepositoryWrapper repositoryWrapper, IMapper mapper, IConfiguration configuration)
+        public ServiceManager(IRepositoryWrapper repositoryWrapper, IMapper mapper)
         {
             _lazyItemService = new Lazy<IItemService>(() => new ItemService(repositoryWrapper, mapper));
 
@@ -28,7 +28,7 @@ namespace InventoryManagement.Services
 
             _lazyWarehouseService = new Lazy<IWarehouseService>(() => new WarehouseService(repositoryWrapper,mapper));
 
-            _fileManagementService=new Lazy<IFileManagementService>(()=>new FileManagementService(configuration));
+            _fileManagementService=new Lazy<IFileManagementService>(()=>new FileManagementService());
         }
 
         public IItemService ItemService => _lazyItemService.Value;

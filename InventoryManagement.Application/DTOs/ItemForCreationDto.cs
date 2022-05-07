@@ -28,7 +28,7 @@ namespace InventoryManagement.Application.DTOs
         public int? TotalQuantity { get; set; }
         [Required(ErrorMessage = "ItemType is required")]
         public ItemType ItemType { get; set; }
-        public bool IsActive { get; set; } = true;
+        public bool? IsActive { get; set; } = true;
 
         public int ItemCategoryId { get; set; }
         public virtual ICollection<WarehouseItemForCreationDto> WarehouseItems { get; set; }

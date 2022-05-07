@@ -3,6 +3,7 @@ using InventoryManagement.API.ActionFilters;
 using InventoryManagement.Application.Contracts;
 using InventoryManagement.Application.DTOs;
 using InventoryManagement.Services.Abstractions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -25,12 +26,17 @@ namespace InventoryManagement.API.Controllers
         private readonly IServiceManager serviceManager;
         private readonly ILoggerManager _loggerManager;
         private readonly IMapper _mapper;
+        private readonly IConfiguration _config;
+        private string _fileFolderPath;
 
-        public ItemCategoriesController(IServiceManager serviceManager, ILoggerManager loggerManager, IMapper mapper)
+        public ItemCategoriesController(IServiceManager serviceManager, ILoggerManager loggerManager, IMapper mapper, IConfiguration configuration)
         {
             this.serviceManager = serviceManager;
             _loggerManager = loggerManager;
             _mapper = mapper;
+            _config = configuration;
+            _fileFolderPath = _config["CategoryFileUpload"];
+
         }
 
         // GET: api/<ItemCategoriesController>
@@ -52,80 +58,27 @@ namespace InventoryManagement.API.Controllers
         }
 
         // POST api/<ItemCategoriesController>
-        [HttpPost]
+        [HttpPost, DisableRequestSizeLimit]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
-        public async Task<IActionResult> CreateItemCategoryAsync([FromBody] ItemCategoryForCreationDto itemCategoryForCreationDto)
+        public async Task<IActionResult> CreateItemCategoryAsync([FromForm] ItemCategoryForCreationDto itemCategoryForCreationDto)
         {
+            var fileDbPath = await this.serviceManager.FileManagementService.UploadFile(itemCategoryForCreationDto.ImageFile, this._fileFolderPath);
+            itemCategoryForCreationDto.Image = fileDbPath;
+
             var itemCategoryDto = await this.serviceManager.ItemCategoryService.CreateItemCategoryAsync(itemCategoryForCreationDto);
 
-            return CreatedAtAction("GetItemCategoryById", new { itemCategoryId = itemCategoryDto.Id }, itemCategoryDto);
-        }
-
-        // POST api/<ItemCategoriesController>
-        [HttpPost("CreateItemCategoryWithFilesAsync"), DisableRequestSizeLimit]
-        public async Task<IActionResult> CreateItemCategoryWithFilesAsync()
-        {
-            var formCollection = await Request.ReadFormAsync();
+            #region Method 2
+            /*var formCollection = await Request.ReadFormAsync();
             var itemCategoryString = formCollection["itemCategory"];
             var itemCategoryForCreationDto = JsonConvert.DeserializeObject<ItemCategoryForCreationDto>(itemCategoryString);
-            
+
             var formFiles = formCollection.Files;
 
             List<String> paths = await this.serviceManager.FileManagementService.uploadFiles(formFiles);
 
-            var itemCategoryDto = await this.serviceManager.ItemCategoryService.CreateItemCategoryAsync(itemCategoryForCreationDto);
-
-            return CreatedAtAction("GetItemCategoryById", new { itemCategoryId = itemCategoryDto.Id }, itemCategoryDto);
-        }
-
-        // POST api/<ItemCategoriesController>
-        [HttpPost("upload"), DisableRequestSizeLimit]
-        public async Task<IActionResult> UploadFiles()
-        {
-            var formCollection = await Request.ReadFormAsync();
-            var itemCategoryString = formCollection["itemCategory"];
-            var itemCategory = JsonConvert.DeserializeObject<ItemCategoryForCreationDto>(itemCategoryString);
-
-            var formFiles = formCollection.Files;
-
-            List<String> paths=await this.serviceManager.FileManagementService.uploadFiles(formFiles);
-
-            return Ok(paths);
-
-            #region MyRegion
-            /*try
-                {
-                    var formCollection = await Request.ReadFormAsync();
-
-                    var itemCategoryString = formCollection["itemCategory"];
-                    var itemCategory = JsonConvert.DeserializeObject<ItemCategoryForCreationDto>(itemCategoryString);
-
-
-                    var file = formCollection.Files.First();
-                    //var folderName = _config["CategoryFileUpload"];
-                    var folderName = Path.Combine("Resources", "Images\\Categories");
-                    var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
-                    if (file.Length > 0)
-                    {
-                        var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-                        var fullPath = Path.Combine(pathToSave, fileName);
-                        var dbPath = Path.Combine(folderName, fileName);
-                        using (var stream = new FileStream(fullPath, FileMode.Create))
-                        {
-                            file.CopyTo(stream);
-                        }
-                        return Ok(new { dbPath });
-                    }
-                    else
-                    {
-                        return BadRequest();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    return StatusCode(500, $"Internal server error: {ex}");
-                }*/ 
+            */
             #endregion
+            return CreatedAtAction("GetItemCategoryById", new { itemCategoryId = itemCategoryDto.Id }, itemCategoryDto);
         }
 
         // PUT api/<ItemCategoriesController>/5

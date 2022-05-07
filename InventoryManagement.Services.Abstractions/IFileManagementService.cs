@@ -9,8 +9,11 @@ namespace InventoryManagement.Services.Abstractions
 {
     public interface IFileManagementService
     {
+        //return uploaded file paths
+        Task<String> UploadFile(IFormFile formFiles, string folderName);
+
         //return list of uploaded files paths
-        Task<List<String>> uploadFiles(IFormFileCollection formFiles);
-        
+        Task<List<String>> UploadFiles(IEnumerable<IFormFile> formFile, string folderName);
+
     }
 }

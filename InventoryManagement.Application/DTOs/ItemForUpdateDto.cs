@@ -29,7 +29,7 @@ namespace InventoryManagement.Application.DTOs
         public int Price { get; set; }
         public int TotalQuantity { get; set; }
         public ItemType ItemType { get; set; }
-        public bool IsActive { get; set; } = true;
+        public bool? IsActive { get; set; } = true;
 
         public int ItemCategoryId { get; set; }
         public virtual ICollection<WarehouseItemForUpdateDto> WarehouseItems { get; set; }

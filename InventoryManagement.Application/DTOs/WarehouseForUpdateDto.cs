@@ -17,7 +17,7 @@ namespace InventoryManagement.Application.DTOs
 
         [StringLength(500, ErrorMessage = "Description cannot be loner then 500 characters")]
         public String Description { get; set; }
-        public bool IsActive { get; set; } = true;
+        public bool? IsActive { get; set; } = true;
 
     }
 }

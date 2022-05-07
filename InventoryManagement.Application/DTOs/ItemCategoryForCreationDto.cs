@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -18,10 +19,13 @@ namespace InventoryManagement.Application.DTOs
 
         public String Image { get; set; }
 
-        public bool IsActive { get; set; } = true;
+        public bool? IsActive { get; set; } = true;
 
         public int? ParentCategoryId { get; set; }
 
         public ICollection<ItemCategoryForCreationDto> ChildCategories { get; set; }
+
+        public IFormFile ImageFile { get; set; }
+
     }
 }
