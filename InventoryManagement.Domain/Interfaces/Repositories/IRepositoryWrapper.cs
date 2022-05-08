@@ -15,5 +15,9 @@ namespace InventoryManagement.Domain.Interfaces.Repositories
 
         Task SaveAsync();
 
+        void DetachEntry<T>(T o);
+
+        void ModifayEntry<T>(T o);
+
     }
 }

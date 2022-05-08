@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,6 +10,11 @@ namespace InventoryManagement.Application.DTOs
 {
     public class ItemCategoryForUpdateDto: IEntityDto
     {
+        public ItemCategoryForUpdateDto()
+        {
+            this.ChildCategories = new List<ItemCategoryForUpdateDto>();
+        }
+
         public int? Id { get; set; }
 
         [Required(ErrorMessage = "Name is required")]
@@ -20,10 +26,12 @@ namespace InventoryManagement.Application.DTOs
 
         public String Image { get; set; }
 
-        public bool IsActive { get; set; } = true;
+        public bool? IsActive { get; set; } = true;
 
         public int? ParentCategoryId { get; set; }
 
         public ICollection<ItemCategoryForUpdateDto> ChildCategories { get; set; }
+
+        public IFormFile ImageFile { get; set; }
     }
 }

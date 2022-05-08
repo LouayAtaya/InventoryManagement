@@ -25,7 +25,9 @@ namespace InventoryManagement.Infrastructure.Repositories
 
         public async Task<ItemCategory> GetItemCategoryByIdAsync(int itemCategoryId)
         {
-            return await FindByCondition(c => c.Id == itemCategoryId).SingleOrDefaultAsync();
+            return await FindByCondition(c => c.Id == itemCategoryId)
+                //.Include(c=>c.ChildCategories)
+                .SingleOrDefaultAsync();
         }
 
     }

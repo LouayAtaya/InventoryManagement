@@ -1,6 +1,7 @@
 ﻿
 using InventoryManagement.Domain.Interfaces.Repositories;
 using InventoryManagement.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -59,6 +60,16 @@ namespace InventoryManagement.Infrastructure.Repositories
             await this._dbContext.SaveChangesAsync();
         }
 
-        
+        public void DetachEntry<T>(T o)
+        {
+            _dbContext.Entry(o).State = EntityState.Detached;
+        }
+
+        public void ModifayEntry<T>(T o)
+        {
+            _dbContext.Entry(o).State = EntityState.Modified;
+        }
+
+
     }
 }

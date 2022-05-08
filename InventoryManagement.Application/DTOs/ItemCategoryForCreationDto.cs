@@ -26,6 +26,5 @@ namespace InventoryManagement.Application.DTOs
         public ICollection<ItemCategoryForCreationDto> ChildCategories { get; set; }
 
         public IFormFile ImageFile { get; set; }
-
     }
 }

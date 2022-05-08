@@ -62,8 +62,11 @@ namespace InventoryManagement.API.Controllers
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> CreateItemCategoryAsync([FromForm] ItemCategoryForCreationDto itemCategoryForCreationDto)
         {
-            var fileDbPath = await this.serviceManager.FileManagementService.UploadFile(itemCategoryForCreationDto.ImageFile, this._fileFolderPath);
-            itemCategoryForCreationDto.Image = fileDbPath;
+            if(itemCategoryForCreationDto.ImageFile is not null)
+            {
+                var fileDbPath = await this.serviceManager.FileManagementService.UploadFile(itemCategoryForCreationDto.ImageFile, this._fileFolderPath);
+                itemCategoryForCreationDto.Image = fileDbPath;
+            }
 
             var itemCategoryDto = await this.serviceManager.ItemCategoryService.CreateItemCategoryAsync(itemCategoryForCreationDto);
 
@@ -82,10 +85,16 @@ namespace InventoryManagement.API.Controllers
         }
 
         // PUT api/<ItemCategoriesController>/5
-        [HttpPut("{itemCategoryId}")]
+        [HttpPut("{itemCategoryId}"), DisableRequestSizeLimit]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
-        public async Task<IActionResult> UpdateItemCategory(int itemCategoryId, [FromBody] ItemCategoryForUpdateDto itemCategoryForUpdateDto)
+        public async Task<IActionResult> UpdateItemCategory(int itemCategoryId, [FromForm] ItemCategoryForUpdateDto itemCategoryForUpdateDto)
         {
+            if (itemCategoryForUpdateDto.ImageFile is not null)
+            {
+                var fileDbPath = await this.serviceManager.FileManagementService.UploadFile(itemCategoryForUpdateDto.ImageFile, this._fileFolderPath);
+                itemCategoryForUpdateDto.Image = fileDbPath;
+            }
+
             await this.serviceManager.ItemCategoryService.UpdateItemCategoryAsync(itemCategoryId, itemCategoryForUpdateDto);
 
             return Ok();

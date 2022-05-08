@@ -12,12 +12,12 @@ using System.Threading.Tasks;
 
 namespace InventoryManagement.Services
 {
-    internal class ItemCategoryService: IItemCategoryService
+    internal class ItemCategoryService : IItemCategoryService
     {
         private readonly IRepositoryWrapper _repositoryWrapper;
         private readonly IMapper _mapper;
 
-        public ItemCategoryService(IRepositoryWrapper repositoryWrapper,IMapper mapper)
+        public ItemCategoryService(IRepositoryWrapper repositoryWrapper, IMapper mapper)
         {
             this._repositoryWrapper = repositoryWrapper;
             _mapper = mapper;
@@ -26,7 +26,7 @@ namespace InventoryManagement.Services
 
         public async Task<IEnumerable<ItemCategoryDto>> GetAllItemCategoriesAsync()
         {
-            var itemCategories= await this._repositoryWrapper.ItemCategory.GetAllItemCategoriesAsync();
+            var itemCategories = await this._repositoryWrapper.ItemCategory.GetAllItemCategoriesAsync();
 
             var itemCategoryDto = _mapper.Map<IEnumerable<ItemCategoryDto>>(itemCategories);
             return itemCategoryDto;
@@ -34,7 +34,7 @@ namespace InventoryManagement.Services
 
         public async Task<ItemCategoryDto> GetItemCategoryByIdAsync(int itemCategoryId)
         {
-            var itemCategory= await this._repositoryWrapper.ItemCategory.GetItemCategoryByIdAsync(itemCategoryId);
+            var itemCategory = await this._repositoryWrapper.ItemCategory.GetItemCategoryByIdAsync(itemCategoryId);
 
             if (itemCategory is null)
                 throw new ItemCategoryNotFoundException(itemCategoryId);
@@ -59,10 +59,19 @@ namespace InventoryManagement.Services
             var itemCategory = await this._repositoryWrapper.ItemCategory.GetItemCategoryByIdAsync(itemCategoryId);
             if (itemCategory is null)
                 throw new ItemCategoryNotFoundException(itemCategoryId);
+          
+            //deactivate subCategories if parent deactivated
+            if (!itemCategoryForUpdateDto.IsActive.HasValue || !itemCategoryForUpdateDto.IsActive.Value)
+            {
+                foreach(var childItemCategory in itemCategoryForUpdateDto.ChildCategories)
+                {
+                    childItemCategory.IsActive = false;
+                }
+            }
 
             _mapper.Map(itemCategoryForUpdateDto, itemCategory);
 
-            this._repositoryWrapper.ItemCategory.Update(itemCategory);
+            //this._repositoryWrapper.ItemCategory.Update(itemCategory);
 
             await this._repositoryWrapper.SaveAsync();
 
