@@ -36,7 +36,7 @@ namespace InventoryManagement.Services
         {
             var itemCategory = await this._repositoryWrapper.ItemCategory.GetItemCategoryByIdAsync(itemCategoryId);
 
-            if (itemCategory is null)
+            if (itemCategory == null)
                 throw new ItemCategoryNotFoundException(itemCategoryId);
 
             var itemCategoryDto = this._mapper.Map<ItemCategoryDto>(itemCategory);
@@ -57,7 +57,7 @@ namespace InventoryManagement.Services
         public async Task UpdateItemCategoryAsync(int itemCategoryId, ItemCategoryForUpdateDto itemCategoryForUpdateDto)
         {
             var itemCategory = await this._repositoryWrapper.ItemCategory.GetItemCategoryByIdAsync(itemCategoryId);
-            if (itemCategory is null)
+            if (itemCategory == null)
                 throw new ItemCategoryNotFoundException(itemCategoryId);
           
             //deactivate subCategories if parent deactivated
@@ -81,7 +81,7 @@ namespace InventoryManagement.Services
         {
             var itemCategory = await this._repositoryWrapper.ItemCategory.GetItemCategoryByIdAsync(itemCategoryId);
 
-            if(itemCategory is null)
+            if(itemCategory == null)
                 throw new ItemCategoryNotFoundException(itemCategoryId);
 
             this._repositoryWrapper.ItemCategory.Delete(itemCategory);

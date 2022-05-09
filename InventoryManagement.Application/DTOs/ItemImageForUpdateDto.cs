@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -17,9 +18,8 @@ namespace InventoryManagement.Application.DTOs
         [StringLength(500, ErrorMessage = "Image Description can't be longer than 500 characters")]
         public String Description { get; set; }
 
-        [Required(ErrorMessage = "Image URL is required")]
-        [StringLength(500, ErrorMessage = "Image URL can't be longer than 500 characters")]
         public String Url { get; set; }
+
         public int ItemId { get; set; }
 
     }

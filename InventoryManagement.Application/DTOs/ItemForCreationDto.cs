@@ -1,5 +1,6 @@
 ﻿using InventoryManagement.Domain.Entities;
 using InventoryManagement.Domain.Enums;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,6 +12,13 @@ namespace InventoryManagement.Application.DTOs
 {
     public class ItemForCreationDto : IEntityDto
     {
+        public ItemForCreationDto()
+        {
+            WarehouseItems = new List<WarehouseItemForCreationDto>();
+            ItemImages = new List<ItemImageForCreationDto>();
+
+        }
+
         [Required(ErrorMessage = "Code is required")]
         [StringLength(5, ErrorMessage = "Code can't be longer than 5 characters")]
         public String Code { get; set; }
@@ -34,6 +42,7 @@ namespace InventoryManagement.Application.DTOs
         public virtual ICollection<WarehouseItemForCreationDto> WarehouseItems { get; set; }
         public virtual ICollection<ItemImageForCreationDto> ItemImages { get; set; }
 
-
+        //[Required(ErrorMessage = "Image is required")]
+        public ICollection<IFormFile> filesOfImages { get; set; }
     }
 }

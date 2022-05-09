@@ -33,11 +33,12 @@ namespace InventoryManagement.Services
         public async Task<ItemDetailsDto> GetItemByIdAsync(int itemId)
         {
             var item=await this._repositoryWrapper.Item.GetItemByIdAsync(itemId);
-            if (item is null)
+            if (item == null)
                 throw new ItemNotFoundException(itemId);
 
             return this._mapper.Map<ItemDetailsDto>(item);
         }
+
         public async Task<ItemDto> CreateItemAsync(ItemForCreationDto itemForCreationDto)
         {
             var item = _mapper.Map<Item>(itemForCreationDto);
@@ -52,19 +53,19 @@ namespace InventoryManagement.Services
         public async Task UpdateItemAsync(int itemId, ItemForUpdateDto itemForUpdateDto)
         {
             var item = await this._repositoryWrapper.Item.GetItemByIdAsync(itemId);
-            if (item is null)
+            if (item == null)
                 throw new ItemNotFoundException(itemId);
 
             this._mapper.Map(itemForUpdateDto, item);
 
-            this._repositoryWrapper.Item.Update(item);
+            //this._repositoryWrapper.Item.Update(item);
             await this._repositoryWrapper.SaveAsync();
         }
 
         public async Task DeleteItemAsync(int itemId)
         {
             var item = await this._repositoryWrapper.Item.GetItemByIdAsync(itemId);
-            if (item is null)
+            if (item == null)
                 throw new ItemNotFoundException(itemId);
 
             this._repositoryWrapper.Item.Delete(item);

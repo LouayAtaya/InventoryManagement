@@ -35,7 +35,7 @@ namespace InventoryManagement.Services
         {
             var warehouse = await _repositoryWrapper.Warehouse.GetWarehouseByIdAsync(warehouseId);
 
-            if (warehouse is null)
+            if (warehouse == null)
                 throw new WarehoseNotFoundException(warehouseId);
 
             var warehousesDto = _mapper.Map<WarehouseDto>(warehouse);
@@ -57,7 +57,7 @@ namespace InventoryManagement.Services
         public async Task UpdateWarehouseAsync(int warehouseId, WarehouseForUpdateDto warehouseForUpdateDto)
         {
             var warehouse= await this._repositoryWrapper.Warehouse.GetWarehouseByIdAsync(warehouseId);
-            if(warehouse is null)
+            if(warehouse == null)
                 throw new WarehoseNotFoundException(warehouseId);
             
             _mapper.Map(warehouseForUpdateDto, warehouse);
@@ -72,7 +72,7 @@ namespace InventoryManagement.Services
         {
             var warehouse =await this._repositoryWrapper.Warehouse.GetWarehouseByIdAsync(warehouseId);
 
-            if(warehouse is null)
+            if(warehouse == null)
                 throw new WarehoseNotFoundException(warehouseId);
 
             this._repositoryWrapper.Warehouse.Delete(warehouse);

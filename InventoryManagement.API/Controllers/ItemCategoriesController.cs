@@ -62,7 +62,7 @@ namespace InventoryManagement.API.Controllers
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> CreateItemCategoryAsync([FromForm] ItemCategoryForCreationDto itemCategoryForCreationDto)
         {
-            if(itemCategoryForCreationDto.ImageFile is not null)
+            if(itemCategoryForCreationDto.ImageFile != null)
             {
                 var fileDbPath = await this.serviceManager.FileManagementService.UploadFile(itemCategoryForCreationDto.ImageFile, this._fileFolderPath);
                 itemCategoryForCreationDto.Image = fileDbPath;
@@ -89,7 +89,7 @@ namespace InventoryManagement.API.Controllers
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> UpdateItemCategory(int itemCategoryId, [FromForm] ItemCategoryForUpdateDto itemCategoryForUpdateDto)
         {
-            if (itemCategoryForUpdateDto.ImageFile is not null)
+            if (itemCategoryForUpdateDto.ImageFile != null)
             {
                 var fileDbPath = await this.serviceManager.FileManagementService.UploadFile(itemCategoryForUpdateDto.ImageFile, this._fileFolderPath);
                 itemCategoryForUpdateDto.Image = fileDbPath;

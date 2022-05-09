@@ -1,5 +1,6 @@
 ﻿using InventoryManagement.Domain.Entities;
 using InventoryManagement.Domain.Enums;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,6 +12,12 @@ namespace InventoryManagement.Application.DTOs
 {
     public class ItemForUpdateDto : IEntityDto
     {
+        public ItemForUpdateDto()
+        {
+            WarehouseItems = new List<WarehouseItemForUpdateDto>();
+            ItemImages = new List<ItemImageForUpdateDto>();
+        }
+
         public int? Id { get; set; }
 
         [Required(ErrorMessage = "Code is required")]
@@ -34,5 +41,8 @@ namespace InventoryManagement.Application.DTOs
         public int ItemCategoryId { get; set; }
         public virtual ICollection<WarehouseItemForUpdateDto> WarehouseItems { get; set; }
         public virtual ICollection<ItemImageForUpdateDto> ItemImages { get; set; }
+
+        //[Required(ErrorMessage = "Image is required")]
+        public ICollection<IFormFile> filesOfImages { get; set; }
     }
 }
