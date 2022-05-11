@@ -3,21 +3,23 @@
     <div class="card-body">
       <div class="row">
         <div class="col-12 col-sm-6">
-          <h3 class="d-inline-block d-sm-none">LOWA Men’s Renegade GTX Mid Hiking Boots Review</h3>
-          <div class="col-12">
-            <img src="assets/img/photo2.png" class="product-image" alt="Product Image">
+          <div *ngIf="itemDetails.itemImages && itemDetails.itemImages.length > 0; else deFaultImageElseBlock " class="col-12">
+            <img #selectedImage [src]="'http://localhost:55652/'+itemDetails.itemImages[0].url" class="product-image" [alt]="itemDetails.itemImages[0].name">
           </div>
-          <div class="col-12 product-image-thumbs">
-            <div class="product-image-thumb active"><img src="assets/img/photo2.png" alt="Product Image"></div>
-            <div class="product-image-thumb" ><img src="assets/img/photo2.png" alt="Product Image"></div>
-            <div class="product-image-thumb" ><img src="assets/img/photo2.png" alt="Product Image"></div>
-            <div class="product-image-thumb" ><img src="assets/img/photo2.png" alt="Product Image"></div>
-            <div class="product-image-thumb" ><img src="assets/img/photo2.png" alt="Product Image"></div>
+          <ng-template #deFaultImageElseBlock>
+            <img #selectedImage src="assets/img/AtayaLogo.png" class="product-image" alt="Product Image">
+          </ng-template>
+
+          <div  class="col-12 product-image-thumbs">
+            <div *ngFor="let itemImage of itemDetails.itemImages" class="product-image-thumb active">
+              <img  #image (click)="onImageChange(image)"  [src]="'http://localhost:55652/'+itemImage.url"  [alt]="itemImage.name">
+           
+            </div>
           </div>
         </div>
         <div class="col-12 col-sm-6">
-          <h3 class="my-3">طربيزة رخام أبيض</h3>
-          <p>طربيزة رخام أبيض متوفرة الآن</p>
+          <h3 class="my-3">{{itemDetails.name}}</h3>
+          <p> {{itemDetails.description}}   </p>
 
           <hr>
           <h4>المواصفات</h4>
@@ -26,33 +28,37 @@
               <input type="radio" name="color_option" id="color_option_a1" autocomplete="off" checked>
               الكود
               <br>
-              <span class="badge bg-danger ">T458</span>
+              <span class="badge bg-danger ">{{itemDetails.code}} </span>
               
             </label>
             <label class="btn btn-default text-center">
               <input type="radio" name="color_option" id="color_option_a2" autocomplete="off">
             الكمية الإجمالية
               <br>
-              <h1 class="badge bg-warning ">65</h1>
+              <h1 class="badge bg-warning ">{{itemDetails.totalQuantity}} </h1>
             </label>
             <label class="btn btn-default text-center">
               <input type="radio" name="color_option" id="color_option_a3" autocomplete="off">
               التصنيف
               <br>
-              <span class="badge bg-gradient-light ">طربيزات</span>
+              <span class="badge bg-gradient-light ">{{itemDetails.itemCategoryName}} </span>
             </label>
             <label class="btn btn-default text-center">
               <input type="radio" name="color_option" id="color_option_a4" autocomplete="off">
               النوع
               <br>
-              <span class="badge bg-gradient-maroon ">منتج</span>
+              <span class="badge bg-gradient-maroon ">{{itemDetails.itemTypeName}} </span>
 
             </label>
             <label class="btn btn-default text-center">
               <input type="radio" name="color_option" id="color_option_a5" autocomplete="off">
               الحالة
               <br>
-              <span class="badge bg-gradient-olive ">مفعل</span>
+              <span  *ngIf="itemDetails.isActive; else elseBlockNotActive" class="badge bg-gradient-olive ">مفعل</span>
+              <ng-template #elseBlockNotActive>
+                <span class="badge bg-gradient-olive ">غير مفعل</span>            
+              </ng-template>
+
             </label>
           </div>          
 
@@ -61,7 +67,7 @@
               السعر
             </h2>
             <h4 class="mt-0">
-              <small>2450 جنيه </small>
+              <small>{{itemDetails.price}}</small>
             </h4>
           </div>
 

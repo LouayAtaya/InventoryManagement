@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Item } from '../models';
 import { ItemForCreation } from '../models/item-for-creation';
+import { ItemDetails } from '../models/item-details';
 
 @Injectable()
 export class ItemsService {
@@ -13,6 +14,10 @@ export class ItemsService {
 
   GetItems():Observable<Item[]>{
     return this.http.get<Item[]>(this.baseUrl+"items");
+  }
+
+  GetItemDetails(id:number):Observable<ItemDetails>{
+    return this.http.get<ItemDetails>(this.baseUrl+"items/"+id);
   }
 
   addItem(itemForCreation:ItemForCreation): Observable<Item> {
@@ -27,19 +32,26 @@ export class ItemsService {
       let value = model[key];
 
 
-      if(value instanceof Array && value !=null && value.length!=0  ){
+      if(value instanceof Array  && value !=null && value.length!=0){
        
-       
+       console.log(value)
 
         for(let i=0;i<value.length;i++){
           
-          for (const subKey of Object.keys(value[i])) {
+          //check if value[i] is file
+          if(value[i] instanceof File){
+            formData.append(key,value[i])
+          }else{
+            for (const subKey of Object.keys(value[i])) {
             
-            let subvalue = value[i][subKey];
-            let key1=key+"["+i+"]["+subKey+"]"
-           
-            formData.append(key1, subvalue);
+              let subvalue = value[i][subKey];
+              let key1=key+"["+i+"]["+subKey+"]"
+             
+              formData.append(key1, subvalue);
+            }
+
           }
+          
         }
         
       }

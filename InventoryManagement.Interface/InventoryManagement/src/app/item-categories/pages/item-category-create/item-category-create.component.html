@@ -41,7 +41,15 @@
               </div>
             </div>
           </div>
-          
+          <div class="form-group">
+            <label for="image">صورة الصنف</label>
+            <input type="file" id="image" name="image" class="form-control" formControlName="fileInput" (change)="onFileChanged($event)" accept=".jpg,.png,.gif">
+            <div *ngIf="!fileInput.valid && (fileInput.dirty ||fileInput.touched)">
+              <div class="alert alert-danger ">
+                يرجى اختيار الصورة
+              </div>
+            </div>
+          </div>
         </div>
         <!-- /.card-body -->
       </div>

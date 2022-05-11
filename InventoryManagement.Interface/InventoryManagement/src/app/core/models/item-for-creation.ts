@@ -13,7 +13,7 @@ export class ItemForCreation {
         this.itemType=init.itemType
         this.itemCategoryId=init.itemCategoryId
         this.isActive=init.isActive
-
+        this.filesOfImages=init.filesOfImages
         init.itemImages.forEach(itemImage => {
             this.itemImages.push(new ItemImageForCreation(itemImage))
         });
@@ -38,5 +38,5 @@ export class ItemForCreation {
     isActive:boolean;
     warehouseItems: WarehouseItemForCreation[]=[];
     itemImages: ItemImageForCreation[]=[];
-    
+    filesOfImages:File[];
 }

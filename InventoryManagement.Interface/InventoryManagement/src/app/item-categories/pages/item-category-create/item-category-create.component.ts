@@ -18,6 +18,8 @@ export class ItemCategoryCreateComponent implements OnInit {
     'image':new FormControl(),
     'isActive':new FormControl(true),
     'parentCategoryId':new FormControl(''),
+    'imageFile':new FormControl(),
+    'fileInput':new FormControl('',[Validators.required]),
     'childCategories': new FormArray([])
   })
 
@@ -34,6 +36,10 @@ export class ItemCategoryCreateComponent implements OnInit {
 
   get description(){
     return this.itemCategoryForm.get('description');
+  }
+
+  get fileInput(){
+    return this.itemCategoryForm.get('fileInput');
   }
 
   get childCategories(){
@@ -68,6 +74,19 @@ export class ItemCategoryCreateComponent implements OnInit {
   }
   
   itemCategoryForCreation:ItemCategoryForCreation;
+
+  onFileChanged(event) {
+    console.log(event)
+    if (event.target.files.length > 0) {
+      console.log("event")
+      const file = event.target.files[0];
+      this.itemCategoryForm.patchValue({
+        imageFile: file,
+      });
+    }
+  }
+
+  
 
   onSubmit(){
     this.itemCategoryForCreation=this.itemCategoryForm.value 

@@ -39,8 +39,8 @@ export class ItemCreateComponent implements OnInit {
       isActive:[true],
       itemCategoryId:[null,[Validators.required]],
       warehouseItems:this.formBuilder.array([]),
-      itemImages:this.formBuilder.array([])
-
+      itemImages:this.formBuilder.array([]),
+      filesOfImages:[]
     })
   }
 
@@ -89,9 +89,7 @@ export class ItemCreateComponent implements OnInit {
     return this.formBuilder.group({
       name:['',[Validators.required, Validators.minLength(4), Validators.maxLength(50), NotEmpty]],
       description:['',[ Validators.maxLength(500)]],
-      fileInput:['',[Validators.required]],
-      fileSource:[]
-
+      fileInput:['',[Validators.required]]
     }) 
   }
 
@@ -119,10 +117,6 @@ export class ItemCreateComponent implements OnInit {
     return this.itemImages.at(index).get("fileInput");
   }
 
-  getItemImageFileSource(index: number){
-    return this.itemImages.at(index).get("fileSource");
-  }
-
   getWarehouseItemId(index: number){
     return this.warehouseItems.at(index).get("warehouseId");
   }
@@ -131,12 +125,17 @@ export class ItemCreateComponent implements OnInit {
     return this.warehouseItems.at(index).get("quantity");
   }
 
+  uploadedImages:File[]=[];
   onFileChange(event,index){
     console.log(event)
     if(event.target.files.length>0){
       console.log("event")
       const file=event.target.files[0];
-      this.getItemImageFileSource(index).setValue(file)
+      this.uploadedImages.push(file);
+
+      this.itemForm.patchValue({
+        filesOfImages:this.uploadedImages
+      });
       
     }
      
