@@ -8,7 +8,7 @@ import { ItemCategory } from '../../../core/models/item-category';
 import { ItemType } from '../../../core/models/item-type';
 import { itemTypeList } from '../../../core/models/item-types-list';
 import { WarehousesService } from '../../../core/services/warehouses.service';
-import { Warehouse } from 'src/app/core';
+import { ItemsService, Warehouse } from 'src/app/core';
 
 @Component({
   selector: 'app-item-create',
@@ -25,11 +25,11 @@ export class ItemCreateComponent implements OnInit {
   warehousesList:Warehouse[];
 
 
-  constructor( private formBuilder: FormBuilder, private itemCategoriesService: ItemCategoriesService, private WarehousesService:WarehousesService) {
+  constructor( private formBuilder: FormBuilder, private itemsService: ItemsService, private itemCategoriesService: ItemCategoriesService, private WarehousesService:WarehousesService) {
     this.itemTypes=itemTypeList;
 
     this.itemForm= formBuilder.group({
-      code:['',[Validators.required, Validators.minLength(3), Validators.maxLength(5), NotEmpty]],
+      code:['',[Validators.required, Validators.minLength(2), Validators.maxLength(5), NotEmpty]],
       name: ['',[Validators.required, Validators.minLength(4), Validators.maxLength(50), NotEmpty]],
       description:['',[Validators.maxLength(500)]],
       inroduction:[''],
@@ -146,6 +146,20 @@ export class ItemCreateComponent implements OnInit {
     console.log(this.itemForm.value);
     this.itemForCreation=new ItemForCreation(this.itemForm.value);
     console.log(this.itemForCreation)
+
+    this.itemsService.addItem(this.itemForCreation)
+      .subscribe(
+        data=>{
+          alert("created");
+        },
+        error=>{
+          console.log("error")
+          console.log(error)
+          console.log("error")
+          alert(error);
+        }
+
+      )
   }
 
   getItemCategoriesList(){

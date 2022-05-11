@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NotEmpty } from '../../../shared/validators/not-empty.validator';
 import { ItemCategoryForCreation } from '../../../core/models/item-category-for-creation';
+import { ItemCategoriesService } from '../../../core/services/item-categories.service';
+import { error } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-item-category-create',
@@ -15,11 +17,11 @@ export class ItemCategoryCreateComponent implements OnInit {
     'description':new FormControl('',[ Validators.maxLength(500)]),
     'image':new FormControl(),
     'isActive':new FormControl(true),
-    'parentCategoryId':new FormControl(),
+    'parentCategoryId':new FormControl(''),
     'childCategories': new FormArray([])
   })
 
-  constructor() {
+  constructor(public itemCategoriesService : ItemCategoriesService) {
 
   }
 
@@ -44,7 +46,7 @@ export class ItemCategoryCreateComponent implements OnInit {
       'description':new FormControl('',[Validators.maxLength(500)]),
       'image':new FormControl(),
       'isActive':new FormControl(true),
-      'parentCategoryId':new FormControl(),
+      'parentCategoryId':new FormControl(''),
       'childItemCategories': new FormArray([])
     })
   }
@@ -68,9 +70,22 @@ export class ItemCategoryCreateComponent implements OnInit {
   itemCategoryForCreation:ItemCategoryForCreation;
 
   onSubmit(){
-    this.itemCategoryForCreation=this.itemCategoryForm.value as ItemCategoryForCreation;
-    console.log(this.itemCategoryForm.value)
+    this.itemCategoryForCreation=this.itemCategoryForm.value 
+    console.log(this.itemCategoryForCreation)
     
+    this.itemCategoriesService.addItemCategory(this.itemCategoryForCreation)
+      .subscribe(
+        data=>{
+          alert("created");
+        },
+        error=>{
+          console.log("error")
+          console.log(error)
+          console.log("error")
+          alert(error);
+        }
+
+      )
   }
 
   

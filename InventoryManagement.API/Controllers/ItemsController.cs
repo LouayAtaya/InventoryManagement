@@ -53,7 +53,7 @@ namespace InventoryManagement.API.Controllers
         public async Task<IActionResult> CreateItem([FromForm] ItemForCreationDto itemForCreationDto)
         {
 
-            if (itemForCreationDto.ItemImages != null || itemForCreationDto.ItemImages.Count() > 0)
+            if (itemForCreationDto.ItemImages != null && itemForCreationDto.ItemImages.Count() > 0)
             {
                 var itemImagesCount= itemForCreationDto.ItemImages.Count();
                 if (itemForCreationDto.filesOfImages== null || itemForCreationDto.filesOfImages.Count()!= itemImagesCount)

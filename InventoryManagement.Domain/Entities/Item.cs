@@ -26,5 +26,17 @@ namespace InventoryManagement.Domain.Entities
         public int? LocationId { get; set; }
         [NotMapped]
         public Location Location { get; set; }
+
+
+        public void CalculateTotalQuantity() 
+        {
+            if(this.WarehouseItems !=null && this.WarehouseItems.Count > 0)
+            {
+                foreach(var warehouseItem in this.WarehouseItems)
+                {
+                    this.TotalQuantity = this.TotalQuantity + warehouseItem.Quantity;
+                }
+            }
+        }
     }
 }

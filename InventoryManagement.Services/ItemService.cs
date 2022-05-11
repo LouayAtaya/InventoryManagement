@@ -43,6 +43,9 @@ namespace InventoryManagement.Services
         {
             var item = _mapper.Map<Item>(itemForCreationDto);
 
+            //Calculate Item Total Quantity
+            item.CalculateTotalQuantity();
+
             this._repositoryWrapper.Item.Create(item);
 
             await this._repositoryWrapper.SaveAsync();

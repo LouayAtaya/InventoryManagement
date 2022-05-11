@@ -4,5 +4,5 @@ export class ItemCategoryForCreation {
     image:string;
     isActive:boolean=true;
     parentCategoryId:number;
-    childCategoriess:ItemCategoryForCreation[];
+    childCategories:ItemCategoryForCreation[];
 }

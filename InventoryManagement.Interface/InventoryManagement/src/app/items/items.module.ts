@@ -7,6 +7,7 @@ import { ItemCreateComponent } from './pages/item-create/item-create.component';
 import { ItemUpdateComponent } from './pages/item-update/item-update.component';
 import { ItemDetailsComponent } from './pages/item-details/item-details.component';
 import { SharedModule } from '../shared/shared.module';
+import { ItemsListComponent } from './pages/items-list/items-list.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { SharedModule } from '../shared/shared.module';
     ItemsComponent,
     ItemCreateComponent,
     ItemUpdateComponent,
-    ItemDetailsComponent
+    ItemDetailsComponent,
+    ItemsListComponent
   ],
   imports: [
     CommonModule,

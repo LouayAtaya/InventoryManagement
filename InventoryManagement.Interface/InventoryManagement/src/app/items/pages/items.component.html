@@ -1,9 +1,14 @@
 <div class="container-fluid">
     <div class="row">
-      <div class="col-12">
+      <div class="col-12">           
+
         <div class="card">
           <div class="card-header">
             <h3 class="card-title">قائمة  المنتجات</h3>
+            <a [routerLink]="['list']" style="float: left;" class="btn  btn-info">
+              <i _ngcontent-dub-c51="" class="nav-icon fas fas fa-th-large"></i> 
+            </a>
+
           </div>
           <!-- /.card-header -->
           <div class="card-body">
@@ -11,7 +16,7 @@
               <thead>
               <tr>
                 <th>رقم المنتج</th> 
-                <th>المعرف الخاص</th>
+                <th> الكود</th>
                 <th>اسم المنتج</th>
                 <th>الوصف</th>
                 <th>السعر</th>
@@ -40,7 +45,7 @@
                     </td>
                   <td>{{item.createdAt|date:'medium'}}</td>
                   <td> 
-                    <a type="button" class="btn btn-block btn-info btn-sm">عرض التفاصيل</a>
+                    <a [routerLink]="[item.id]" type="button" class="btn btn-block btn-info btn-sm">عرض التفاصيل</a>
                     <a type="button" class="btn btn-block btn-warning btn-sm">تعديل</a>
                     <a type="button" class="btn btn-block btn-danger btn-sm">حذف</a>
                   </td>
@@ -53,7 +58,7 @@
               <tfoot>
               <tr>
                 <th>رقم المنتج</th> 
-                <th>المعرف الخاص</th>
+                <th> الكود</th>
                 <th>اسم المنتج</th>
                 <th>الوصف</th>
                 <th>السعر</th>
