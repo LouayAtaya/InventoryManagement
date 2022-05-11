@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, RouterLinkActive } from '@angular/router';
 import { ItemsService } from '../../../core/services/items.service';
 import { ItemDetails } from '../../../core/models/item-details';
@@ -11,7 +11,7 @@ import { itemTypeList } from 'src/app/core/models/item-types-list';
 })
 export class ItemDetailsComponent implements OnInit {
 
-  @ViewChild("selectedImage") selectedImage:any;
+  @ViewChild('selectedImage',{static:false}) selectedImage: ElementRef;
   itemId:number;
   itemDetails:ItemDetails;
 
@@ -36,9 +36,7 @@ export class ItemDetailsComponent implements OnInit {
       data=>{
         this.itemDetails=data;
         this.assignItemTypeName();
-        console.log("this.itemDetails")
-        console.log(this.itemDetails)
-        console.log("this.itemDetails")
+    
 
       },
       error=>{
@@ -57,8 +55,9 @@ export class ItemDetailsComponent implements OnInit {
   }
 
   
-  onImageChange(event){
-    console.log(event)
+  onImageChange(imageElement : HTMLImageElement){
+
+    this.selectedImage.nativeElement.src=imageElement.src
   }
 
 }

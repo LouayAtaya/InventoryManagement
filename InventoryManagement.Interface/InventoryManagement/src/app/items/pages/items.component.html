@@ -46,7 +46,7 @@
                   <td>{{item.createdAt|date:'medium'}}</td>
                   <td> 
                     <a [routerLink]="[item.id]" type="button" class="btn btn-block btn-info btn-sm">عرض التفاصيل</a>
-                    <a type="button" class="btn btn-block btn-warning btn-sm">تعديل</a>
+                    <a [routerLink]="['update/'+item.id]" type="button" class="btn btn-block btn-warning btn-sm">تعديل</a>
                     <a type="button" class="btn btn-block btn-danger btn-sm">حذف</a>
                   </td>
   

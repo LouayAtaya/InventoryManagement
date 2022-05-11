@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Item } from '../models';
+import { Item, ItemForUpdate } from '../models';
 import { ItemForCreation } from '../models/item-for-creation';
 import { ItemDetails } from '../models/item-details';
 
@@ -23,6 +23,11 @@ export class ItemsService {
   addItem(itemForCreation:ItemForCreation): Observable<Item> {
     var formData=this.formDataCreator(itemForCreation);
     return this.http.post<Item>(this.baseUrl + 'items', formData)
+  }
+
+  UpdateItem(id:number, itemForUpdate:ItemForUpdate): Observable<any> {
+    var formData=this.formDataCreator(itemForUpdate);
+    return this.http.put<Item>(this.baseUrl + 'items/'+id, formData)
   }
 
   formDataCreator(model): FormData{
