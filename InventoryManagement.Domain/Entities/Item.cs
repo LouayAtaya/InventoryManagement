@@ -30,7 +30,9 @@ namespace InventoryManagement.Domain.Entities
 
         public void CalculateTotalQuantity() 
         {
-            if(this.WarehouseItems !=null && this.WarehouseItems.Count > 0)
+            this.TotalQuantity = 0;
+
+            if (this.WarehouseItems !=null && this.WarehouseItems.Count > 0)
             {
                 foreach(var warehouseItem in this.WarehouseItems)
                 {

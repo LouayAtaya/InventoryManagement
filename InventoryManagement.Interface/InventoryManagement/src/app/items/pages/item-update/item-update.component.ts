@@ -89,17 +89,23 @@ export class ItemUpdateComponent implements OnInit {
   newWarehouseItem(): FormGroup{
     return this.formBuilder.group({
       warehouseId:[null,[Validators.required]],
+      itemId:[],
       quantity:[null,[Validators.required]]
     }) 
   }
 
   newItemImage(): FormGroup{
     return this.formBuilder.group({
+      id:[],
       name:['',[Validators.required, Validators.minLength(4), Validators.maxLength(50), NotEmpty]],
       description:['',[ Validators.maxLength(500)]],
+      url:[],
+      itemId:[],
       fileInput:['',[Validators.required]]
     }) 
   }
+
+  
 
   addNewWarehouseItem(){
     this.warehouseItems.push(this.newWarehouseItem());
@@ -108,6 +114,14 @@ export class ItemUpdateComponent implements OnInit {
   addNewItemImage(){
     this.itemImages.push(this.newItemImage());
   }
+
+  addNewItemImageDisabledFields(){
+    let itemImageElement= this.newItemImage();
+    itemImageElement.disable({onlySelf:true});
+    this.itemImages.push(itemImageElement);
+  }
+
+  
 
   removeWarehouseItem(index: number){
     this.warehouseItems.removeAt(index);
@@ -151,13 +165,13 @@ export class ItemUpdateComponent implements OnInit {
 
   onSubmit(){
     console.log(this.itemForm.value);
-    //this.itemForUpdate=new ItemForUpdate(this.itemForm.value);
+    this.itemForUpdate=new ItemForUpdate(this.itemForm.value);
     console.log(this.itemForUpdate)
 
-    this.itemsService.UpdateItem(1,this.itemForUpdate)
+    this.itemsService.UpdateItem(this.itemId,this.itemForUpdate)
       .subscribe(
         data=>{
-          alert("created");
+          alert("updated");
         },
         error=>{
           console.log("error")
@@ -195,21 +209,28 @@ export class ItemUpdateComponent implements OnInit {
     this.itemsService.GetItemDetails(id).subscribe(
       data=>{
         this.itemDetails=data;
+        //this.itemDetails.filesOfImages=[]
 
+        this.itemDetails.warehouseItems.forEach(element=>{
+            element.itemId=this.itemDetails.id;
+            this.addNewWarehouseItem();
+          }
+        )
+        
+
+        //this.itemForm.setValue(this.itemDetails)
         this.itemForm.patchValue({
           id:this.itemDetails.id,
           code:this.itemDetails.code,
           name:this.itemDetails.name,
-          description:this.itemDetails.description,
+          description:this.itemDetails.description?this.itemDetails.description:'',
           inroduction:this.itemDetails.inroduction,
           price:this.itemDetails.price,
           totalQuantity:this.itemDetails.totalQuantity,
           itemType:this.itemDetails.itemType,
           isActive:this.itemDetails.isActive,
           itemCategoryId:this.itemDetails.itemCategoryId,
-          warehouseItems:this.initializeWarehouseItemsForm(),
-          itemImages:this.initializeItemImagesForm(),
-          filesOfImages:[]
+          warehouseItems:this.itemDetails.warehouseItems,
         })
       },
       error=>{

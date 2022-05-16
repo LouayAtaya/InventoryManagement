@@ -78,7 +78,7 @@ namespace InventoryManagement.API.Controllers
         [HttpPut("{itemId}")]
         public async Task<IActionResult> Put(int itemId, [FromForm] ItemForUpdateDto itemForUpdateDto)
         {
-            if (itemForUpdateDto.ItemImages != null || itemForUpdateDto.ItemImages.Count() > 0)
+            if (itemForUpdateDto.ItemImages != null && itemForUpdateDto.ItemImages.Count() > 0)
             {
                 var itemImagesCount = itemForUpdateDto.ItemImages.Count();
                 if (itemForUpdateDto.filesOfImages == null || itemForUpdateDto.filesOfImages.Count() != itemImagesCount)

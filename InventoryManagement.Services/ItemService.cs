@@ -61,6 +61,9 @@ namespace InventoryManagement.Services
 
             this._mapper.Map(itemForUpdateDto, item);
 
+            //Calculate Item Total Quantity
+            item.CalculateTotalQuantity();
+
             //this._repositoryWrapper.Item.Update(item);
             await this._repositoryWrapper.SaveAsync();
         }

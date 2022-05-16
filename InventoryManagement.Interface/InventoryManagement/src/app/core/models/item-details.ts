@@ -24,8 +24,8 @@ export class ItemDetails {
     updatedAt:Date;
     updatedBy: number;
     deActivatedAt:Date;
-    deActivatedBy: number
-
+    deActivatedBy: number;
+    filesOfImages:File[]=[];
     
     
 }
