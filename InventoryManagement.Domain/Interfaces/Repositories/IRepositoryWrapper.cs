@@ -13,6 +13,11 @@ namespace InventoryManagement.Domain.Interfaces.Repositories
 
         IWarehouseRepository Warehouse { get; }
 
+        IAccountRepository Account { get; }
+
+        ISaleOrderRepository SaleOrder { get; }
+
+
         Task SaveAsync();
 
         void DetachEntry<T>(T o);

@@ -27,10 +27,10 @@ namespace InventoryManagement.Application.DTOs
         [StringLength(50, ErrorMessage = "Name can't be longer than 50 characters")]
         public String Name { get; set; }
 
-        [StringLength(500, ErrorMessage = "Description cannot be loner then 500 characters")]
+        [StringLength(500, ErrorMessage = "Description cannot be longer then 500 characters")]
         public String Description { get; set; }
 
-        [StringLength(200, ErrorMessage = "Inroduction cannot be loner then 200 characters")]
+        [StringLength(200, ErrorMessage = "Inroduction cannot be longer then 200 characters")]
         public String Inroduction { get; set; }
         public int Price { get; set; }
         public int? TotalQuantity { get; set; }

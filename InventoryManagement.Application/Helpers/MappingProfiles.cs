@@ -40,6 +40,22 @@ namespace InventoryManagement.Application.Helpers
             CreateMap<ItemForUpdateDto, Item>();
             CreateMap<WarehouseItemForUpdateDto, WarehouseItem>();
             CreateMap<ItemImageForUpdateDto, ItemImage>();
+
+            //Account
+            CreateMap<Account, AccountDto>();
+            CreateMap<Account, AccountDetailDto>();
+            CreateMap<AccountForCreationDto, Account>();
+            CreateMap<AccountForUpdateDto, Account>();
+
+            //SaleOrder
+            CreateMap<SaleOrder, SaleOrderDto>();
+            CreateMap<SaleOrderForCreationDto, SaleOrder>();
+            CreateMap<SaleOrderForUpdateDto, SaleOrder>();
+            CreateMap<SaleOrderItem, SaleOrderItemDto>();
+            CreateMap<SaleOrderItemForCreationDto, SaleOrderItem>();
+            CreateMap<SaleOrderItemForUpdateDto, SaleOrderItem>();
+
+
         }
     }
 }

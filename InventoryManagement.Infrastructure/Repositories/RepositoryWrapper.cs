@@ -19,6 +19,10 @@ namespace InventoryManagement.Infrastructure.Repositories
 
         private IWarehouseRepository _warehouseRepository;
 
+        private IAccountRepository _accountRepository;
+
+        private ISaleOrderRepository _saleOrderRepository;
+
         public RepositoryWrapper(InventoryManagementContext dbContext)
         {
             _dbContext = dbContext;
@@ -52,6 +56,26 @@ namespace InventoryManagement.Infrastructure.Repositories
                 if (this._warehouseRepository == null)
                     _warehouseRepository = new WarehouseRepository(_dbContext);
                 return _warehouseRepository;
+            }
+        }
+
+        public IAccountRepository Account
+        {
+            get
+            {
+                if (this._accountRepository == null)
+                    _accountRepository = new AccountRepository(_dbContext);
+                return _accountRepository;
+            }
+        }
+
+        public ISaleOrderRepository SaleOrder
+        {
+            get
+            {
+                if (this._saleOrderRepository == null)
+                    _saleOrderRepository = new SaleOrderRepository(_dbContext);
+                return _saleOrderRepository;
             }
         }
 

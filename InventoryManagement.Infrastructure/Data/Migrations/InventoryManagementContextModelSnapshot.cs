@@ -19,6 +19,67 @@ namespace InventoryManagement.Infrastructure.Data.Migrations
                 .HasAnnotation("ProductVersion", "5.0.16")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("InventoryManagement.Domain.Entities.Account", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AccountCode")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<byte>("AccountType")
+                        .HasColumnType("tinyint");
+
+                    b.Property<double>("Amount")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DeActivatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("DeActivatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("UpdatedBy")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountCode")
+                        .IsUnique();
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("Accounts");
+                });
+
             modelBuilder.Entity("InventoryManagement.Domain.Entities.Item", b =>
                 {
                     b.Property<int>("Id")
@@ -84,7 +145,13 @@ namespace InventoryManagement.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Code")
+                        .IsUnique();
+
                     b.HasIndex("ItemCategoryId");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("Items");
                 });
@@ -175,6 +242,97 @@ namespace InventoryManagement.Infrastructure.Data.Migrations
                     b.ToTable("ItemImages");
                 });
 
+            modelBuilder.Entity("InventoryManagement.Domain.Entities.SaleOrder", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DeActivatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("DeActivatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("TotalAmount")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int>("TotalOrderPrice")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("UpdatedBy")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("SaleOrders");
+                });
+
+            modelBuilder.Entity("InventoryManagement.Domain.Entities.SaleOrderItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ItemId")
+                        .HasColumnType("int")
+                        .HasColumnName("Item_Id");
+
+                    b.Property<int>("Quantity")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int>("SaleOrderId")
+                        .HasColumnType("int")
+                        .HasColumnName("SaleOrder_Id");
+
+                    b.Property<int>("SubTotal")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int>("price")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ItemId");
+
+                    b.HasIndex("SaleOrderId");
+
+                    b.ToTable("SaleOrder_Items");
+                });
+
             modelBuilder.Entity("InventoryManagement.Domain.Entities.Warehouse", b =>
                 {
                     b.Property<int>("Id")
@@ -239,7 +397,7 @@ namespace InventoryManagement.Infrastructure.Data.Migrations
 
                     b.HasIndex("WarehouseId");
 
-                    b.ToTable("Warehouse_Item");
+                    b.ToTable("Warehouse_Items");
                 });
 
             modelBuilder.Entity("InventoryManagement.Domain.Entities.Item", b =>
@@ -273,6 +431,36 @@ namespace InventoryManagement.Infrastructure.Data.Migrations
                     b.Navigation("Item");
                 });
 
+            modelBuilder.Entity("InventoryManagement.Domain.Entities.SaleOrder", b =>
+                {
+                    b.HasOne("InventoryManagement.Domain.Entities.Account", "Customer")
+                        .WithMany("SaleOrders")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("InventoryManagement.Domain.Entities.SaleOrderItem", b =>
+                {
+                    b.HasOne("InventoryManagement.Domain.Entities.Item", "Item")
+                        .WithMany("SaleOrderItems")
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("InventoryManagement.Domain.Entities.SaleOrder", "SaleOrder")
+                        .WithMany("SaleOrderItems")
+                        .HasForeignKey("SaleOrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Item");
+
+                    b.Navigation("SaleOrder");
+                });
+
             modelBuilder.Entity("InventoryManagement.Domain.Entities.WarehouseItem", b =>
                 {
                     b.HasOne("InventoryManagement.Domain.Entities.Item", "Item")
@@ -292,9 +480,16 @@ namespace InventoryManagement.Infrastructure.Data.Migrations
                     b.Navigation("Warehouse");
                 });
 
+            modelBuilder.Entity("InventoryManagement.Domain.Entities.Account", b =>
+                {
+                    b.Navigation("SaleOrders");
+                });
+
             modelBuilder.Entity("InventoryManagement.Domain.Entities.Item", b =>
                 {
                     b.Navigation("ItemImages");
+
+                    b.Navigation("SaleOrderItems");
 
                     b.Navigation("WarehouseItems");
                 });
@@ -304,6 +499,11 @@ namespace InventoryManagement.Infrastructure.Data.Migrations
                     b.Navigation("ChildCategories");
 
                     b.Navigation("Items");
+                });
+
+            modelBuilder.Entity("InventoryManagement.Domain.Entities.SaleOrder", b =>
+                {
+                    b.Navigation("SaleOrderItems");
                 });
 
             modelBuilder.Entity("InventoryManagement.Domain.Entities.Warehouse", b =>

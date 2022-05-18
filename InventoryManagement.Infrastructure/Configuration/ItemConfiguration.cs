@@ -19,9 +19,13 @@ namespace InventoryManagement.Infrastructure.Configuration
                 .IsRequired()
                 .HasMaxLength(5);
 
+            builder.HasIndex(i => i.Code).IsUnique();
+
             builder.Property(i => i.Name)
                 .IsRequired()
                 .HasMaxLength(50);
+
+            builder.HasIndex(i => i.Name).IsUnique();
 
             builder.Property(i => i.Description)
                 .HasMaxLength(500);

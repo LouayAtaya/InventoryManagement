@@ -12,7 +12,7 @@ namespace InventoryManagement.Infrastructure.Configuration
     {
         public void Configure(EntityTypeBuilder<WarehouseItem> builder)
         {
-            builder.ToTable("Warehouse_Item");
+            builder.ToTable("Warehouse_Items");
 
             builder.HasKey(wi => new { wi.ItemId, wi.WarehouseId });
 

@@ -22,6 +22,9 @@ namespace InventoryManagement.Domain.Entities
         public virtual ItemCategory ItemCategory { get; set; }
         public virtual ICollection<WarehouseItem> WarehouseItems { get; set; }
         public virtual ICollection<ItemImage> ItemImages { get; set; }
+        public virtual ICollection<SaleOrderItem> SaleOrderItems { get; set; }
+
+
         [NotMapped]
         public int? LocationId { get; set; }
         [NotMapped]
