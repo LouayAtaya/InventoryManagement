@@ -1,0 +1,115 @@
+<form [formGroup]="accountForm" (ngSubmit)="onSubmit()" novalidate>
+    <div class="row">
+      
+        <div class="col-md-12">
+          <div class="card card-maroon">
+            <div class="card-header">
+              <h3 class="card-title"> معلومات الحساب</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="form-group col-md-2">
+                        <label for="accountCode">المعرف الخاص/ الكود </label>
+                        <input type="text" id="accountCode" name="accountCode" formControlName="accountCode" class="form-control" > 
+                        <div *ngIf="!accountCode.valid && (accountCode.dirty ||accountCode.touched)">
+                          <div class="alert alert-danger ">
+                            يرجى ادخال الكود بالشكل الصحيح!!
+                            <div [hidden]="!accountCode?.errors.required">
+                              الكود مطلوب
+                            </div>
+                            <div [hidden]="!accountCode?.errors.NotEmpty">
+                              الكود فارغ !!
+                            </div>
+                            <div [hidden]="!accountCode?.errors.minlength">
+                              عدد الأحرف يجب أن لا يقل عن {{accountCode?.errors.minlength?.requiredLength}}
+                            </div>
+                            <div [hidden]="!accountCode.errors.maxlength">
+                              عدد الأحرف يجب أن لا يزيد عن {{accountCode.errors.maxlength?.requiredLength}}
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group col-md-2">
+                        <label for="accountType">النوع </label>
+                        <select id="accountType" name="accountType" formControlName="accountType" class="form-control">    
+                            <option value="" selected>اختر النوع</option>
+                            <option *ngFor="let accountTypeKey of accountTypesKeys" [ngValue]="accountTypeKey"> 
+                              {{defaultAccountTypes.get(accountTypeKey)}}
+                            </option>
+                        </select>
+                        <div *ngIf="!accountType.valid && (accountType.dirty ||accountType.touched)">
+                          <div class="alert alert-danger ">
+                            يرجى اختيار النوع!!
+                            
+                          </div>
+                        </div>   
+                    </div>
+
+                    <div class="form-group col-md-2">
+                        <label for="amount">الرصيد </label>
+                        <input type="number" id="amount" name="amount" formControlName="amount" class="form-control" >       
+                        <div *ngIf="!amount.valid && (amount.dirty ||amount.touched )">
+                            <div class="alert alert-danger ">
+                              يرجى إدخال الرصيد !!
+                            </div>
+                          </div>
+                    </div>
+
+                    <div class="form-group col-md-4 ">
+                        <label for="name">الاسم </label>
+                        <input type="text" id="name" name="name" formControlName="name" class="form-control">       
+                        <div *ngIf="!name.valid && (name.dirty ||name.touched)">
+                          <div class="alert alert-danger ">
+                            يرجى ادخال الاسم بالشكل الصحيح!!
+                            <div [hidden]="!name?.errors.required">
+                              الاسم مطلوب
+                            </div>
+                            <div [hidden]="!name?.errors.NotEmpty">
+                              الاسم فارغ !!
+                            </div>
+                            <div [hidden]="!name?.errors.minlength">
+                              عدد الأحرف يجب أن لا يقل عن {{name?.errors.minlength?.requiredLength}}
+                            </div>
+                            <div [hidden]="!name.errors.maxlength">
+                              عدد الأحرف يجب أن لا يزيد عن {{name.errors.maxlength?.requiredLength}}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    
+                    <div class="form-group col-md-6">
+                      <label for="description"> الوصف</label>
+                      <textarea id="description" name="description" formControlName="description" class="form-control" rows="4" ></textarea>
+                      <div *ngIf="!description.valid && (description.dirty ||description.touched)">
+                        <div class="alert alert-danger ">
+                          يرجى ادخال الوصف بالشكل الصحيح!!
+                          
+                          <div [hidden]="!description.errors.maxlength">
+                            عدد الأحرف يجب أن لا يزيد عن {{description.errors.maxlength?.requiredLength}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        
+      </div>
+      <div class="row">
+        <div class="col-4">
+        </div>
+        <div class="col-4">
+          <input type="submit" [disabled]="!accountForm.valid" value=" حفظ التغييرات " class="btn btn-success ">
+        </div>
+        <div class="col-4">
+        </div>
+      
+      </div>
+    </form>
+    
+    <br>
+    <br>

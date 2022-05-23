@@ -77,21 +77,30 @@ namespace InventoryManagement.API.Controllers
         // PUT api/<ItemsController>/5
         [HttpPut("{itemId}")]
         public async Task<IActionResult> Put(int itemId, [FromForm] ItemForUpdateDto itemForUpdateDto)
-        
         {
-            if (itemForUpdateDto.ItemImages != null && itemForUpdateDto.ItemImages.Count() > 0)
+            if (itemForUpdateDto.ItemImages != null &&itemForUpdateDto.ItemImages.Count>0)
             {
-                var itemImagesCount = itemForUpdateDto.ItemImages.Count();
-                if (itemForUpdateDto.filesOfImages == null || itemForUpdateDto.filesOfImages.Count() != itemImagesCount)
-                {
-                    throw new Exception();
-                }
+                var itemImagesToUpload = itemForUpdateDto.ItemImages.Where(i => i.Url == null);
+                var itemImagesToUploadCount = itemImagesToUpload.Count();
 
-                for (int i = 0; i < itemImagesCount; i++)
+                if (itemImagesToUploadCount > 0)
                 {
-                    var fileDbPath = await this._serviceManager.FileManagementService.UploadFile(itemForUpdateDto.filesOfImages.ElementAt(i), this._fileFolderPath);
-                    itemForUpdateDto.ItemImages.ElementAt(i).Url = fileDbPath;
+                    if (itemForUpdateDto.filesOfImages != null && itemForUpdateDto.filesOfImages.Count() == itemImagesToUploadCount)
+                    {
+                        for (int i = 0; i < itemImagesToUploadCount; i++)
+                        {
+                            var fileDbPath = await this._serviceManager.FileManagementService.UploadFile(itemForUpdateDto.filesOfImages.ElementAt(i), this._fileFolderPath);
+                            itemImagesToUpload.ElementAt(i).Url = fileDbPath;
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception();
+
+                    }
+
                 }
+                
 
             }
 

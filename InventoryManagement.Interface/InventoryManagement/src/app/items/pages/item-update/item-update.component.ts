@@ -99,7 +99,7 @@ export class ItemUpdateComponent implements OnInit {
       id:[],
       name:['',[Validators.required, Validators.minLength(4), Validators.maxLength(50), NotEmpty]],
       description:['',[ Validators.maxLength(500)]],
-      url:[],
+      url:[''],
       itemId:[],
       fileInput:['',[Validators.required]]
     }) 
@@ -117,7 +117,7 @@ export class ItemUpdateComponent implements OnInit {
 
   addNewItemImageDisabledFields(){
     let itemImageElement= this.newItemImage();
-    itemImageElement.disable({onlySelf:true});
+    itemImageElement.get("fileInput").disable({onlySelf:true});
     this.itemImages.push(itemImageElement);
   }
 
@@ -133,6 +133,10 @@ export class ItemUpdateComponent implements OnInit {
 
   getItemImageName(index: number){
     return this.itemImages.at(index).get("name");
+  }
+
+  getItemImageUrl(index: number){
+    return this.itemImages.at(index).get("url");
   }
 
   getItemImageFileInput(index: number){
@@ -209,11 +213,18 @@ export class ItemUpdateComponent implements OnInit {
     this.itemsService.GetItemDetails(id).subscribe(
       data=>{
         this.itemDetails=data;
+        
         //this.itemDetails.filesOfImages=[]
 
         this.itemDetails.warehouseItems.forEach(element=>{
             element.itemId=this.itemDetails.id;
             this.addNewWarehouseItem();
+          }
+        )
+
+        this.itemDetails.itemImages.forEach(element=>{
+            element.itemId=this.itemDetails.id;
+            this.addNewItemImageDisabledFields();
           }
         )
         
@@ -231,7 +242,9 @@ export class ItemUpdateComponent implements OnInit {
           isActive:this.itemDetails.isActive,
           itemCategoryId:this.itemDetails.itemCategoryId,
           warehouseItems:this.itemDetails.warehouseItems,
+          itemImages:this.itemDetails.itemImages
         })
+
       },
       error=>{
 

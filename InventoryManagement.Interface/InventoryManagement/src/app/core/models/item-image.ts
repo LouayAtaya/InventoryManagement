@@ -3,4 +3,5 @@ export class ItemImage {
     name:string;
     description:string;
     url:string;
+    itemId:number;
 }

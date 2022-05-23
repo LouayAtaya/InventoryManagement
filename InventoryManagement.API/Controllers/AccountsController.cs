@@ -61,7 +61,6 @@ namespace InventoryManagement.API.Controllers
         }
 
         // DELETE api/<AccountsController>/5
-        [HttpDelete("{id}")]
         [HttpDelete("{accountId}")]
         public async Task<IActionResult> Delete(int accountId)
         {

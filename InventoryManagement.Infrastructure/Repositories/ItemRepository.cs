@@ -21,6 +21,7 @@ namespace InventoryManagement.Infrastructure.Repositories
         {
             return await FindAll()
                 .Include(i => i.ItemCategory)
+                .Include(i => i.ItemImages)
                 .ToListAsync();
         }
 

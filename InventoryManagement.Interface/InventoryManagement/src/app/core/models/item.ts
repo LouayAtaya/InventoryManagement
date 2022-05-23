@@ -1,3 +1,4 @@
+import { ItemImage } from ".";
 import { ItemType } from "./item-type";
 
 export class Item {
@@ -18,4 +19,6 @@ export class Item {
     updatedBy: number;
     deActivatedAt:Date;
     deActivatedBy: number
+    itemImages:ItemImage[]=[];
+
 }

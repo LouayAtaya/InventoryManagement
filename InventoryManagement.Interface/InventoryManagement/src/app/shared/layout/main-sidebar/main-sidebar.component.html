@@ -44,7 +44,7 @@
           </li>
 
           <li class="nav-item menu-open">
-            <a [routerLink]="['warehouses']"  class="nav-link active">
+            <a   class="nav-link active">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 المصانع والمخازن
@@ -69,7 +69,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a [routerLink]="['itemCategories']" class="nav-link">
+            <a class="nav-link">
               <i class="nav-icon fas fas fa-th-large"></i>
               <p>
                 الأصناف
@@ -93,7 +93,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a [routerLink]="['items']" class="nav-link">
+            <a  class="nav-link">
               <i class="nav-icon fas fa-shopping-cart"></i>
               <p>
                 المنتجات
@@ -116,10 +116,106 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a [routerLink]="['employees']" class="nav-link">
+            <a  class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
-                إدارة العمال
+                إدارة الموارد البشرية
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a [routerLink]="['employees']"  class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>عرض القائمة</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a [routerLink]="['employees/add']"  class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>إضافة جديد</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a  class="nav-link">
+              <i class="nav-icon fas fa-cart-arrow-down"></i>
+              <p>
+                إدارة المبيعات
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a [routerLink]="['employees']"  class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>عرض القائمة</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a [routerLink]="['employees/add']"  class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>إضافة جديد</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a  class="nav-link">
+              <i class="nav-icon fas fa-cart-plus"></i>
+              <p>
+                إدارة المشتريات
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a [routerLink]="['employees']"  class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>عرض القائمة</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a [routerLink]="['employees/add']"  class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>إضافة جديد</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link">
+              <i class="nav-icon fas fa-calculator"></i>
+              <p>
+                إدارة الحسابات
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a [routerLink]="['accounts']"  class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p> قائمة الحسابات</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a [routerLink]="['accounts/add']"  class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>إضافة حساب جديد</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link">
+              <i class="nav-icon fas fa-tag"></i>
+              <p>
+                إدارة الأصول
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>

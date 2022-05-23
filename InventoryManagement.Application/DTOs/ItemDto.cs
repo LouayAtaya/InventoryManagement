@@ -21,6 +21,8 @@ namespace InventoryManagement.Application.DTOs
         public int ItemCategoryId { get; set; }
         public string ItemCategoryName { get; set; }
 
+        public virtual ICollection<ItemImageDto> ItemImages { get; set; }
+
         public bool IsActive { get; set; } = true;
 
         public DateTime CreatedAt { get; set; }
