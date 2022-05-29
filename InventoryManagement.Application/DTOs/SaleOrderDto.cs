@@ -13,6 +13,8 @@ namespace InventoryManagement.Application.DTOs
         public int CustomerId { get; set; }
         public string CustomerName { get; set; }
 
+        public int WarehouseId { get; set; }
+        public string WarehouseName { get; set; }
 
         public String Description { get; set; }
 

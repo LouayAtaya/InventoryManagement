@@ -23,6 +23,7 @@ namespace InventoryManagement.Domain.Entities
         public virtual ICollection<WarehouseItem> WarehouseItems { get; set; }
         public virtual ICollection<ItemImage> ItemImages { get; set; }
         public virtual ICollection<SaleOrderItem> SaleOrderItems { get; set; }
+        public virtual ICollection<ItemOperation> ItemOperations { get; set; }
 
 
         [NotMapped]

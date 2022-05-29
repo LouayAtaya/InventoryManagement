@@ -30,6 +30,8 @@ namespace InventoryManagement.Infrastructure.Repositories
         public async Task<SaleOrder> GetSaleOrdertWithDetailsAsync(int saleOrderId)
         {
             return await FindByCondition(s => s.Id == saleOrderId)
+                .Include(s => s.Customer)
+                .Include(s => s.Warehouse)
                 .Include(s=>s.SaleOrderItems)
                 .ThenInclude(si => si.Item)
                 .SingleOrDefaultAsync();

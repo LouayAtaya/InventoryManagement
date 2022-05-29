@@ -4,14 +4,16 @@ using InventoryManagement.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace InventoryManagement.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(InventoryManagementContext))]
-    partial class InventoryManagementContextModelSnapshot : ModelSnapshot
+    [Migration("20220523092219_SaleOrderTableAlterTobeBasedOnWarehouse")]
+    partial class SaleOrderTableAlterTobeBasedOnWarehouse
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -242,57 +244,6 @@ namespace InventoryManagement.Infrastructure.Data.Migrations
                     b.ToTable("ItemImages");
                 });
 
-            modelBuilder.Entity("InventoryManagement.Domain.Entities.ItemOperation", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("CreatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("DeActivatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("DeActivatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("ItemId")
-                        .HasColumnType("int")
-                        .HasColumnName("Item_Id");
-
-                    b.Property<byte>("ItemOperationType")
-                        .HasColumnType("tinyint");
-
-                    b.Property<int>("Quantity")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(0);
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("UpdatedBy")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ItemId");
-
-                    b.ToTable("ItemOperations");
-                });
-
             modelBuilder.Entity("InventoryManagement.Domain.Entities.SaleOrder", b =>
                 {
                     b.Property<int>("Id")
@@ -489,17 +440,6 @@ namespace InventoryManagement.Infrastructure.Data.Migrations
                     b.Navigation("Item");
                 });
 
-            modelBuilder.Entity("InventoryManagement.Domain.Entities.ItemOperation", b =>
-                {
-                    b.HasOne("InventoryManagement.Domain.Entities.Item", "Item")
-                        .WithMany("ItemOperations")
-                        .HasForeignKey("ItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Item");
-                });
-
             modelBuilder.Entity("InventoryManagement.Domain.Entities.SaleOrder", b =>
                 {
                     b.HasOne("InventoryManagement.Domain.Entities.Account", "Customer")
@@ -565,8 +505,6 @@ namespace InventoryManagement.Infrastructure.Data.Migrations
             modelBuilder.Entity("InventoryManagement.Domain.Entities.Item", b =>
                 {
                     b.Navigation("ItemImages");
-
-                    b.Navigation("ItemOperations");
 
                     b.Navigation("SaleOrderItems");
 

@@ -12,6 +12,9 @@ namespace InventoryManagement.Domain.Entities
         public String Description { get; set; }
 
         public virtual ICollection<WarehouseItem> WarehouseItems { get; set; }
+
+        public virtual ICollection<SaleOrder> SaleOrders { get; set; }
+
         [NotMapped]
         public Location Location { get; set; }
 

@@ -18,6 +18,7 @@ namespace InventoryManagement.Infrastructure.Data
         public DbSet<Account> Accounts { get; set; }
         public DbSet<SaleOrderItem> SaleOrderItems { get; set; }
         public DbSet<SaleOrder> SaleOrders { get; set; }
+        public DbSet<ItemOperation> ItemOperations { get; set; }
 
         public InventoryManagementContext(DbContextOptions<InventoryManagementContext> options) 
             : base(options)
@@ -42,6 +43,7 @@ namespace InventoryManagement.Infrastructure.Data
             modelBuilder.ApplyConfiguration(new SaleOrderConfiguration());
             modelBuilder.ApplyConfiguration(new SaleOrderItemConfiguration());
             modelBuilder.ApplyConfiguration(new AccountConfiguration());
+            modelBuilder.ApplyConfiguration(new ItemOperationConfiguration());
 
 
         }

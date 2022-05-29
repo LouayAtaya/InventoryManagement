@@ -26,7 +26,12 @@ namespace InventoryManagement.Infrastructure.Configuration
                 .IsRequired()
                 .HasDefaultValue(0);
 
+            builder.Property(o => o.CustomerId).HasColumnName("Customer_Id");
+            builder.Property(o => o.WarehouseId).HasColumnName("Warehouse_Id");
 
+            builder.HasOne(o => o.Warehouse)
+                .WithMany(w => w.SaleOrders)
+                .HasForeignKey(o => o.WarehouseId);
         }
     }
 }

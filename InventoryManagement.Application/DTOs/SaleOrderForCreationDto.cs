@@ -15,6 +15,8 @@ namespace InventoryManagement.Application.DTOs
 
         public int CustomerId { get; set; }
 
+        public int WarehouseId { get; set; }
+
         [StringLength(500, ErrorMessage = "Description cannot be loner than 500 characters")]
         public String Description { get; set; }
 

@@ -12,6 +12,8 @@ namespace InventoryManagement.Domain.Entities
     {
         public int CustomerId { get; set; }
 
+        public int WarehouseId { get; set; }
+
         public String Description { get; set; }
 
         public int TotalAmount { get; set; }
@@ -25,6 +27,8 @@ namespace InventoryManagement.Domain.Entities
         public int TotalOrderPrice { get; set; }
 
         public virtual Account Customer { get; set; }
+        public virtual Warehouse Warehouse { get; set; }
+
         public virtual ICollection<SaleOrderItem> SaleOrderItems { get; set; }
 
         public void  CalculateTotalOrderPrice()
