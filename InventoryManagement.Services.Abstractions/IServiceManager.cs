@@ -13,6 +13,7 @@ namespace InventoryManagement.Services.Abstractions
         IWarehouseService WarehouseService { get; }
         IAccountService AccountService { get; }
         ISaleOrderService SaleOrderService { get; }
+        IItemOperationService ItemOperationService { get; }
 
         IFileManagementService FileManagementService { get; }
     }

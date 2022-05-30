@@ -22,6 +22,8 @@ namespace InventoryManagement.Services
 
         private readonly Lazy<ISaleOrderService> _lazySaleOrderService;
 
+        private readonly Lazy<IItemOperationService> _lazyItemOperationService;
+
 
         private readonly Lazy<IFileManagementService> _fileManagementService;
 
@@ -37,7 +39,10 @@ namespace InventoryManagement.Services
 
             _lazySaleOrderService = new Lazy<ISaleOrderService>(() => new SaleOrderService(repositoryWrapper, mapper));
 
-            _fileManagementService =new Lazy<IFileManagementService>(()=>new FileManagementService());
+            _lazyItemOperationService = new Lazy<IItemOperationService>(() => new ItemOperationService(repositoryWrapper, mapper));
+
+            _fileManagementService = new Lazy<IFileManagementService>(()=>new FileManagementService());
+        
         }
 
         public IItemService ItemService => _lazyItemService.Value;
@@ -49,6 +54,9 @@ namespace InventoryManagement.Services
         public IAccountService AccountService => _lazyAccountService.Value;
 
         public ISaleOrderService SaleOrderService => _lazySaleOrderService.Value;
+
+        public IItemOperationService ItemOperationService => _lazyItemOperationService.Value;
+
 
         public IFileManagementService FileManagementService => _fileManagementService.Value;
 

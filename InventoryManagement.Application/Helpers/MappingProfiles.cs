@@ -55,6 +55,10 @@ namespace InventoryManagement.Application.Helpers
             CreateMap<SaleOrderItemForCreationDto, SaleOrderItem>();
             CreateMap<SaleOrderItemForUpdateDto, SaleOrderItem>();
 
+            //ItemOperation
+            CreateMap<ItemOperation, ItemOperationDto>();
+            CreateMap<ItemOperationForCreationDto, ItemOperation>();
+            CreateMap<ItemOperationForUpdateDto, ItemOperation>();
 
         }
     }

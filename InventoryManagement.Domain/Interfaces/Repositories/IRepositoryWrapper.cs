@@ -17,6 +17,8 @@ namespace InventoryManagement.Domain.Interfaces.Repositories
 
         ISaleOrderRepository SaleOrder { get; }
 
+        IItemOperationRepository ItemOperation { get; }
+
 
         Task SaveAsync();
 

@@ -23,6 +23,8 @@ namespace InventoryManagement.Infrastructure.Repositories
 
         private ISaleOrderRepository _saleOrderRepository;
 
+        private IItemOperationRepository _itemOperationRepository;
+
         public RepositoryWrapper(InventoryManagementContext dbContext)
         {
             _dbContext = dbContext;
@@ -76,6 +78,16 @@ namespace InventoryManagement.Infrastructure.Repositories
                 if (this._saleOrderRepository == null)
                     _saleOrderRepository = new SaleOrderRepository(_dbContext);
                 return _saleOrderRepository;
+            }
+        }
+
+        public IItemOperationRepository ItemOperation
+        {
+            get
+            {
+                if (this._itemOperationRepository == null)
+                    _itemOperationRepository = new ItemOperationRepository(_dbContext);
+                return _itemOperationRepository;
             }
         }
 
