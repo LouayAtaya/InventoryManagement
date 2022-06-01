@@ -1,5 +1,6 @@
 ﻿using InventoryManagement.Domain.Entities.Base;
 using InventoryManagement.Domain.Enums;
+using InventoryManagement.Domain.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace InventoryManagement.Domain.Entities
 {
-    
+
     public class Item : Auditor
     {
         public String Code { get; set; }
@@ -32,17 +33,63 @@ namespace InventoryManagement.Domain.Entities
         public Location Location { get; set; }
 
 
-        public void CalculateTotalQuantity() 
+        public void CalculateTotalQuantity()
         {
             this.TotalQuantity = 0;
 
-            if (this.WarehouseItems !=null && this.WarehouseItems.Count > 0)
+            if (this.WarehouseItems != null && this.WarehouseItems.Count > 0)
             {
-                foreach(var warehouseItem in this.WarehouseItems)
+                foreach (var warehouseItem in this.WarehouseItems)
                 {
                     this.TotalQuantity = this.TotalQuantity + warehouseItem.Quantity;
                 }
             }
+        }
+
+        public void AddNewQuantity(int warehouseId,int quantity)
+        {
+            bool itemExistInWarehouse = false;
+            foreach(WarehouseItem warehouseItem in WarehouseItems)
+            {
+                if (warehouseItem.WarehouseId == warehouseId)
+                {
+                    itemExistInWarehouse = true;
+                    warehouseItem.Quantity += quantity;
+                    break;
+                }
+            }
+
+            if (!itemExistInWarehouse)
+            {
+                this.WarehouseItems.Add(new WarehouseItem(this.Id,warehouseId,quantity));
+            }
+            this.TotalQuantity += quantity;
+        }
+
+        public void RemoveQuantity(int warehouseId, int quantity)
+        {
+            if (this.TotalQuantity < quantity)
+                throw new ItemRemovedQuantityBigerThanTotalException();
+
+            bool itemExistInWarehouse = false;
+            foreach (WarehouseItem warehouseItem in WarehouseItems)
+            {
+                if (warehouseItem.WarehouseId == warehouseId)
+                {
+                    itemExistInWarehouse = true;
+
+                    if (warehouseItem.Quantity < quantity)
+                        throw new ItemRemovedQuantityBigerThanTotalException();
+
+                    warehouseItem.Quantity -= quantity;
+                    break;
+                }
+            }
+
+            if (!itemExistInWarehouse)
+                throw new ItemNotExistInWarehouseException(warehouseId);
+
+            this.TotalQuantity -= quantity;
         }
     }
 }

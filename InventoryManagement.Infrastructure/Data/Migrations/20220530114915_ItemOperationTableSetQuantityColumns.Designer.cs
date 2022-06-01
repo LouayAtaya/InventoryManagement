@@ -4,14 +4,16 @@ using InventoryManagement.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace InventoryManagement.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(InventoryManagementContext))]
-    partial class InventoryManagementContextModelSnapshot : ModelSnapshot
+    [Migration("20220530114915_ItemOperationTableSetQuantityColumns")]
+    partial class ItemOperationTableSetQuantityColumns
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -291,15 +293,9 @@ namespace InventoryManagement.Infrastructure.Data.Migrations
                     b.Property<int?>("UpdatedBy")
                         .HasColumnType("int");
 
-                    b.Property<int>("WarehouseId")
-                        .HasColumnType("int")
-                        .HasColumnName("Warehouse_Id");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ItemId");
-
-                    b.HasIndex("WarehouseId");
 
                     b.ToTable("ItemOperations");
                 });
@@ -508,15 +504,7 @@ namespace InventoryManagement.Infrastructure.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("InventoryManagement.Domain.Entities.Warehouse", "Warehouse")
-                        .WithMany("ItemOperations")
-                        .HasForeignKey("WarehouseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Item");
-
-                    b.Navigation("Warehouse");
                 });
 
             modelBuilder.Entity("InventoryManagement.Domain.Entities.SaleOrder", b =>
@@ -606,8 +594,6 @@ namespace InventoryManagement.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("InventoryManagement.Domain.Entities.Warehouse", b =>
                 {
-                    b.Navigation("ItemOperations");
-
                     b.Navigation("SaleOrders");
 
                     b.Navigation("WarehouseItems");

@@ -15,6 +15,9 @@ namespace InventoryManagement.Domain.Entities
 
         public virtual ICollection<SaleOrder> SaleOrders { get; set; }
 
+        public virtual ICollection<ItemOperation> ItemOperations { get; set; }
+
+
         [NotMapped]
         public Location Location { get; set; }
 

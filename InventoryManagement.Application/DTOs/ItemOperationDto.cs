@@ -12,8 +12,11 @@ namespace InventoryManagement.Application.DTOs
         public int Id { get; set; }
 
         public int ItemId { get; set; }
+        public int WarehouseId { get; set; }
 
-        public int Quantity { get; set; }
+        public int PreviousQuantity { get; set; }
+
+        public int AffectedQuantity { get; set; }
 
         public string Description { get; set; }
 

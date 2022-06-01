@@ -14,7 +14,12 @@ namespace InventoryManagement.Application.DTOs
 
         public int ItemId { get; set; }
 
-        public int Quantity { get; set; }
+        public int WarehouseId { get; set; }
+
+        public int? PreviousQuantity { get; set; }
+
+        [Required(ErrorMessage = "AffectedQuantity is required")]
+        public int? AffectedQuantity { get; set; }
 
         [StringLength(500, ErrorMessage = "Description cannot be loner than 500 characters")]
         public String Description { get; set; }

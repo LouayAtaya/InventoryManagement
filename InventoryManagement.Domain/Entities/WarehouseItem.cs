@@ -7,6 +7,18 @@ namespace InventoryManagement.Domain.Entities
 {
     public class WarehouseItem
     {
+        public WarehouseItem()
+        {
+
+        }
+
+        public WarehouseItem(int itemId,int warehouseId, int quantity)
+        {
+            this.ItemId = itemId;
+            this.WarehouseId = warehouseId;
+            this.Quantity = quantity;
+        }
+
         public int ItemId { get; set; }
         public int WarehouseId { get; set; }
 

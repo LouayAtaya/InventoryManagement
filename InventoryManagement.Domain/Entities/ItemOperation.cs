@@ -14,7 +14,11 @@ namespace InventoryManagement.Domain.Entities
     {
         public int ItemId { get; set; }
 
-        public int Quantity { get; set; }
+        public int WarehouseId { get; set; }
+
+        public int PreviousQuantity { get; set; }
+
+        public int AffectedQuantity { get; set; }
 
         public string Description { get; set; }
 
@@ -22,13 +26,15 @@ namespace InventoryManagement.Domain.Entities
 
         public virtual Item Item { get; set; }
 
+        public virtual Warehouse Warehouse { get; set; }
+
         [NotMapped]
         public int IsReturnOperation { get; set; }
         [NotMapped]
         public int RmrId { get; set; }
 
         [NotMapped]
-        public bool isSaleOperation { get; set; }
+        public bool IsSaleOperation { get; set; }
         [NotMapped]
         public int SaleInvoiceId { get; set; }
 
