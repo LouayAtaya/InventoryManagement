@@ -1,4 +1,5 @@
 ﻿using InventoryManagement.Domain.Entities;
+using InventoryManagement.Domain.Enums;
 using InventoryManagement.Domain.Interfaces.Repositories;
 using InventoryManagement.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +22,11 @@ namespace InventoryManagement.Infrastructure.Repositories
         {
             return await FindAll().ToListAsync();
         }
+        public async Task<IEnumerable<Account>> GetAccountsByTypeAsync(AccountType accountType)
 
+        {
+            return await FindByCondition(a=>a.AccountType==accountType).ToListAsync();
+        }
         public async Task<Account> GetAccountByIdAsync(int accountId)
         {
             return await FindByCondition(a => a.Id == accountId).SingleOrDefaultAsync();

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InventoryManagement.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,8 @@ namespace InventoryManagement.Application.DTOs
 
         public int WarehouseId { get; set; }
         public string WarehouseName { get; set; }
+
+        public SaleOrderStatus SaleOrderStatus { get; set; }
 
         public String Description { get; set; }
 

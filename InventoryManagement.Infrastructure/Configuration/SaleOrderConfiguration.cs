@@ -1,4 +1,5 @@
 ﻿using InventoryManagement.Domain.Entities;
+using InventoryManagement.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -21,6 +22,10 @@ namespace InventoryManagement.Infrastructure.Configuration
             builder.Property(o => o.TotalAmount)
                 .IsRequired()
                 .HasDefaultValue(0);
+
+            builder.Property(o => o.SaleOrderStatus)
+                .IsRequired()
+                .HasDefaultValue(SaleOrderStatus.Incomplet);
 
             builder.Property(o => o.TotalOrderPrice)
                 .IsRequired()

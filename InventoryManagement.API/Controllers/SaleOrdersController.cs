@@ -1,5 +1,6 @@
 ﻿using InventoryManagement.API.ActionFilters;
 using InventoryManagement.Application.DTOs;
+using InventoryManagement.Domain.Enums;
 using InventoryManagement.Services.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -55,6 +56,15 @@ namespace InventoryManagement.API.Controllers
         public async Task<IActionResult> UpdateSaleOrder(int saleOrderId, [FromBody] SaleOrderForUpdateDto saleOrderForUpdateDto)
         {
             await this._serviceManager.SaleOrderService.UpdateSaleOrderAsync(saleOrderId, saleOrderForUpdateDto);
+
+            return Ok();
+        }
+
+        // PUT api/<SaleOrdersController>/5
+        [HttpPut("{saleOrderId}/status/{saleOrderStatus}")]
+        public async Task<IActionResult> UpdateSaleOrderStatus(int saleOrderId, SaleOrderStatus saleOrderStatus)
+        {
+            await this._serviceManager.SaleOrderService.UpdateSaleOrderStatusAsync(saleOrderId, saleOrderStatus);
 
             return Ok();
         }

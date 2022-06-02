@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using InventoryManagement.Application.DTOs;
 using InventoryManagement.Domain.Entities;
+using InventoryManagement.Domain.Enums;
 using InventoryManagement.Domain.Exceptions;
 using InventoryManagement.Domain.Interfaces.Repositories;
 using InventoryManagement.Services.Abstractions;
@@ -26,6 +27,13 @@ namespace InventoryManagement.Services
         public async Task<IEnumerable<AccountDto>> GetAllAccountsAsync()
         {
             var accounts = await this._repositoryWrapper.Account.getAllAccountsAsync();
+            List<AccountDto> accountsDto = _mapper.Map<List<AccountDto>>(accounts);
+            return accountsDto;
+        }
+
+        public async Task<IEnumerable<AccountDto>> GetAccountsByTypeAsync(AccountType accountType)
+        {
+            var accounts = await this._repositoryWrapper.Account.GetAccountsByTypeAsync(accountType);
             List<AccountDto> accountsDto = _mapper.Map<List<AccountDto>>(accounts);
             return accountsDto;
         }

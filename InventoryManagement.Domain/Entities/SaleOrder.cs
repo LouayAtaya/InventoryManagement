@@ -1,4 +1,5 @@
 ﻿using InventoryManagement.Domain.Entities.Base;
+using InventoryManagement.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,6 +14,8 @@ namespace InventoryManagement.Domain.Entities
         public int CustomerId { get; set; }
 
         public int WarehouseId { get; set; }
+
+        public SaleOrderStatus SaleOrderStatus { get; set; }
 
         public String Description { get; set; }
 

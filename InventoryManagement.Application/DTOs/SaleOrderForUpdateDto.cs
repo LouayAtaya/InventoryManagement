@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InventoryManagement.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace InventoryManagement.Application.DTOs
 
         public int CustomerId { get; set; }
         public int WarehouseId { get; set; }
+        public SaleOrderStatus SaleOrderStatus { get; set; }
 
         [StringLength(500, ErrorMessage = "Description cannot be loner then 500 characters")]
         public String Description { get; set; }

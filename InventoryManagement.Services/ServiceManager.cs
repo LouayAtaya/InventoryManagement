@@ -37,7 +37,7 @@ namespace InventoryManagement.Services
 
             _lazyAccountService = new Lazy<IAccountService>(() => new AccountService(repositoryWrapper, mapper));
 
-            _lazySaleOrderService = new Lazy<ISaleOrderService>(() => new SaleOrderService(repositoryWrapper, mapper));
+            _lazySaleOrderService = new Lazy<ISaleOrderService>(() => new SaleOrderService(repositoryWrapper, mapper, this));
 
             _lazyItemOperationService = new Lazy<IItemOperationService>(() => new ItemOperationService(repositoryWrapper, mapper));
 

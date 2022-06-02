@@ -1,5 +1,6 @@
 ﻿using InventoryManagement.API.ActionFilters;
 using InventoryManagement.Application.DTOs;
+using InventoryManagement.Domain.Enums;
 using InventoryManagement.Services.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -38,6 +39,15 @@ namespace InventoryManagement.API.Controllers
             var account = await this._serviceManager.AccountService.GetAccountByIdAsync(accountId);
 
             return Ok(account);
+        }
+
+        // GET: api/<AccountsController>/type/0
+        [HttpGet("type/{accountType}")]
+        public async Task<IActionResult> GetAccounts(AccountType accountType)
+        {
+            var accounts = await this._serviceManager.AccountService.GetAccountsByTypeAsync(accountType);
+
+            return Ok(accounts);
         }
 
         // POST api/<AccountsController>
