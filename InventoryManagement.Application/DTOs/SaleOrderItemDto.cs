@@ -10,6 +10,9 @@ namespace InventoryManagement.Application.DTOs
     {
         public int Id { get; set; }
         public int ItemId { get; set; }
+
+        public string ItemCode { get; set; }
+
         public string ItemName { get; set; }
 
         public int price { get; set; }

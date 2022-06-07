@@ -20,6 +20,14 @@ export * from './account-type'
 export * from './account-type-map'
 export * from './account-for-creation'
 export * from './account-for-update'
+export * from './sale-order'
+export * from './sale-order-for-creation'
+export * from './sale-order-for-update'
+export * from './sale-order-item'
+export * from './sale-order-item-for-creation'
+export * from './sale-order-item-for-update'
+export * from './sale-order-status'
+export * from './sale-order-status-map'
 
 
 

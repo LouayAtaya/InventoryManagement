@@ -1,0 +1,244 @@
+<div class="row">
+    <div class="col-12">
+        <form [formGroup]="saleOrderForm" (ngSubmit)="onSubmit()" novalidate>
+            
+            <!-- Main content -->
+            <div class="invoice p-3 mb-3">
+                <!-- title row -->
+                <div class="row">
+                    <div class="col-12">
+                        <div style="text-align: center;">
+                            <h3 >
+                                طلب مبيعات جديد
+                           </h3>
+                        </div>
+                        
+                        <h4>
+                        <i class="fas fa-globe"></i> شركة عطايا الشام 
+                        <small class="float-right">التاريخ: {{currentDate|date}}</small>
+                        </h4>
+                    </div>
+                <!-- /.col -->
+                </div>
+                <!-- info row -->
+                <div class="row invoice-info">
+                    <div class="col-sm-3 invoice-col">
+                        من
+                        <address>
+                        <strong>شركة عطايا الشام</strong><br>
+                        دمياط الجديدة -المدينة الصناعية<br>
+                        هاتف: 01150769856<br>
+                        
+                        </address>
+                        
+                    </div>
+
+                    <div class="col-sm-3 invoice-col">
+                        إلى
+                        <div class="form-group">
+                            <label for="customerId">العميل/ الزبون  </label>
+                            <select type="number" id="customerId" name="customerId" formControlName="customerId"  class="form-control">    
+                                <option value="">اختر العميل/ الزبون</option>
+                                <option *ngFor="let customer of customers" [ngValue]="customer.id">{{customer.name }}</option>
+
+                            </select> 
+                            <div *ngIf="!customerId.valid && (customerId.dirty ||customerId.touched)">
+                                <div class="alert alert-danger ">
+                                  يرجى اختيار العميل  !!
+                                 
+                                </div>
+                            </div>   
+                        </div>
+                        <div class="form-group">
+                            <label for="warehouseId">المصنع/ المخزن </label>
+                            <select type="number" id="warehouseId" name="warehouseId" formControlName="warehouseId"  class="form-control">    
+                                <option value="">اختر المصنع/ المخزن</option>
+                                <option *ngFor="let warehouse of warehouses" [ngValue]="warehouse.id">{{warehouse.name }}</option>
+
+                            </select> 
+                            <div *ngIf="!warehouseId.valid && (warehouseId.dirty ||warehouseId.touched)">
+                                <div class="alert alert-danger ">
+                                  يرجى اختيار المصنع/ المخزن  !!
+                                 
+                                </div>
+                              </div>   
+                        </div>
+                        
+                    </div>
+
+                    <div class="col-sm-6 invoice-col">
+                        <br>
+                        <div class="form-group">
+                            <label for="description"> الوصف</label>
+                            <textarea id="description" name="description" formControlName="description" class="form-control" rows="4" ></textarea>
+                            <div *ngIf="!description.valid && (description.dirty ||description.touched)">
+                                <div class="alert alert-danger ">
+                                  يرجى ادخال الوصف بالشكل الصحيح!!
+                                  
+                                  <div [hidden]="!description.errors.maxlength">
+                                    عدد الأحرف يجب أن لا يزيد عن {{description.errors.maxlength?.requiredLength}}
+                                  </div>
+                                </div>
+                              </div>
+                        </div>
+                        
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+
+                <!-- Table row -->
+                <div class="row">
+                    
+                    <div class="col-lg-9 col-md-12 col-sm-12 table-responsive"  formArrayName="saleOrderItems">
+                        <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>#  </th>
+                            <th> الكود</th>
+                            <th>الصنف</th>
+                            <th>الكمية</th>
+                            <th>السعر</th>
+                            <th>الإجمالي</th>
+                            <th> <a  (click)="addNewSaleOrderItem()" class="btn  btn-outline-success">  <i class="fas fa-plus"></i> </a>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let saleOrderItem of saleOrderItems.controls; let i=index">
+                            <ng-container [formGroupName]="i" class="row" style="border-style:groove; border-color: beige; padding-top: 15px; margin-bottom: 10px;" >
+                                <td>{{i+1}}</td>
+                                <td>
+                                    <div class="form-group" style="width: 100px;" >
+                                        <input type="text" id="itemCode" name="itemCode" formControlName="itemCode" class="form-control">       
+                                    </div>
+                                </td>
+                                <td>
+                                    <div  class="form-group ">
+                                        <select (change)="onNewItemSelected(i)" type="number" id="itemId" name="itemId" formControlName="itemId" class="form-control">    
+                                            <option value="">اختر الصنف </option>
+                                            <option *ngFor="let item of items" [ngValue]="item.id"> 
+                                                {{item.name}}
+                                              </option>
+                                        </select>   
+                                        <div *ngIf="!getSaleOrderItemItemId(i).valid && (getSaleOrderItemItemId(i).dirty ||getSaleOrderItemItemId(i).touched)">
+                                            <div class="alert alert-danger ">
+                                              يرجى اختيار الصنف  !!
+                                            </div>
+                                        </div>      
+                                    </div>
+                                </td>
+                                <td >
+                                    <div style="width: 100px;" class="form-group ">
+                                        <input  type="number" id="quantity" name="quantity" formControlName="quantity" class="form-control" >       
+                                        <div *ngIf="!getSaleOrderItemQuantity(i).valid && (getSaleOrderItemQuantity(i).dirty ||getSaleOrderItemQuantity(i).touched)">
+                                            <div class="alert alert-danger ">
+                                              يرجى إدخال الكمية !!
+                                              <div [hidden]="!getSaleOrderItemQuantity(i).errors.minQuantity">
+                                                الكمية يجب ألا تقل عن {{getSaleOrderItemQuantity(i).errors.minQuantity}}
+                                                </div>
+                                            </div>
+                                          </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="width: 100px;" class="form-group ">
+    
+                                        <input   type="number" id="price" name="price" formControlName="price" class="form-control" >       
+                                        <div *ngIf="!getSaleOrderItemPrice(i).valid && (getSaleOrderItemPrice(i).dirty ||getSaleOrderItemPrice(i).touched)">
+                                            <div class="alert alert-danger ">
+                                                يرجى ادخال السعر بالشكل الصحيح!!
+                                                <div [hidden]="!getSaleOrderItemPrice(i).errors.minPrice">
+                                                    السعر يجب ألا يقل عن {{getSaleOrderItemPrice(i).errors.minPrice}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="width: 100px;" class="form-group ">
+    
+                                        <input type="text" id="name" name="name" formControlName="subTotal" class="form-control">       
+                                    </div>
+    
+                                </td>                           
+                                 <td>
+                                    <button (click)="removeSaleOrderItem(i)" type="button" class="btn btn-tool">
+                                        <i class="fas fa-times"></i>
+                                      </button>
+                                 </td>
+                                
+                            </ng-container>
+                           
+                            
+
+                        </tr>
+                        <!--<tr>
+                            <td>1</td>
+                            <td>T0001</td>
+                            <td>طربيزة رخام اسود</td>
+                            <td>6</td>
+                            <td>2150</td>
+                            <td>6800</td>
+                            <td></td>
+
+                        </tr>-->
+                        
+                        
+                        </tbody>
+                        </table>
+                    </div>
+                    
+                <!-- /.col -->
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                <!-- accepted payments column -->
+                
+                <!-- /.col -->
+                <div class="col-6">
+                    <p class="lead">القيمة الإجمالية</p>
+
+                    <div class="table-responsive">
+                    <table class="table">
+                        <tr>
+                        <th style="width:50%">الإجمالي </th>
+                        <td>
+                            <div class="form-group">
+                                <input type="text" id="totalAmount" name="totalAmount" formControlName="totalAmount" class="form-control">       
+                                <div *ngIf="!description.valid && (description.dirty ||description.touched)">
+                                    <div class="alert alert-danger ">
+                                      يرجى ادخال الوصف بالشكل الصحيح!!
+                                      
+                                      <div [hidden]="!description.errors.maxlength">
+                                        عدد الأحرف يجب أن لا يزيد عن {{description.errors.maxlength?.requiredLength}}
+                                      </div>
+                                    </div>
+                                  </div>
+                            </div>
+                        </td>
+                        </tr>
+                        
+                    </table>
+                    </div>
+                </div>
+                <!-- /.col -->
+                </div>
+                <!-- /.row -->
+
+                <!-- this row will not appear when printing -->
+                <div class="row no-print">
+                <div class="col-12">
+                    
+                    <button type="submit"   [disabled]="!saleOrderForm.valid" class="btn  btn-success ">
+                        <i class="fas fa-download"></i> حفظ
+                    </button>
+                </div>
+                </div>
+            </div>
+            <!-- /.invoice -->
+        </form>
+
+    </div><!-- /.col -->
+  </div><!-- /.row -->

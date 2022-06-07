@@ -19,7 +19,10 @@ namespace InventoryManagement.Infrastructure.Repositories
 
         public async Task<IEnumerable<SaleOrder>> getAllSaleOrdersAsync()
         {
-            return await FindAll().ToListAsync();
+            return await FindAll()
+                .Include(s => s.Customer)
+                .Include(s => s.Warehouse)
+                .ToListAsync();
         }
 
         public async Task<SaleOrder> GetSaleOrderByIdAsync(int saleOrderId)
