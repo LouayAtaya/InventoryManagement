@@ -6,13 +6,14 @@ import { SharedModule } from '../shared';
 import { HttpClientModule } from '@angular/common/http';
 import { AccountsService } from './services/accounts.service';
 import { SaleOrdersService } from './services/sale-orders.service';
+import { ItemOperationsService } from './services/item-operations.service';
 
 
 
 @NgModule({
   declarations: [],
   providers:[
-    ItemsService,WarehousesService,ItemCategoriesService,AccountsService,SaleOrdersService
+    ItemsService,WarehousesService,ItemCategoriesService,AccountsService,SaleOrdersService,ItemOperationsService
   ],
   imports: [
     CommonModule,

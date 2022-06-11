@@ -76,35 +76,46 @@ namespace InventoryManagement.Services
 
         public async Task UpdateSaleOrderStatusAsync(int saleOrderId, SaleOrderStatus saleOrderStatus)
         {
-            var saleOrder = await this._repositoryWrapper.SaleOrder.GetSaleOrdertWithDetailsAsync(saleOrderId);
-            if (saleOrder == null)
-                throw new SaleOrderNotFoundException(saleOrderId);
-
-            saleOrder.SaleOrderStatus = saleOrderStatus;
-
-            //if Approved: Create An items operation for all involoved items in SaleOrder
-            if (saleOrderStatus == SaleOrderStatus.Approved)
+            using( var transaction= this._repositoryWrapper.DbContext.Database.BeginTransaction())
             {
-
-                ItemOperationForCreationDto itemOperationForCreation = null;
-                ItemOperationDto itemOperation = null;
-                foreach (var saleOrderItem in saleOrder.SaleOrderItems)
+                try
                 {
-                    itemOperationForCreation = new ItemOperationForCreationDto()
-                    {
-                        ItemId = saleOrderItem.ItemId,
-                        WarehouseId=saleOrder.WarehouseId,
-                        AffectedQuantity = saleOrderItem.Quantity,
-                        Description = "Sale Order #"+saleOrder.Id,
-                        ItemOperationType = ItemOperationType.Exit,
-                        IsActive = true
-                    };
+                    var saleOrder = await this._repositoryWrapper.SaleOrder.GetSaleOrdertWithDetailsAsync(saleOrderId);
+                    if (saleOrder == null)
+                        throw new SaleOrderNotFoundException(saleOrderId);
 
-                    itemOperation = await this._serviceManager.ItemOperationService.CreateItemOperationAsync(itemOperationForCreation);
+                    saleOrder.SaleOrderStatus = saleOrderStatus;
+
+                    //if Approved: Create An items operation for all involoved items in SaleOrder
+                    if (saleOrderStatus == SaleOrderStatus.Approved)
+                    {
+
+                        ItemOperationForCreationDto itemOperationForCreation = null;
+                        ItemOperationDto itemOperation = null;
+                        foreach (var saleOrderItem in saleOrder.SaleOrderItems)
+                        {
+                            itemOperationForCreation = new ItemOperationForCreationDto()
+                            {
+                                ItemId = saleOrderItem.ItemId,
+                                WarehouseId = saleOrder.WarehouseId,
+                                AffectedQuantity = saleOrderItem.Quantity,
+                                Description = "Sale Order #" + saleOrder.Id,
+                                ItemOperationType = ItemOperationType.Exit,
+                                IsActive = true
+                            };
+
+                            itemOperation = await this._serviceManager.ItemOperationService.CreateItemOperationAsync(itemOperationForCreation);
+                        }
+                    }
+                    await this._repositoryWrapper.SaveAsync();
+                    transaction.Commit();
+                }
+                catch(Exception e)
+                {
+                    transaction.Rollback();
+                    throw e;
                 }
             }
-
-            await this._repositoryWrapper.SaveAsync();
         }
 
         public async Task DeleteSaleOrderAsync(int saleOrderId)

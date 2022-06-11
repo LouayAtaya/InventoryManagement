@@ -1,4 +1,4 @@
-import { ItemType } from './item-type';
+import { ItemType } from './enums/item-type';
 
 export const itemTypeList=[
     {itemTypeId: ItemType.RawItem,ItemTypeName:"مواد خام"},

@@ -26,8 +26,12 @@ export * from './sale-order-for-update'
 export * from './sale-order-item'
 export * from './sale-order-item-for-creation'
 export * from './sale-order-item-for-update'
-export * from './sale-order-status'
-export * from './sale-order-status-map'
+export * from './enums/sale-order-status'
+export * from './item-operation'
+export * from './item-operation-for-creation'
+export * from './item-operation-for-update'
+export * from './enums/item-operation-type'
+
 
 
 

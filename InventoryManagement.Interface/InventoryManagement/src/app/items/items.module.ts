@@ -8,6 +8,8 @@ import { ItemUpdateComponent } from './pages/item-update/item-update.component';
 import { ItemDetailsComponent } from './pages/item-details/item-details.component';
 import { SharedModule } from '../shared/shared.module';
 import { ItemsListComponent } from './pages/items-list/items-list.component';
+import { ItemOperationsComponent } from './components/item-operations/item-operations.component';
+import { ItemOperationCreateComponent } from './components/item-operation-create/item-operation-create.component';
 
 
 @NgModule({
@@ -16,7 +18,9 @@ import { ItemsListComponent } from './pages/items-list/items-list.component';
     ItemCreateComponent,
     ItemUpdateComponent,
     ItemDetailsComponent,
-    ItemsListComponent
+    ItemsListComponent,
+    ItemOperationsComponent,
+    ItemOperationCreateComponent
   ],
   imports: [
     CommonModule,

@@ -5,7 +5,7 @@ import { ItemForCreation } from '../../../core/models/item-for-creation';
 import { ItemImageForCreation } from '../../../core/models/item-image-for-creation';
 import { ItemCategoriesService } from '../../../core/services/item-categories.service';
 import { ItemCategory } from '../../../core/models/item-category';
-import { ItemType } from '../../../core/models/item-type';
+import { ItemType } from '../../../core/models/enums/item-type';
 import { itemTypeList } from '../../../core/models/item-types-list';
 import { WarehousesService } from '../../../core/services/warehouses.service';
 import { ItemsService, Warehouse } from 'src/app/core';

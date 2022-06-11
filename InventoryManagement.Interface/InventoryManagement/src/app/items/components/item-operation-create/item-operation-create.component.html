@@ -1,0 +1,84 @@
+<form [formGroup]="itemOperationForm" (ngSubmit)="onSubmit()" novalidate>
+    <div class="row">
+      
+        <div class="col-md-12">
+          <div class="card card-primary">
+           
+            <div class="card-body">
+                <div class="form-group ">
+                    <label for="itemOperationType">نوع الحركة </label>
+                    <select type="number" id="itemOperationType" name="itemOperationType" formControlName="itemOperationType" class="form-control">    
+                        <option value="" selected>اختر النوع</option>
+                        <option *ngFor="let itemOperation of itemOperationTypes|keyvalue" [ngValue]="itemOperation.key"> 
+                            {{itemOperation.value}} 
+                        </option>
+                    </select>
+                    <div *ngIf="!itemOperationType.valid && (itemOperationType.dirty ||itemOperationType.touched)">
+                        <div class="alert alert-danger ">
+                          يرجى اختيار النوع!!
+                          
+                        </div>
+                      </div>  
+                    
+                </div>
+                <div class="form-group ">
+                    <label for="warehouseId"> المصنع/ المخزن </label>
+                    <select type="number" id="warehouseId" name="warehouseId" formControlName="warehouseId" class="form-control">    
+                        <option value="" selected>اختر المصنع/ المخزن</option>
+                        <option *ngFor="let warehouse of warehousesList" [ngValue]="warehouse.id"> 
+                            {{warehouse.name}} 
+                          </option>
+                    </select>
+                    <div *ngIf="!warehouseId.valid && (warehouseId.dirty ||warehouseId.touched)">
+                        <div class="alert alert-danger ">
+                          يرجى اختيار المصنع/ المخزن !!
+                        </div>
+                      </div>   
+                    
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="affectedQuantity">الكمية المتأثرة </label>
+                    <input type="number" id="affectedQuantity" name="affectedQuantity" formControlName="affectedQuantity" class="form-control" >       
+                    <div *ngIf="!affectedQuantity.valid && (affectedQuantity.dirty ||affectedQuantity.touched)">
+                        <div class="alert alert-danger ">
+                          يرجى إدخال الكمية !!
+                          <div [hidden]="!affectedQuantity.errors.minQuantity">
+                            الكمية يجب ألا تقل عن {{affectedQuantity.errors.minQuantity}}
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+              <div class="form-group">
+                <label for="description">الوصف</label>
+                <textarea id="description" name="description" formControlName="description" class="form-control" rows="4"></textarea>
+                <div *ngIf="!description.valid && (description.dirty ||description.touched)">
+                    <div class="alert alert-danger ">
+                      يرجى ادخال الوصف بالشكل الصحيح!!
+                      
+                      <div [hidden]="!description.errors.maxlength">
+                        عدد الأحرف يجب أن لا يزيد عن {{description.errors.maxlength?.requiredLength}}
+                      </div>
+                    </div>
+                  </div>
+              </div>
+              
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        
+     
+      </div>
+      <div class="row">
+        <div class="col-4">
+        </div>
+        <div class="col-4">
+          <input type="submit" [disabled]="!itemOperationForm.valid"  value="إضافة حركة جديدة" class="btn btn-success ">
+        </div>
+        <div class="col-4">
+        </div>
+      </div>
+    </form>
+   

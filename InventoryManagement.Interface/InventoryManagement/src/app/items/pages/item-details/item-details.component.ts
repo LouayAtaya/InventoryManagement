@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, RouterLinkActive } from '@angular/router';
-import { ItemsService } from '../../../core/services/items.service';
-import { ItemDetails } from '../../../core/models/item-details';
+import { error } from '@angular/compiler/src/util';
+import { ItemDetails, ItemOperation,ItemOperationsService,ItemsService } from 'src/app/core';
 import { itemTypeList } from 'src/app/core/models/item-types-list';
 
 @Component({
@@ -14,8 +14,9 @@ export class ItemDetailsComponent implements OnInit {
   @ViewChild('selectedImage',{static:false}) selectedImage: ElementRef;
   itemId:number;
   itemDetails:ItemDetails;
+  itemOperations:ItemOperation[];
 
-  constructor( private ItemsService:ItemsService, private route:ActivatedRoute, private router:Router) {
+  constructor( private itemsService:ItemsService,private itemOperationsService:ItemOperationsService, private route:ActivatedRoute, private router:Router) {
     this.itemDetails=new ItemDetails();
    }
 
@@ -27,17 +28,13 @@ export class ItemDetailsComponent implements OnInit {
         this.getItemDetails(this.itemId);
       }
     )
-
-
   }
 
   getItemDetails(id:number){
-    this.ItemsService.GetItemDetails(id).subscribe(
+    this.itemsService.GetItemDetails(id).subscribe(
       data=>{
         this.itemDetails=data;
         this.assignItemTypeName();
-    
-
       },
       error=>{
         this.router.navigateByUrl("test")
@@ -58,6 +55,17 @@ export class ItemDetailsComponent implements OnInit {
   onImageChange(imageElement : HTMLImageElement){
 
     this.selectedImage.nativeElement.src=imageElement.src
+  }
+
+  getItemOperations(){
+    this.itemOperationsService.getItemOperationByItem(this.itemId).subscribe(
+      data=>{
+          this.itemOperations=data;
+      },
+      error=>{
+        alert("itemOperation:error")
+      }
+    )
   }
 
 }

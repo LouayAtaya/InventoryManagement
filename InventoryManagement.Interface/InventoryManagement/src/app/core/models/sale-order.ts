@@ -1,5 +1,5 @@
 import { SaleOrderItem } from './sale-order-item';
-import { SaleOrderStatus } from './sale-order-status';
+import { SaleOrderStatus } from './enums/sale-order-status';
 
 
 export class SaleOrder {

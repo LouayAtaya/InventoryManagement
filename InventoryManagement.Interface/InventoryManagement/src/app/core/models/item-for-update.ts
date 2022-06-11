@@ -1,4 +1,4 @@
-import { ItemType } from "./item-type";
+import { ItemType } from "./enums/item-type";
 import { WarehouseItemForUpdate } from './warehouse-item-for-update';
 import { ItemImageForUpdate } from './item-image-for-update';
 

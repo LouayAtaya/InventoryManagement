@@ -106,6 +106,8 @@ namespace InventoryManagement.Infrastructure.Repositories
             _dbContext.Entry(o).State = EntityState.Modified;
         }
 
+        public DbContext DbContext { get { return this._dbContext; } }
+
 
     }
 }

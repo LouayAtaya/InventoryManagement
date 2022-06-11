@@ -1,6 +1,6 @@
 import { WarehouseItemForCreation } from './warehouse-item-for-creation';
 import { ItemImageForCreation } from './item-image-for-creation';
-import { ItemType } from './item-type';
+import { ItemType } from './enums/item-type';
 import { newArray } from '@angular/compiler/src/util';
 export class ItemForCreation {
     constructor(init?: Partial<ItemForCreation>){

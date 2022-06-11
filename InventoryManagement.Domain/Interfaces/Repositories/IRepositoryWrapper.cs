@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,8 @@ namespace InventoryManagement.Domain.Interfaces.Repositories
         ISaleOrderRepository SaleOrder { get; }
 
         IItemOperationRepository ItemOperation { get; }
+
+        DbContext DbContext { get; }
 
 
         Task SaveAsync();

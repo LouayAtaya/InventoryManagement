@@ -26,6 +26,8 @@ namespace InventoryManagement.Infrastructure.Repositories
         public async Task<IEnumerable<ItemOperation>> GetItemOperationsByItemAsync(int itemId)
         {
             return await FindByCondition(i => i.ItemId == itemId)
+                .Include(i=>i.Warehouse)
+                .OrderByDescending(i=>i.CreatedAt)
                 .ToListAsync();
         }
 

@@ -2,14 +2,19 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { SaleOrder, SaleOrderForCreation, SaleOrderForUpdate, SaleOrderStatus, saleOrderStatusMap } from '../models';
+import { SaleOrder, SaleOrderForCreation, SaleOrderForUpdate, SaleOrderStatus } from '../models';
 
 @Injectable()
 export class SaleOrdersService {
 
   baseUrl=environment.baseUrl;
 
-  saleOrderStatusMap=saleOrderStatusMap;
+  saleOrderStatusMap=new Map<Number,string>([
+    [SaleOrderStatus.Incomplet,'غير مكتمل'],
+    [SaleOrderStatus.Pending,'قيد التدقيق'],
+    [SaleOrderStatus.Approved,' تمت الموافقة'],
+    [SaleOrderStatus.Rejected,' تم الرفض']
+  ])
 
 
   constructor(private http: HttpClient) { }

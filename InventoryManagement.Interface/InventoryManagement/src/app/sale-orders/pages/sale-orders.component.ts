@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SaleOrderStatus, saleOrderStatusMap } from 'src/app/core';
+import { SaleOrderStatus } from 'src/app/core';
 import { SaleOrder } from '../../core/models/sale-order';
 import { SaleOrdersService } from '../../core/services/sale-orders.service';
 

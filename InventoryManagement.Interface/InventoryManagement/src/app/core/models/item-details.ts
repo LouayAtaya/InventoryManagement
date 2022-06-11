@@ -1,7 +1,6 @@
-import { ItemType } from "./item-type";
+import { ItemType } from "./enums/item-type";
 import { WarehouseItem } from './warehouse-item';
 import { ItemImage } from './item-image';
-import { itemTypeList } from "./item-types-list";
 
 export class ItemDetails {
     id:number;

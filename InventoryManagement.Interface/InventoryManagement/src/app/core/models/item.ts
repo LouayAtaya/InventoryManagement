@@ -1,5 +1,5 @@
 import { ItemImage } from ".";
-import { ItemType } from "./item-type";
+import { ItemType } from "./enums/item-type";
 
 export class Item {
     id:number;

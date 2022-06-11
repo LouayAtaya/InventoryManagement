@@ -1,0 +1,70 @@
+<table id="example1" class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>رقم الحركة</th> 
+        <th> المصنع/ المخزن</th>
+        <th> الكمية الاجمالية السابقة</th>
+        <th>الكمية المتأثرة</th>
+        <th>الوصف</th>
+        <th>نوع الحركة</th>
+        <th>تاريخ الحركة</th>
+        <th>
+            <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#modal-default">
+                إضافة حركة جديدة   
+             </button>
+        </th>
+
+    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let itemOperation of itemOperations">
+        <td>{{itemOperation.id}}</td>
+        <td>{{itemOperation.warehouseName}}</td>
+        <td>{{itemOperation.previousQuantity}}</td>
+        <td>{{itemOperation.affectedQuantity}}</td>
+        <td>{{itemOperation.description}}</td>
+        <td>{{getItemOperationType(itemOperation.itemOperationType)}}</td>        
+        <td>{{itemOperation.createdAt|date:'medium'}}</td>
+        <td> 
+          <a [routerLink]="[itemOperation.id]" type="button" class="btn btn-block btn-info btn-sm ">عرض التفاصيل</a>
+        </td>
+
+       
+      </tr>
+   
+    
+    </tbody>
+    <tfoot>
+    <tr>
+        <th>رقم الحركة</th> 
+        <th> المصنع/ المخزن</th>
+        <th> الكمية الاجمالية السابقة</th>
+        <th>الكمية المتأثرة</th>
+        <th>الوصف</th>
+        <th>نوع الحركة</th>
+        <th>تاريخ الحركة</th>
+        <th> </th>
+    </tr>
+    </tfoot>
+  </table>
+
+  <div class="modal fade" id="modal-default">
+    <div class="modal-dialog">
+      <div class="modal-content bg-secondary">
+        <div class="modal-header">
+          <h4 class="modal-title">إضافة حركة جديدة </h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <app-item-operation-create [itemId]="itemId" (itemOperationCreated)="newOperationSubmitHandler($event)"></app-item-operation-create>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
