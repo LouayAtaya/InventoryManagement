@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SaleOrderStatus } from 'src/app/core';
+import { ContentHeaderService, SaleOrderStatus } from 'src/app/core';
 import { SaleOrder } from '../../core/models/sale-order';
 import { SaleOrdersService } from '../../core/services/sale-orders.service';
 
@@ -13,9 +13,10 @@ export class SaleOrdersComponent implements OnInit {
   saleOrders:SaleOrder[];
 
 
-  constructor(private saleOrdersService:SaleOrdersService) { }
+  constructor(private saleOrdersService:SaleOrdersService,private contentHeaderService:ContentHeaderService) { }
 
   ngOnInit(): void {
+    this.contentHeaderService.setMainHeaderTitle("طلبات المبيعات")
     this.saleOrdersService.GetSaleOrders().subscribe(
       data=>{
         this.saleOrders=data;

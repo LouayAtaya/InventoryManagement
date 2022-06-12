@@ -1,19 +1,16 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ItemsService } from './services/items.service';
-import { ItemCategoriesService, WarehousesService } from './services';
+import { ItemCategoriesService, WarehousesService ,AccountsService,SaleOrdersService,ContentHeaderService,ItemOperationsService} from './services';
 import { SharedModule } from '../shared';
 import { HttpClientModule } from '@angular/common/http';
-import { AccountsService } from './services/accounts.service';
-import { SaleOrdersService } from './services/sale-orders.service';
-import { ItemOperationsService } from './services/item-operations.service';
 
 
 
 @NgModule({
   declarations: [],
   providers:[
-    ItemsService,WarehousesService,ItemCategoriesService,AccountsService,SaleOrdersService,ItemOperationsService
+    ItemsService,WarehousesService,ItemCategoriesService,AccountsService,SaleOrdersService,ItemOperationsService,ContentHeaderService
   ],
   imports: [
     CommonModule,

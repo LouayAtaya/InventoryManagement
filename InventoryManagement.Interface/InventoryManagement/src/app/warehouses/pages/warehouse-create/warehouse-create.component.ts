@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ContentHeaderService } from 'src/app/core';
 import { WarehouseForCreation } from '../../../core/models/warehouse-for-creation';
 
 @Component({
@@ -11,9 +12,10 @@ export class WarehouseCreateComponent implements OnInit {
 
   warehouseForCreation:WarehouseForCreation;
 
-  constructor() { }
+  constructor(private contentHeaderService:ContentHeaderService) { }
   
   ngOnInit() {
+    this.contentHeaderService.setMainHeaderTitle("إضافة مصنع/ مخزن جديد")
     this.warehouseForCreation=new WarehouseForCreation();
   }
 

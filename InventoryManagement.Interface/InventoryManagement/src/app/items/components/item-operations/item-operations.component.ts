@@ -11,6 +11,8 @@ export class ItemOperationsComponent implements OnInit {
   @Input() itemOperations: ItemOperation[];
   @Input() itemId: number;
 
+  displayedColumns=['id','warehouseName','previousQuantity','affectedQuantity','description','itemOperationType','createdAt']
+
   constructor(private itemOperationsService:ItemOperationsService) { }
 
   ngOnInit(): void {

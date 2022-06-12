@@ -5,7 +5,7 @@
         <a class="nav-link" data-widget="pushmenu"   role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a [routerLink]="['/']"  class="nav-link">الصفحة الرئيسية</a>
+        <a [routerLink]="['/home']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" class="nav-link">الصفحة الرئيسية</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a [routerLink]="['settings']"  class="nav-link">الإعدادات</a>
@@ -16,7 +16,7 @@
     <ul class="navbar-nav ml-auto">
       <!-- Navbar Search -->
       <li class="nav-item">
-        <a class="nav-link" data-widget="navbar-search" [routerLink]="['home']"  role="button">
+        <a class="nav-link" data-widget="navbar-search"  role="button">
           <i class="fas fa-search"></i>
         </a>
         <div class="navbar-search-block">

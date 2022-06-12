@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SaleOrdersService } from '../../../core/services/sale-orders.service';
 import { SaleOrder } from '../../../core/models/sale-order';
-import { SaleOrderStatus } from 'src/app/core';
+import { ContentHeaderService, SaleOrderStatus } from 'src/app/core';
 
 @Component({
   selector: 'app-sale-order-details',
@@ -19,7 +19,7 @@ export class SaleOrderDetailsComponent implements OnInit {
   isPendingStatus:boolean;
   isApprovedStatus:boolean;
 
-  constructor(private saleOrdersService:SaleOrdersService, private route:ActivatedRoute, private router:Router) { 
+  constructor(private saleOrdersService:SaleOrdersService, private route:ActivatedRoute, private router:Router,private contentHeaderService:ContentHeaderService) { 
     this.saleOrder=new SaleOrder();
   }
 
@@ -36,6 +36,8 @@ export class SaleOrderDetailsComponent implements OnInit {
     this.saleOrdersService.GetSaleOrderDetails(id).subscribe(
       data=>{
         this.saleOrder=data;  
+
+        this.contentHeaderService.setMainHeaderTitle("طلب مبيعات: #"+this.saleOrder.id)
         this.isApprovedStatus=data.saleOrderStatus==SaleOrderStatus.Approved
         this.isRejectedStatus=data.saleOrderStatus==SaleOrderStatus.Rejected
         this.isPendingStatus=data.saleOrderStatus==SaleOrderStatus.Pending

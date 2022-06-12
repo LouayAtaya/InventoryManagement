@@ -4,6 +4,7 @@ import { NotEmpty } from '../../../shared/validators/not-empty.validator';
 import { ItemCategoryForCreation } from '../../../core/models/item-category-for-creation';
 import { ItemCategoriesService } from '../../../core/services/item-categories.service';
 import { error } from '@angular/compiler/src/util';
+import { ContentHeaderService } from 'src/app/core';
 
 @Component({
   selector: 'app-item-category-create',
@@ -23,11 +24,12 @@ export class ItemCategoryCreateComponent implements OnInit {
     'childCategories': new FormArray([])
   })
 
-  constructor(public itemCategoriesService : ItemCategoriesService) {
+  constructor(public itemCategoriesService : ItemCategoriesService,private contentHeaderService:ContentHeaderService) {
 
   }
 
   ngOnInit(): void {
+    this.contentHeaderService.setMainHeaderTitle("إضافة تصنيف جديد")
   }
 
   get name(){

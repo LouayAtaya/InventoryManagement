@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, RouterLinkActive } from '@angular/router';
 import { error } from '@angular/compiler/src/util';
-import { ItemDetails, ItemOperation,ItemOperationsService,ItemsService } from 'src/app/core';
+import { ContentHeaderService, ItemDetails, ItemOperation,ItemOperationsService,ItemsService } from 'src/app/core';
 import { itemTypeList } from 'src/app/core/models/item-types-list';
 
 @Component({
@@ -16,7 +16,7 @@ export class ItemDetailsComponent implements OnInit {
   itemDetails:ItemDetails;
   itemOperations:ItemOperation[];
 
-  constructor( private itemsService:ItemsService,private itemOperationsService:ItemOperationsService, private route:ActivatedRoute, private router:Router) {
+  constructor( private itemsService:ItemsService,private itemOperationsService:ItemOperationsService, private route:ActivatedRoute, private router:Router,private contentHeaderService:ContentHeaderService) {
     this.itemDetails=new ItemDetails();
    }
 
@@ -34,6 +34,9 @@ export class ItemDetailsComponent implements OnInit {
     this.itemsService.GetItemDetails(id).subscribe(
       data=>{
         this.itemDetails=data;
+
+        this.contentHeaderService.setMainHeaderTitle(this.itemDetails.name)
+
         this.assignItemTypeName();
       },
       error=>{
@@ -66,6 +69,10 @@ export class ItemDetailsComponent implements OnInit {
         alert("itemOperation:error")
       }
     )
+  }
+
+  navigateToItems() {
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 
 }

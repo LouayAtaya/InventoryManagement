@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ItemCategoriesService, ItemCategory, ItemsService, Warehouse } from 'src/app/core';
+import { ContentHeaderService, ItemCategoriesService, ItemCategory, ItemsService, Warehouse } from 'src/app/core';
 import { itemTypeList } from 'src/app/core/models/item-types-list';
 import { NotEmpty } from 'src/app/shared/validators/not-empty.validator';
 import { ItemForUpdate } from '../../../core/models/item-for-update';
@@ -24,7 +24,7 @@ export class ItemUpdateComponent implements OnInit {
   itemTypes:any [];
   warehousesList:Warehouse[];
   
-  constructor( private formBuilder: FormBuilder, private itemsService: ItemsService, private itemCategoriesService: ItemCategoriesService, private warehousesService:WarehousesService,private route:ActivatedRoute,private router: Router) {
+  constructor( private formBuilder: FormBuilder, private itemsService: ItemsService, private itemCategoriesService: ItemCategoriesService, private warehousesService:WarehousesService,private route:ActivatedRoute,private router: Router,private contentHeaderService:ContentHeaderService) {
     this.itemTypes=itemTypeList;
 
     this.itemForm= formBuilder.group({
@@ -214,6 +214,7 @@ export class ItemUpdateComponent implements OnInit {
       data=>{
         this.itemDetails=data;
         
+        this.contentHeaderService.setMainHeaderTitle(this.itemDetails.name)
         //this.itemDetails.filesOfImages=[]
 
         this.itemDetails.warehouseItems.forEach(element=>{

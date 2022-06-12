@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AccountsService, Warehouse, WarehousesService,Account, Item, SaleOrdersService, SaleOrderForCreation } from '../../../core';
+import { AccountsService, Warehouse, WarehousesService,Account, Item, SaleOrdersService, SaleOrderForCreation, ContentHeaderService } from '../../../core';
 import { ItemsService } from '../../../core/services/items.service';
 
 @Component({
@@ -18,7 +18,7 @@ export class SaleOrderCreateComponent implements OnInit {
   saleOrderForm: FormGroup;
   currentDate= new Date()
 
-  constructor( private formBuilder: FormBuilder,private saleOrdersService: SaleOrdersService, private itemsService: ItemsService,private accountsService: AccountsService, private warehousesService: WarehousesService) { 
+  constructor( private formBuilder: FormBuilder,private saleOrdersService: SaleOrdersService, private itemsService: ItemsService,private accountsService: AccountsService, private warehousesService: WarehousesService,private contentHeaderService:ContentHeaderService) { 
     this.saleOrderForm= formBuilder.group({
       customerId:['',[Validators.required]],
       warehouseId: ['',[Validators.required]],
@@ -30,6 +30,8 @@ export class SaleOrderCreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.contentHeaderService.setMainHeaderTitle("طلب مبيعات جديد")
+    
     this.getAllCustomers();
     this.getAllWarehouses();
     this.getAllItems();

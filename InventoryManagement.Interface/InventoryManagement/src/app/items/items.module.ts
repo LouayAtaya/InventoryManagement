@@ -10,6 +10,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ItemsListComponent } from './pages/items-list/items-list.component';
 import { ItemOperationsComponent } from './components/item-operations/item-operations.component';
 import { ItemOperationCreateComponent } from './components/item-operation-create/item-operation-create.component';
+import { MatTableModule } from '@angular/material/table';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { ItemOperationCreateComponent } from './components/item-operation-create
   imports: [
     CommonModule,
     ItemsRoutingModule,
-    SharedModule
+    SharedModule,
+    MatTableModule
   ]
 })
 export class ItemsModule { }

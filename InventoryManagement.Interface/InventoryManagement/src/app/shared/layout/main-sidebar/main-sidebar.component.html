@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a [routerLink]="['/']" class="brand-link">
+    <a [routerLink]="['/']"  class="brand-link">
       <img src="assets/img/AtayaLogo.png" alt="AdminLTE Logo" class="brand-image " style="opacity: .8">
       <span class="brand-text font-weight-light">عطايا الشام</span>
     </a>
@@ -35,7 +35,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item ">
-            <a [routerLink]="['/']"  class="nav-link active">
+            <a [routerLink]="['/home']"  [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}"  class="nav-link ">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 لوحة التحكم
@@ -44,7 +44,7 @@
           </li>
 
           <li class="nav-item menu-open">
-            <a   class="nav-link active">
+            <a class="nav-link ">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 المصانع والمخازن
@@ -54,14 +54,14 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item ">
-                <a [routerLink]="['warehouses']" class="nav-link active">
+                <a [routerLink]="['warehouses']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}"  class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>عرض القائمة</p>
                 </a>
               </li>
               
               <li class="nav-item">
-                <a [routerLink]="['warehouses/add']" class="nav-link">
+                <a [routerLink]="['warehouses/add']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>إضافة جديد</p>
                 </a>
@@ -72,19 +72,19 @@
             <a class="nav-link">
               <i class="nav-icon fas fas fa-th-large"></i>
               <p>
-                الأصناف
+                التصنيفات
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a [routerLink]="['itemCategories']" class="nav-link">
+                <a [routerLink]="['itemCategories']"  [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>عرض القائمة</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a [routerLink]="['itemCategories/add']" class="nav-link">
+                <a [routerLink]="['itemCategories/add']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>إضافة جديد</p>
                 </a>
@@ -102,13 +102,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a [routerLink]="['items']" class="nav-link">
+                <a [routerLink]="['items']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>عرض القائمة</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a [routerLink]="['items/add']" class="nav-link">
+                <a [routerLink]="['items/add']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>إضافة جديد</p>
                 </a>
@@ -125,13 +125,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a [routerLink]="['employees']"  class="nav-link">
+                <a [routerLink]="['employees']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}"  class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>عرض القائمة</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a [routerLink]="['employees/add']"  class="nav-link">
+                <a [routerLink]="['employees/add']"  [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>إضافة جديد</p>
                 </a>
@@ -149,13 +149,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a [routerLink]="['saleOrders']"  class="nav-link">
+                <a [routerLink]="['saleOrders']"  [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>طلبات البيع </p>
                 </a>
               </li>
               <li class="nav-item">
-                <a [routerLink]="['saleOrders/add']"  class="nav-link">
+                <a [routerLink]="['saleOrders/add']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}"  class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p> طلب بيع جديد</p>
                 </a>
@@ -173,13 +173,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a [routerLink]="['employees']"  class="nav-link">
+                <a [routerLink]="['employees']"  [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>عرض القائمة</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a [routerLink]="['employees/add']"  class="nav-link">
+                <a [routerLink]="['employees/add']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>إضافة جديد</p>
                 </a>
@@ -197,13 +197,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a [routerLink]="['accounts']"  class="nav-link">
+                <a [routerLink]="['accounts']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p> قائمة الحسابات</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a [routerLink]="['accounts/add']"  class="nav-link">
+                <a [routerLink]="['accounts/add']"  [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>إضافة حساب جديد</p>
                 </a>
@@ -221,13 +221,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a [routerLink]="['employees']"  class="nav-link">
+                <a [routerLink]="['employees']"  [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>عرض القائمة</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a [routerLink]="['employees/add']"  class="nav-link">
+                <a [routerLink]="['employees/add']"  [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>إضافة جديد</p>
                 </a>
@@ -238,7 +238,7 @@
          
           <li class="nav-header">السمتخدمين والصلاحيات</li>
           <li class="nav-item">
-            <a [routerLink]="['users']"  class="nav-link">
+            <a [routerLink]="['users']"  [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
                  المستخدمين  
@@ -247,7 +247,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a [routerLink]="['roles']"  class="nav-link">
+            <a [routerLink]="['roles']"  [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" class="nav-link">
               <i class="nav-icon fas fa-cog"></i>
               <p>
                  الصلاحيات  

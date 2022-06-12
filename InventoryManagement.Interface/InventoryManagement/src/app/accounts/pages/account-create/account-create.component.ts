@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NotEmpty } from 'src/app/shared/validators/not-empty.validator';
-import { AccountsService,AccountTypeMap,AccountForCreation } from '../../../core';
+import { AccountsService,AccountTypeMap,AccountForCreation, ContentHeaderService } from '../../../core';
 
 @Component({
   selector: 'app-account-create',
@@ -13,7 +13,7 @@ export class AccountCreateComponent implements OnInit {
   accountForCreation:AccountForCreation
   defaultAccountTypes:Map<Number,String>;
   
-  constructor(private formBuilder: FormBuilder, private accountsService: AccountsService) {
+  constructor(private formBuilder: FormBuilder, private accountsService: AccountsService, private contentHeaderService: ContentHeaderService) {
     this.defaultAccountTypes=AccountTypeMap;
 
     this.accountForm=formBuilder.group({
@@ -29,7 +29,7 @@ export class AccountCreateComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    
+    this.contentHeaderService.setMainHeaderTitle("إضافة حساب جديد")
   }
 
   get accountCode(){

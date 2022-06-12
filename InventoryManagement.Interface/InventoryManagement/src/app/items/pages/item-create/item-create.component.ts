@@ -8,7 +8,7 @@ import { ItemCategory } from '../../../core/models/item-category';
 import { ItemType } from '../../../core/models/enums/item-type';
 import { itemTypeList } from '../../../core/models/item-types-list';
 import { WarehousesService } from '../../../core/services/warehouses.service';
-import { ItemsService, Warehouse } from 'src/app/core';
+import { ContentHeaderService, ItemsService, Warehouse } from 'src/app/core';
 
 @Component({
   selector: 'app-item-create',
@@ -25,7 +25,7 @@ export class ItemCreateComponent implements OnInit {
   warehousesList:Warehouse[];
 
 
-  constructor( private formBuilder: FormBuilder, private itemsService: ItemsService, private itemCategoriesService: ItemCategoriesService, private WarehousesService:WarehousesService) {
+  constructor( private formBuilder: FormBuilder, private itemsService: ItemsService, private itemCategoriesService: ItemCategoriesService, private WarehousesService:WarehousesService,private contentHeaderService:ContentHeaderService) {
     this.itemTypes=itemTypeList;
 
     this.itemForm= formBuilder.group({
@@ -45,6 +45,7 @@ export class ItemCreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.contentHeaderService.setMainHeaderTitle("إضافة صنف جديد")
     this.getItemCategoriesList();
     this.getWarehousesList();
   }

@@ -4,11 +4,11 @@
     <div class="col-md-4">
       <div class="card card-primary">
         <div class="card-header">
-          <h3 class="card-title">معلومات الصنف</h3>
+          <h3 class="card-title">معلومات التصنيف</h3>
         </div>
         <div class="card-body">
           <div class="form-group">
-            <label for="name">اسم الصنف</label>
+            <label for="name">اسم التصنيف</label>
             <input type="text" id="name" name="name" formControlName="name" class="form-control">
             <div *ngIf="!name.valid && (name.dirty ||name.touched)">
               <div class="alert alert-danger ">
@@ -29,11 +29,11 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="description">وصف الصنف</label>
+            <label for="description">وصف التصنيف</label>
             <textarea id="description" name="description" formControlName="description" class="form-control" rows="4"></textarea>
             <div *ngIf="!description.valid && (description.dirty ||description.touched)">
               <div class="alert alert-danger ">
-                يرجى ادخال الوصف بالشكل الصحيح!!
+                يرجى ادخال التصنيف بالشكل الصحيح!!
                 
                 <div [hidden]="!description.errors.maxlength">
                   عدد الأحرف يجب أن لا يزيد عن {{description.errors.maxlength?.requiredLength}}
@@ -42,7 +42,7 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="image">صورة الصنف</label>
+            <label for="image">صورة التصنيف</label>
             <input type="file" id="image" name="image" class="form-control" formControlName="fileInput" (change)="onFileChanged($event)" accept=".jpg,.png,.gif">
             <div *ngIf="!fileInput.valid && (fileInput.dirty ||fileInput.touched)">
               <div class="alert alert-danger ">
@@ -58,7 +58,7 @@
     <div class="col-md-8">
       <div class="card card-secondary">
         <div class="card-header">
-          <h3 class="card-title">الأصناف الفرعية</h3>
+          <h3 class="card-title">التصنيفات الفرعية</h3>
         </div>
         <div class="card-body">
            
@@ -66,7 +66,7 @@
             <div *ngFor="let childCategory of childCategories.controls; let i=index"  >
               <div [formGroupName]="i" class="row" style="border-style:groove; border-color: beige; padding-top: 15px; margin-bottom: 10px;">
                 <div class="form-group col-md-3">
-                  <input type="text" id="name" name="name" formControlName="name" class="form-control" placeholder="اسم الصنف">
+                  <input type="text" id="name" name="name" formControlName="name" class="form-control" placeholder="اسم التصنيف">
                   <div *ngIf="!getChildCategoryName(i).valid && (getChildCategoryName(i).dirty ||getChildCategoryName(i).touched)">
                     <div class="alert alert-danger ">
                       يرجى ادخال الاسم بالشكل الصحيح!!
@@ -86,7 +86,7 @@
                   </div>
                 </div>
                 <div class="form-group col-md-7">
-                  <textarea id="description" name="description" formControlName="description" class="form-control" rows="1" placeholder="وصف الصنف"></textarea>
+                  <textarea id="description" name="description" formControlName="description" class="form-control" rows="1" placeholder="وصف التصنيف"></textarea>
                   <div *ngIf="!getChildCategoryDescription(i).valid && (getChildCategoryDescription(i).dirty ||getChildCategoryDescription(i).touched)">
                     <div class="alert alert-danger ">
                       يرجى ادخال الوصف بالشكل الصحيح!!
@@ -122,7 +122,7 @@
     <div class="col-4">
     </div>
     <div class="col-4">
-      <input type="submit" [disabled]="!itemCategoryForm.valid" value="إضافة الصنف الجديد" class="btn btn-success ">
+      <input type="submit" [disabled]="!itemCategoryForm.valid" value="إضافة التصنيف الجديد" class="btn btn-success ">
     </div>
     <div class="col-4">
     </div>
