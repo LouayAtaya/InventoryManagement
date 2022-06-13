@@ -1,16 +1,83 @@
-<!-- Default box -->
-<div class="card card-solid">
-    <div class="card-header">
-        <h3 class="card-title">قائمة  المنتجات</h3>
-        <a [routerLink]="['../']" style="float: left;" class="btn  btn-info">
-          <i _ngcontent-dub-c51="" class="nav-icon fas fa-table"></i> 
-        </a>
-
+<div class="row ">
+  <div class=" col-md-3 ">
+    <section class="card ">
+      <div class="card-body ">
+          <input class="#fff" type="text" placeholder="Keyword Search" class="form-control">
       </div>
+    </section>
+    
+    <section class="card">
+      <header class="card-header">
+          Filter
+      </header>
+      <div class="card-body">
+          <form role="form product-form">
+              <div class="form-group">
+                  <label>Brand</label>
+                  <select class="form-control">
+                      <option>Wallmart</option>
+                      <option>Catseye</option>
+                      <option>Moonsoon</option>
+                      <option>Textmart</option>
+                  </select>
+              </div>
+              <div class="form-group">
+                  <label>Color</label>
+                  <select class="form-control">
+                      <option>White</option>
+                      <option>Black</option>
+                      <option>Red</option>
+                      <option>Green</option>
+                  </select>
+              </div>
+              <div class="form-group">
+                  <label>Type</label>
+                  <select class="form-control">
+                      <option>Small</option>
+                      <option>Medium</option>
+                      <option>Large</option>
+                      <option>Extra Large</option>
+                  </select>
+              </div>
+          </form>
+      </div>
+    </section>
+    
+  </div>
+  <div class="col-md-9">
+    <!-- Default box -->
+<div class="card card-solid ">
+  <div class="card-header  ">
+     
+      <!-- Sorting Filters -->
+      <div class="row">
+        <div class=" col-md-12 col-xs-12 col-sm-12 col-lg-12">
+          <!-- Sorting Filters Breadcrumb -->
+          <div class=" filter-brudcrums">
+             <span>عرض <span class="showed">1 - 20</span> of <span class="showed">42211</span>النتائج</span>
+             <div class="filter-brudcrums-sort">
+                <ul>
+                   <li><span>ترتيب حسب:</span></li>
+                   <li><a href="#">تاريخ التحديث</a></li>
+                   <li><a href="#">السعر</a></li>
+                   <li><a href="#">جديد</a></li>
+                   <li><a href="#">مستعمل</a></li>
+                   <li><a href="#">ضمان</a></li>
+                </ul>
+             </div>
+             
+          </div>
+          
+          <!-- Sorting Filters Breadcrumb End -->
+       </div>
+        <!-- Sorting Filters End-->
+        <div class="clearfix"></div>
+      </div>
+    </div>
     
     <div class="card-body pb-0">
       <div class="row">
-        <div *ngFor="let item of items" class="col-12 col-sm-6 col-md-3 d-flex align-items-stretch flex-column">
+        <div *ngFor="let item of items" class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
           <div class="card bg-light d-flex "> 
             <div class="card-header  border-bottom-0">
               {{item.itemCategoryName}}
@@ -40,8 +107,8 @@
                 </div>
               </div>
             </div>
-            <div class="card-footer">
-              <div class="text-right">
+            <div class="card-footer  ">
+              <div class="text-right ">
                 <a [routerLink]="['/items/'+item.id]" routerLinkActive="router-link-active"  class="btn btn-primary btn-sm">عرض المزيد</a>
               </div>
             </div>
@@ -53,19 +120,31 @@
     </div>
     <!-- /.card-body -->
     <div class="card-footer">
+      
       <nav aria-label="Contacts Page Navigation">
-        <ul class="pagination justify-content-center m-0">
-          <li class="page-item active"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item"><a class="page-link" href="#">4</a></li>
-          <li class="page-item"><a class="page-link" href="#">5</a></li>
-          <li class="page-item"><a class="page-link" href="#">6</a></li>
-          <li class="page-item"><a class="page-link" href="#">7</a></li>
-          <li class="page-item"><a class="page-link" href="#">8</a></li>
+        <ul class="pagination  justify-content-center m-0">
+          <li class="paginate_button page-item previous disabled" id="example1_previous"><a href="#" aria-controls="example1"
+              data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
+          <li class="paginate_button page-item active"><a href="#" aria-controls="example1" data-dt-idx="1" tabindex="0"
+              class="page-link">1</a></li>
+          <li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="2" tabindex="0"
+              class="page-link">2</a></li>
+          <li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="3" tabindex="0"
+              class="page-link">3</a></li>
+          <li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="4" tabindex="0"
+              class="page-link">4</a></li>
+          <li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="5" tabindex="0"
+              class="page-link">5</a></li>
+          <li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="6" tabindex="0"
+              class="page-link">6</a></li>
+          <li class="paginate_button page-item next" id="example1_next"><a href="#" aria-controls="example1" data-dt-idx="7"
+              tabindex="0" class="page-link">Next</a></li>
         </ul>
+        
       </nav>
     </div>
     <!-- /.card-footer -->
   </div>
   <!-- /.card -->
+  </div>
+</div>

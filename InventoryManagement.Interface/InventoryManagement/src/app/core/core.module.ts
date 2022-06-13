@@ -3,14 +3,16 @@ import { CommonModule } from '@angular/common';
 import { ItemsService } from './services/items.service';
 import { ItemCategoriesService, WarehousesService ,AccountsService,SaleOrdersService,ContentHeaderService,ItemOperationsService} from './services';
 import { SharedModule } from '../shared';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AppHttpInterceptor } from './interceptors/app-http.interceptor';
 
 
 
 @NgModule({
   declarations: [],
   providers:[
-    ItemsService,WarehousesService,ItemCategoriesService,AccountsService,SaleOrdersService,ItemOperationsService,ContentHeaderService
+    ItemsService,WarehousesService,ItemCategoriesService,AccountsService,SaleOrdersService,ItemOperationsService,ContentHeaderService,
+    {provide:HTTP_INTERCEPTORS,useClass: AppHttpInterceptor, multi:true}
   ],
   imports: [
     CommonModule,
