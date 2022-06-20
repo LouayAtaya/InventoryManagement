@@ -2,8 +2,11 @@
 using InventoryManagement.API.ActionFilters;
 using InventoryManagement.Application.Contracts;
 using InventoryManagement.Application.Helpers;
+using InventoryManagement.Domain.Entities;
+using InventoryManagement.Domain.Interfaces.Helpers;
 using InventoryManagement.Domain.Interfaces.Repositories;
 using InventoryManagement.Infrastructure.Data;
+using InventoryManagement.Infrastructure.Helpers;
 using InventoryManagement.Infrastructure.Repositories;
 using InventoryManagement.Services;
 using InventoryManagement.Services.Abstractions;
@@ -68,6 +71,9 @@ namespace InventoryManagement.API.Extensions
 
         public static void ConfigureRepositoryWrapper(this IServiceCollection services)
         {
+            services.AddScoped<ISortHelper<Item>, SortHelper<Item>>();
+
+
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
         }
 

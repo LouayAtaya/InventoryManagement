@@ -1,4 +1,6 @@
 ﻿
+using InventoryManagement.Domain.Entities;
+using InventoryManagement.Domain.Interfaces.Helpers;
 using InventoryManagement.Domain.Interfaces.Repositories;
 using InventoryManagement.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -25,9 +27,14 @@ namespace InventoryManagement.Infrastructure.Repositories
 
         private IItemOperationRepository _itemOperationRepository;
 
-        public RepositoryWrapper(InventoryManagementContext dbContext)
+        private ISortHelper<Item> _itemSortHelper;
+
+
+        public RepositoryWrapper(InventoryManagementContext dbContext, ISortHelper<Item> itemSortHelper)
         {
             _dbContext = dbContext;
+
+            _itemSortHelper = itemSortHelper;
         }
 
         public IItemRepository Item
@@ -35,7 +42,7 @@ namespace InventoryManagement.Infrastructure.Repositories
             get
             {
                 if (this._itemRepository == null)
-                    _itemRepository= new ItemRepository(_dbContext);
+                    _itemRepository= new ItemRepository(_dbContext,_itemSortHelper);
                 return _itemRepository;
             }
         }

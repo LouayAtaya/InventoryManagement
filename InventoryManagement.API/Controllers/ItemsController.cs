@@ -2,9 +2,12 @@
 using InventoryManagement.API.ActionFilters;
 using InventoryManagement.Application.Contracts;
 using InventoryManagement.Application.DTOs;
+using InventoryManagement.Application.Helpers;
+using InventoryManagement.Domain.Entities.Parameters;
 using InventoryManagement.Services.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,9 +34,30 @@ namespace InventoryManagement.API.Controllers
 
         // GET: api/<ItemsController>
         [HttpGet]
-        public async Task<IActionResult> GetItems()
+        public async Task<IActionResult> GetItems([FromQuery] ItemParameters itemParameters)
         {
-            var items= await this._serviceManager.ItemService.GetAllItemsAsync();
+            if (!itemParameters.ValidPriceRange)
+            {
+                throw new Exception();
+            }
+
+            if (!itemParameters.ValidQuantity)
+            {
+                throw new Exception();
+            }
+
+            var items= (PagedList<ItemDto>) await this._serviceManager.ItemService.GetItemsAsync(itemParameters);
+
+            var metadata = new
+            {
+                items.TotalCount,
+                items.PageSize,
+                items.CurrentPage,
+                items.TotalPages,
+                items.HasNext,
+                items.HasPrevious
+            };
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
 
             return Ok(items);
         }

@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using InventoryManagement.Application.DTOs;
+using InventoryManagement.Application.Helpers;
 using InventoryManagement.Domain.Entities;
+using InventoryManagement.Domain.Entities.Parameters;
 using InventoryManagement.Domain.Exceptions;
 using InventoryManagement.Domain.Interfaces.Repositories;
 using InventoryManagement.Services.Abstractions;
@@ -25,9 +27,21 @@ namespace InventoryManagement.Services
 
         public async Task<IEnumerable<ItemDto>> GetAllItemsAsync()
         {
-            var items= await this._repositoryWrapper.Item.getAllItemsAsync();
+            var items= await this._repositoryWrapper.Item.GetAllItemsAsync();
             List<ItemDto> itemsDto= _mapper.Map<List<ItemDto>>(items);
             return itemsDto;
+        }
+
+        public async Task<IEnumerable<ItemDto>> GetItemsAsync(ItemParameters itemParameters)
+        {
+            var items = (PagedList<Item>) await this._repositoryWrapper.Item.GetItemsAsync(itemParameters);
+            
+            //map items to itemsDto
+            var itemsDto = _mapper.Map<List<ItemDto>>(items);
+
+            var pagedItemsDto = new PagedList<ItemDto>(itemsDto, items.TotalCount, items.CurrentPage, items.PageSize);
+
+            return pagedItemsDto;
         }
 
         public async Task<ItemDetailsDto> GetItemByIdAsync(int itemId)
