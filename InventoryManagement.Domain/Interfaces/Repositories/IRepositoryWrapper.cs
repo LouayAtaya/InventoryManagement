@@ -8,17 +8,20 @@ namespace InventoryManagement.Domain.Interfaces.Repositories
 {
     public interface IRepositoryWrapper
     {
-        IItemRepository Item { get; }
+        public IItemRepository Item { get; }
 
-        IItemCategoryRepository ItemCategory { get; }
+        public IItemCategoryRepository ItemCategory { get; }
 
-        IWarehouseRepository Warehouse { get; }
+        public IWarehouseRepository Warehouse { get; }
 
-        IAccountRepository Account { get; }
+        public IAccountRepository Account { get; }
 
-        ISaleOrderRepository SaleOrder { get; }
+        public ISaleOrderRepository SaleOrder { get; }
+        public IItemOperationRepository ItemOperation { get; }
 
-        IItemOperationRepository ItemOperation { get; }
+        public IRoleRepository Role { get; }
+        public IUserRepository User { get; }
+        public IPrivilegeRepository Privilege { get; }
 
         DbContext DbContext { get; }
 

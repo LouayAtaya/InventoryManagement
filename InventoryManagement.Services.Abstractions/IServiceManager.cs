@@ -14,6 +14,9 @@ namespace InventoryManagement.Services.Abstractions
         IAccountService AccountService { get; }
         ISaleOrderService SaleOrderService { get; }
         IItemOperationService ItemOperationService { get; }
+        IRoleService RoleService { get; }
+        IUserService UserService { get; }
+        IPrivilegeService PrivilegeService { get; }
 
         IFileManagementService FileManagementService { get; }
     }

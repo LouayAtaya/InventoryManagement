@@ -4,6 +4,7 @@ using InventoryManagement.Application.Contracts;
 using InventoryManagement.Application.DTOs;
 using InventoryManagement.Application.Helpers;
 using InventoryManagement.Domain.Entities.Parameters;
+using InventoryManagement.Domain.Exceptions;
 using InventoryManagement.Services.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -38,12 +39,12 @@ namespace InventoryManagement.API.Controllers
         {
             if (!itemParameters.ValidPriceRange)
             {
-                throw new Exception();
+                throw new ItemNotValidPriceRangeException();
             }
 
             if (!itemParameters.ValidQuantity)
             {
-                throw new Exception();
+                throw new ItemNotValidQuantityException();
             }
 
             var items= (PagedList<ItemDto>) await this._serviceManager.ItemService.GetItemsAsync(itemParameters);

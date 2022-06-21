@@ -27,6 +27,12 @@ namespace InventoryManagement.Infrastructure.Repositories
 
         private IItemOperationRepository _itemOperationRepository;
 
+        private IUserRepository _userRepository;
+
+        private IRoleRepository _roleRepository;
+
+        private IPrivilegeRepository _privilegeRepository;
+
         private ISortHelper<Item> _itemSortHelper;
 
 
@@ -95,6 +101,36 @@ namespace InventoryManagement.Infrastructure.Repositories
                 if (this._itemOperationRepository == null)
                     _itemOperationRepository = new ItemOperationRepository(_dbContext);
                 return _itemOperationRepository;
+            }
+        }
+
+        public IUserRepository User
+        {
+            get
+            {
+                if (this._userRepository == null)
+                    _userRepository = new UserRepository(_dbContext);
+                return _userRepository;
+            }
+        }
+
+        public IRoleRepository Role
+        {
+            get
+            {
+                if (this._roleRepository == null)
+                    _roleRepository = new RoleRepository(_dbContext);
+                return _roleRepository;
+            }
+        }
+
+        public IPrivilegeRepository Privilege
+        {
+            get
+            {
+                if (this._privilegeRepository == null)
+                    _privilegeRepository = new PrivilegeRepository(_dbContext);
+                return _privilegeRepository;
             }
         }
 
