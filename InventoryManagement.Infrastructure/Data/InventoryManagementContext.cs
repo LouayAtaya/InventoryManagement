@@ -19,6 +19,13 @@ namespace InventoryManagement.Infrastructure.Data
         public DbSet<SaleOrderItem> SaleOrderItems { get; set; }
         public DbSet<SaleOrder> SaleOrders { get; set; }
         public DbSet<ItemOperation> ItemOperations { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<Member> Members { get; set; }
+        public DbSet<Privilege> Privileges { get; set; }
+        public DbSet<UserRole> UserRoles { get; set; }
+        public DbSet<RolePrivilege> RolePrivileges { get; set; }
+
 
         public InventoryManagementContext(DbContextOptions<InventoryManagementContext> options) 
             : base(options)
@@ -44,6 +51,12 @@ namespace InventoryManagement.Infrastructure.Data
             modelBuilder.ApplyConfiguration(new SaleOrderItemConfiguration());
             modelBuilder.ApplyConfiguration(new AccountConfiguration());
             modelBuilder.ApplyConfiguration(new ItemOperationConfiguration());
+            modelBuilder.ApplyConfiguration(new RoleConfiguration());
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new PrivilegeConfiguration());
+            modelBuilder.ApplyConfiguration(new RolePrivilegeConfiguration());
+            modelBuilder.ApplyConfiguration(new UserRoleConfiguration());
+            modelBuilder.ApplyConfiguration(new MemberConfiguration());
 
 
         }

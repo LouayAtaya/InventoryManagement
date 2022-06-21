@@ -33,6 +33,8 @@ namespace InventoryManagement.Infrastructure.Configuration
             builder.Property(io => io.WarehouseId)
                 .HasColumnName("Warehouse_Id");
 
+            builder.Property(io => io.IsActive).HasDefaultValue(true);
+
             builder.HasOne(io => io.Item)
                 .WithMany(i => i.ItemOperations)
                 .HasForeignKey(io => io.ItemId);

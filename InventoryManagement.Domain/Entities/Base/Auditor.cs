@@ -10,12 +10,11 @@ namespace InventoryManagement.Domain.Entities.Base
     {
         public Auditor()
         {
-            this.IsActive = true;
             this.CreatedAt = DateTime.Now;
         }
 
         [DefaultValue(true)]
-        public bool IsActive { get; set; } = true;
+        public bool? IsActive { get; set; }
 
         public DateTime CreatedAt { get; set; } 
 

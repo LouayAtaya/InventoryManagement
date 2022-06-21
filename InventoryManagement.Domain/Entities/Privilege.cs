@@ -1,14 +1,16 @@
-﻿using System;
+﻿using InventoryManagement.Domain.Entities.Base;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace InventoryManagement.Domain.Entities
 {
-    class Privilege
+    public class Privilege: Auditor
     {
-        public int Id { get; set; }
         public String Name { get; set; }
         public String Description { get; set; }
-        public bool IsActive { get; set; }
+
+        public virtual ICollection<RolePrivilege> RolePrivileges { get; set; }
+
     }
 }

@@ -30,6 +30,8 @@ namespace InventoryManagement.Infrastructure.Configuration
 
             builder.HasIndex(i => i.Name).IsUnique();
 
+            builder.Property(i => i.IsActive).HasDefaultValue(true);
+
             builder.HasOne(c => c.ParentCategory)
                 .WithMany(c => c.ChildCategories)
                 .HasForeignKey(c => c.ParentCategoryId);

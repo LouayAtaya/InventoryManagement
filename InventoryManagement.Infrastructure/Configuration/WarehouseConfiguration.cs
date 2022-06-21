@@ -19,10 +19,12 @@ namespace InventoryManagement.Infrastructure.Configuration
                 .IsRequired()
                 .HasMaxLength(50);
 
-            builder.HasIndex(x => x.Name).IsUnique();
+            builder.HasIndex(w => w.Name).IsUnique();
 
             builder.Property(w => w.Description)
                 .HasMaxLength(500);
+
+            builder.Property(w => w.IsActive).HasDefaultValue(true);
 
         }
     }

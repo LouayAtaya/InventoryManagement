@@ -32,6 +32,8 @@ namespace InventoryManagement.Infrastructure.Configuration
                 .IsRequired()
                 .HasMaxLength(50);
 
+            builder.Property(a => a.IsActive).HasDefaultValue(true);
+
             builder.HasIndex(a => a.Name).IsUnique();
 
             builder.Property(a => a.Description)

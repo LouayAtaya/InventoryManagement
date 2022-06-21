@@ -9,7 +9,7 @@ using System.Text;
 
 namespace InventoryManagement.Infrastructure.Configuration
 {
-    class ItemConfiguration : IEntityTypeConfiguration<Item>
+    public class ItemConfiguration : IEntityTypeConfiguration<Item>
     {
         public void Configure(EntityTypeBuilder<Item> builder)
         {
@@ -41,6 +41,9 @@ namespace InventoryManagement.Infrastructure.Configuration
 
             builder.Property(i => i.ItemType)
                 .IsRequired();
+
+            builder.Property(i => i.IsActive).HasDefaultValue(true);
+
 
             builder.Property(i => i.ItemCategoryId)
                 .HasColumnName("ItemCategory_Id")
