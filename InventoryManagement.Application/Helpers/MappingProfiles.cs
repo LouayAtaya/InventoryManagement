@@ -64,7 +64,7 @@ namespace InventoryManagement.Application.Helpers
             CreateMap<User, UserDto>();
             CreateMap<UserForCreationDto, User>();
             CreateMap<UserForUpdateDto, User>();
-            CreateMap<Member, UserDto>();
+            CreateMap<Member, MemberDto>();
             CreateMap<MemberForCreationDto, Member>();
             CreateMap<MemberForUpdateDto, Member>();
             CreateMap<UserRole, UserRoleDto>();
@@ -72,7 +72,7 @@ namespace InventoryManagement.Application.Helpers
             CreateMap<UserRoleForUpdateDto, UserRole>();
 
             //Role
-            CreateMap<Role, UserDto>();
+            CreateMap<Role, RoleDto>();
             CreateMap<RoleForCreationDto, Role>();
             CreateMap<RoleForUpdateDto, Role>();
             CreateMap<RolePrivilege, RolePrivilegeDto>();

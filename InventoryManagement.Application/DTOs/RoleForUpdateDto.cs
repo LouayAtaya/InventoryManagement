@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace InventoryManagement.Application.DTOs
 {
-    public class RoleForUpdateDto
+    public class RoleForUpdateDto : IEntityDto
     {
         public RoleForUpdateDto()
         {
@@ -25,7 +25,7 @@ namespace InventoryManagement.Application.DTOs
 
         public virtual ICollection<RolePrivilegeForUpdateDto> RolePrivileges { get; set; }
 
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; } = true;
 
     }
 }

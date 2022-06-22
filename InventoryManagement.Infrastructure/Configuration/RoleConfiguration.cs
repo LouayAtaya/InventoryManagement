@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace InventoryManagement.Infrastructure.Configuration
 {
     public class RoleConfiguration : IEntityTypeConfiguration<Role>

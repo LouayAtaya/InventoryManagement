@@ -8,5 +8,9 @@ namespace InventoryManagement.Application.DTOs
 {
     public class RolePrivilegeForCreationDto : IEntityDto
     {
+        public int PrivilegeId { get; set; }
+
+        public bool? IsActive { get; set; }
+
     }
 }

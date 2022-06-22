@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InventoryManagement.Application.DTOs
 {
-    public class PrivilegeDto
+    public class PrivilegeDto : IEntityDto
     {
         public int Id { get; set; }
         public String Name { get; set; }

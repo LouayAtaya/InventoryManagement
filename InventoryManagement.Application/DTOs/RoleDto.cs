@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace InventoryManagement.Application.DTOs
 {
-    public class RoleDto
+    public class RoleDto : IEntityDto
     {
         public int Id { get; set; }
         public String Name { get; set; }
         public String Description { get; set; }
 
-        public virtual ICollection<RolePrivilege> RolePrivileges { get; set; }
+        public virtual ICollection<RolePrivilegeDto> RolePrivileges { get; set; }
 
-        public bool IsActive { get; set; } = true;
+        public bool? IsActive { get; set; } = true;
 
         public DateTime CreatedAt { get; set; }
 

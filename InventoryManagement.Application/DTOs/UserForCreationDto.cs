@@ -33,6 +33,6 @@ namespace InventoryManagement.Application.DTOs
         public virtual MemberForCreationDto Member { get; set; }
         public virtual ICollection<UserRoleForCreationDto> UserRoles { get; set; }
 
-        public bool IsActive { get; set; }
+        public bool? IsActive { get; set; }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace InventoryManagement.Application.DTOs
 {
-    public class RoleForCreationDto
+    public class RoleForCreationDto : IEntityDto
     {
         public RoleForCreationDto()
         {
@@ -23,6 +23,6 @@ namespace InventoryManagement.Application.DTOs
 
         public virtual ICollection<RolePrivilegeForCreationDto> RolePrivileges { get; set; }
 
-        public bool IsActive { get; set; }
+        public bool? IsActive { get; set; }
     }
 }

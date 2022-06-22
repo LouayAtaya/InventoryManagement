@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace InventoryManagement.Application.DTOs
 {
-    public class PrivilegeForCreationDto
+    public class PrivilegeForCreationDto : IEntityDto
     {
         [Required(ErrorMessage = "Name is required")]
         [StringLength(50, ErrorMessage = "Name can't be longer than 50 characters")]
@@ -16,6 +16,6 @@ namespace InventoryManagement.Application.DTOs
         [StringLength(500, ErrorMessage = "Description cannot be longer then 500 characters")]
         public String Description { get; set; }
 
-        public bool IsActive { get; set; }
+        public bool? IsActive { get; set; }
     }
 }

@@ -36,7 +36,7 @@ namespace InventoryManagement.Services
             if (privilege == null)
                 throw new PrivilegeNotFoundException(privilegeId);
 
-            return this._mapper.Map<PrivilegeDto>(privilegeId);
+            return this._mapper.Map<PrivilegeDto>(privilege);
         }
 
         public async Task<PrivilegeDto> CreatePrivilegeAsync(PrivilegeForCreationDto privilegeForCreationDto)

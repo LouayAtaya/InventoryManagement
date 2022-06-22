@@ -35,6 +35,6 @@ namespace InventoryManagement.Application.DTOs
         public virtual MemberForUpdateDto Member { get; set; }
         public virtual ICollection<UserRoleForUpdateDto> UserRoles { get; set; }
 
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; } = true;
     }
 }

@@ -8,5 +8,9 @@ namespace InventoryManagement.Application.DTOs
 {
     public class UserRoleForUpdateDto : IEntityDto
     {
+        public int UserId { get; set; }
+        public int RoleId { get; set; }
+
+        public bool IsActive { get; set; } = true;
     }
 }

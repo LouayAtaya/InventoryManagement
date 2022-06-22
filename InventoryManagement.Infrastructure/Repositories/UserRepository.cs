@@ -26,6 +26,8 @@ namespace InventoryManagement.Infrastructure.Repositories
         {
             return await FindByCondition(u => u.Id == userId)
                             .Include(u => u.Member)
+                            .Include(u => u.UserRoles)
+                            .ThenInclude(ur => ur.Role)
                             .SingleOrDefaultAsync();
         }
 
