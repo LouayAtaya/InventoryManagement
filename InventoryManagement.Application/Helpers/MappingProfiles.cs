@@ -60,6 +60,30 @@ namespace InventoryManagement.Application.Helpers
             CreateMap<ItemOperationForCreationDto, ItemOperation>();
             CreateMap<ItemOperationForUpdateDto, ItemOperation>();
 
+            //User
+            CreateMap<User, UserDto>();
+            CreateMap<UserForCreationDto, User>();
+            CreateMap<UserForUpdateDto, User>();
+            CreateMap<Member, UserDto>();
+            CreateMap<MemberForCreationDto, Member>();
+            CreateMap<MemberForUpdateDto, Member>();
+            CreateMap<UserRole, UserRoleDto>();
+            CreateMap<UserRoleForCreationDto, UserRole>();
+            CreateMap<UserRoleForUpdateDto, UserRole>();
+
+            //Role
+            CreateMap<Role, UserDto>();
+            CreateMap<RoleForCreationDto, Role>();
+            CreateMap<RoleForUpdateDto, Role>();
+            CreateMap<RolePrivilege, RolePrivilegeDto>();
+            CreateMap<RolePrivilegeForCreationDto, RolePrivilege>();
+            CreateMap<RolePrivilegeForUpdateDto, RolePrivilege>();
+
+            //Privilege
+            CreateMap<Privilege, PrivilegeDto>();
+            CreateMap<PrivilegeForCreationDto, Privilege>();
+            CreateMap<PrivilegeForUpdateDto, Privilege>();
+
         }
     }
 }

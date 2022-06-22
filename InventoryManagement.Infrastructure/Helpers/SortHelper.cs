@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Dynamic.Core;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,7 +43,7 @@ namespace InventoryManagement.Infrastructure.Helpers
 
 			var orderQuery = orderQueryBuilder.ToString().TrimEnd(',', ' ');
 
-			return entities.OrderBy(i=>orderQuery);
+			return entities.OrderBy(orderQuery);
 		}
     }
 }
