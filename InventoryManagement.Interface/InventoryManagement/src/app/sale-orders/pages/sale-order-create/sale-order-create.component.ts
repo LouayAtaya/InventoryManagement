@@ -64,8 +64,8 @@ export class SaleOrderCreateComponent implements OnInit {
 
 
         //check Price not less than selected item price
-        if(element.price<selectedItem?.price){
-          this.getSaleOrderItemPrice(index).setErrors({minPrice:selectedItem?.price})
+        if(element.price<selectedItem?.minPrice){
+          this.getSaleOrderItemPrice(index).setErrors({minPrice:selectedItem?.minPrice})
         }
 
 

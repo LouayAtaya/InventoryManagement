@@ -41,6 +41,12 @@ namespace InventoryManagement.Application.CustomMiddlewares
                     $" A new BadReqest exception has been thrown: {be}");
                 await HandleExceptionAsync(httpContext, be, be.StatusCode);
             }
+            catch (UnauthorizedException ue)
+            {
+                _loggerManager.LogError($"{httpContext.Request.Method} {httpContext.Request.Path}" +
+                    $" A new Unauthorized exception has been thrown: {ue}");
+                await HandleExceptionAsync(httpContext, ue, ue.StatusCode);
+            }
             catch (Exception e)
             {
                 _loggerManager.LogError($"{httpContext.Request.Method} {httpContext.Request.Path}" +
@@ -58,6 +64,7 @@ namespace InventoryManagement.Application.CustomMiddlewares
             {
                 ResourceNotFoundException => exception.Message,
                 BadRequestException=> exception.Message,
+                UnauthorizedException => exception.Message,
                 _ => "Internal Server Error."
             };
 

@@ -33,6 +33,7 @@ namespace InventoryManagement.Application.DTOs
 
         [StringLength(200, ErrorMessage = "Inroduction cannot be loner then 200 characters")]
         public String Inroduction { get; set; }
+        public int MinPrice { get; set; }
         public int Price { get; set; }
         public int TotalQuantity { get; set; }
         public ItemType ItemType { get; set; }

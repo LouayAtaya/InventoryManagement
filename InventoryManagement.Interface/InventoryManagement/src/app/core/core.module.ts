@@ -5,13 +5,20 @@ import { ItemCategoriesService, WarehousesService ,AccountsService,SaleOrdersSer
 import { SharedModule } from '../shared';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppHttpInterceptor } from './interceptors/app-http.interceptor';
+import { UsersService } from './services/users.service';
 
 
 
 @NgModule({
   declarations: [],
   providers:[
-    ItemsService,WarehousesService,ItemCategoriesService,AccountsService,SaleOrdersService,ItemOperationsService,ContentHeaderService,
+    ItemsService,
+    WarehousesService,ItemCategoriesService,
+    AccountsService,
+    SaleOrdersService,
+    ItemOperationsService,
+    ContentHeaderService,
+    UsersService,
     {provide:HTTP_INTERCEPTORS,useClass: AppHttpInterceptor, multi:true}
   ],
   imports: [

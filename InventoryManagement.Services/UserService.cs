@@ -4,9 +4,12 @@ using InventoryManagement.Domain.Entities;
 using InventoryManagement.Domain.Exceptions;
 using InventoryManagement.Domain.Interfaces.Repositories;
 using InventoryManagement.Services.Abstractions;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -43,6 +46,38 @@ namespace InventoryManagement.Services
         {
             throw new NotImplementedException();
         }
+
+        public async Task<AuthenticatedResponseDto> Login(LoginUserDto loginUser)
+        {
+            var user = await this._repositoryWrapper.User.GetUserByNameAndPassword(loginUser.Username,loginUser.Password);
+            if (user == null)
+                throw new InvalidLoginCredentialsException();
+
+            var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@5215"));
+            var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
+
+            var claims = new List<Claim>
+            {
+                //new Claim("username",user.Username),
+                new Claim(ClaimTypes.Name, user.Username),
+            };
+
+            foreach (var role in user.UserRoles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role.Role.Name));
+            }
+
+            var tokeOptions = new JwtSecurityToken(
+                issuer: "https://InventoryManagement.com",
+                audience: "https://InventoryManagement.com",
+                claims: claims,
+                expires: DateTime.Now.AddMinutes(2),
+                signingCredentials: signinCredentials
+            );
+            var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
+            return new AuthenticatedResponseDto { Token = tokenString };
+        }
+
 
         public async Task<UserDto> CreateUserAsync(UserForCreationDto userForCreationDto)
         {

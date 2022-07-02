@@ -8,6 +8,7 @@ export class ItemDetails {
     name:string;
     description:string;
     inroduction:string;
+    minPrice:number;
     price:number;
     totalQuantity:number;
     itemType:ItemType;

@@ -2,11 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { HomeRoutingModule } from './home-routing.module';
-import { HomeComponent } from './pages/home/home.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { AboutusComponent } from './pages/aboutus/aboutus.component';
 import { SharedModule } from '../shared';
-import { LoginComponent } from './pages/login/login.component';
+import { HomeComponent } from './pages';
+import { HomeContentComponent } from './pages/home-content/home-content.component';
+import 'node_modules/admin-lte-with-rtl/dist/js/adminlte.js'
 
 
 @NgModule({
@@ -14,12 +15,12 @@ import { LoginComponent } from './pages/login/login.component';
     HomeComponent,
     SettingsComponent,
     AboutusComponent,
-    LoginComponent
+    HomeContentComponent
   ],
   imports: [
     CommonModule,
     HomeRoutingModule,
-    SharedModule
+    SharedModule,
   ]
 })
 export class HomeModule { }

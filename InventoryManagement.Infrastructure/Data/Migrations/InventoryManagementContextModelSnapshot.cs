@@ -126,6 +126,11 @@ namespace InventoryManagement.Infrastructure.Data.Migrations
                     b.Property<byte>("ItemType")
                         .HasColumnType("tinyint");
 
+                    b.Property<int>("MinPrice")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)

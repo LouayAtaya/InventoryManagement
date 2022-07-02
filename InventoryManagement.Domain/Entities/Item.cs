@@ -15,6 +15,9 @@ namespace InventoryManagement.Domain.Entities
         public String Name { get; set; }
         public String Description { get; set; }
         public String Inroduction { get; set; }
+
+        public int MinPrice { get; set; }
+
         public int Price { get; set; }
         public int TotalQuantity { get; set; }
         public ItemType ItemType { get; set; }

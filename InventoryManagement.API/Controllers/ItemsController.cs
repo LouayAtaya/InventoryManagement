@@ -6,6 +6,7 @@ using InventoryManagement.Application.Helpers;
 using InventoryManagement.Domain.Entities.Parameters;
 using InventoryManagement.Domain.Exceptions;
 using InventoryManagement.Services.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -35,6 +36,7 @@ namespace InventoryManagement.API.Controllers
 
         // GET: api/<ItemsController>
         [HttpGet]
+        //[Authorize(Roles ="Admin")]
         public async Task<IActionResult> GetItems([FromQuery] ItemParameters itemParameters)
         {
             if (!itemParameters.ValidPriceRange)

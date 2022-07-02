@@ -31,6 +31,14 @@ namespace InventoryManagement.Infrastructure.Repositories
                             .SingleOrDefaultAsync();
         }
 
+        public async Task<User> GetUserByNameAndPassword(string username, string password)
+        {
+            return await FindByCondition(u => u.Username == username && u.Password==password)
+                            .Include(u => u.UserRoles)
+                            .ThenInclude(ur => ur.Role)
+                            .SingleOrDefaultAsync();
+        }
+
         public async Task<IEnumerable<Role>> GetRolesByUserAsync(int userId)
         {
             return await FindByCondition(u => u.Id == userId)

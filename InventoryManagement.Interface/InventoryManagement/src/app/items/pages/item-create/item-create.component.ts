@@ -33,6 +33,7 @@ export class ItemCreateComponent implements OnInit {
       name: ['',[Validators.required, Validators.minLength(4), Validators.maxLength(50), NotEmpty]],
       description:['',[Validators.maxLength(500)]],
       inroduction:[''],
+      minPrice:[0],
       price:[0],
       totalQuantity:[0],
       itemType:[null,[Validators.required]],

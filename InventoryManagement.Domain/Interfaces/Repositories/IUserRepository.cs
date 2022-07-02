@@ -14,6 +14,8 @@ namespace InventoryManagement.Domain.Interfaces.Repositories
 
         Task<User> GetUserByIdAsync(int userId);
 
+        Task<User> GetUserByNameAndPassword(string username, string password);
+
         Task<IEnumerable<Role>> GetRolesByUserAsync(int userId);
 
     }

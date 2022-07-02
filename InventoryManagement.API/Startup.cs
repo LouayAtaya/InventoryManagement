@@ -46,6 +46,7 @@ namespace InventoryManagement.API
             services.ConfigureAutoMapper();
             services.ConfigureAutomaticValidation();
             services.ConfigureValidationFilterAttribute();
+            services.ConfigureAuthentication();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -97,6 +98,7 @@ namespace InventoryManagement.API
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

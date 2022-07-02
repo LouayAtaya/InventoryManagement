@@ -14,6 +14,7 @@ namespace InventoryManagement.Application.DTOs
         public String Name { get; set; }
         public String Description { get; set; }
         public String Inroduction { get; set; }
+        public int minPrice { get; set; }
         public int Price { get; set; }
         public int TotalQuantity { get; set; }
         public ItemType ItemType { get; set; }

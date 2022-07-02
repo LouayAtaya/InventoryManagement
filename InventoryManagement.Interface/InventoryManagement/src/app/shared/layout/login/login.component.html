@@ -1,0 +1,79 @@
+<div class="login-page">
+  <img src="assets/img/AtayaLogo.png" 
+      style=" display: block;
+        position:absolute;
+        width: 100%;
+        left: 0;
+        top: 3;
+        height: 100%;
+        background: #00000000;
+        opacity: .7;"  
+        alt="User Image">
+<div class=" login-box">
+    <!-- /.login-logo -->
+    <div class="card card-outline card-primary">
+      <div class="card-header text-center">
+        <a [routerLink]="['']" class="h1"><b>عطايا</b>الشام</a>
+      </div>
+      <div class="card-body">
+        <p class="login-box-msg"> قم بتسجيل الدخول</p>
+  
+        <form  [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+          <div class="input-group mb-4">
+            <input name="username" formControlName="username" type="text" class="form-control" placeholder="User Name">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-envelope"></span>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="!username.valid && (username.dirty ||username.touched)">
+            <div class="alert alert-danger ">
+              يرجى ادخال اسم المستخدم  !!
+            </div>
+          </div>
+          <div class="input-group mb-4">
+            <input name="password" formControlName="password" type="password" class="form-control" placeholder="Password">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="!password.valid && (password.dirty ||password.touched)">
+            <div class="alert alert-danger ">
+              يرجى ادخال كلمة المرور  !!
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-7">
+              <div class="icheck-primary">
+                <input type="checkbox" id="remember">
+                <label for="remember">
+                  تذكرني
+                </label>
+              </div>
+            </div>
+            <!-- /.col -->
+            <div class="col-5">
+              <button type="submit" [disabled]="!loginForm.valid" class="btn btn-primary btn-block">تسجيل الدخول</button>
+            </div>
+            <!-- /.col -->
+          </div>
+        </form>
+  
+       
+  
+        <p class="mb-1">
+          <a href="forgot-password.html">نسيت كلمة المرور</a>
+        </p>
+        <p class="mb-0">
+          <a href="register.html" class="text-center">تسجيل حساب جديد</a>
+        </p>
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+  </div>
+  <!-- /.login-box -->
+</div>

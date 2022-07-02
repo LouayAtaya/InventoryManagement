@@ -49,6 +49,16 @@ namespace InventoryManagement.API.Controllers
             return CreatedAtAction("GetUserById", new { userId = user.Id }, user);
         }
 
+        // POST api/<UsersController>
+        [HttpPost("login")]
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
+        public async Task<IActionResult> Login([FromBody] LoginUserDto loginUser)
+        {
+            var authenticatedResponse = await this._serviceManager.UserService.Login(loginUser);
+
+            return Ok(authenticatedResponse);
+        }
+
         // PUT api/<UsersController>/5
         [HttpPut("{userId}")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]

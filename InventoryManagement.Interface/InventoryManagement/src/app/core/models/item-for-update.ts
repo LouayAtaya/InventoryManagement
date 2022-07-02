@@ -9,6 +9,7 @@ export class ItemForUpdate {
         this.name=init.name;
         this.description=init.description
         this.inroduction=init.inroduction
+        this.minPrice=init.minPrice
         this.price=init.price
         this.totalQuantity=init.totalQuantity
         this.itemType=init.itemType
@@ -33,6 +34,7 @@ export class ItemForUpdate {
     name:string;
     description:string;
     inroduction:string;
+    minPrice:number;
     price:number;
     totalQuantity:number;
     itemType:ItemType; 

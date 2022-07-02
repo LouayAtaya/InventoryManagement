@@ -36,6 +36,9 @@ namespace InventoryManagement.Infrastructure.Configuration
             builder.Property(i => i.TotalQuantity)
                 .HasDefaultValue(0);
 
+            builder.Property(i => i.MinPrice)
+                .HasDefaultValue(0);
+
             builder.Property(i => i.Price)
                 .HasDefaultValue(0);
 

@@ -10,14 +10,17 @@ using InventoryManagement.Infrastructure.Helpers;
 using InventoryManagement.Infrastructure.Repositories;
 using InventoryManagement.Services;
 using InventoryManagement.Services.Abstractions;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace InventoryManagement.API.Extensions
@@ -97,6 +100,29 @@ namespace InventoryManagement.API.Extensions
         public static void ConfigureValidationFilterAttribute(this IServiceCollection services)
         {
             services.AddScoped<ValidationFilterAttribute>();
+
+        }
+
+        public static void ConfigureAuthentication(this IServiceCollection services)
+        {
+            services.AddAuthentication(opt =>
+            {
+                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = "https://InventoryManagement.com",
+                    ValidAudience = "https://InventoryManagement.com",
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@5215"))
+                };
+            });
 
         }
 

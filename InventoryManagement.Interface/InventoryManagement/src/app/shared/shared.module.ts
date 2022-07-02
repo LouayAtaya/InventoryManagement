@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, NG_VALIDATORS, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { ContentHeaderComponent, FooterComponent, MainHeaderComponent, MainSidebarComponent, PreloaderComponent } from './layout';
+import { ContentHeaderComponent, FooterComponent, LoginComponent, MainHeaderComponent, MainSidebarComponent, PreloaderComponent } from './layout';
 import { NotFoundComponent } from './layout/not-found/not-found.component';
 import { NotEmptyValidatorDirective } from './directives/not-empty.validator';
 
@@ -19,6 +19,7 @@ import { NotEmptyValidatorDirective } from './directives/not-empty.validator';
     ContentHeaderComponent,
     NotFoundComponent,
     NotEmptyValidatorDirective,
+    LoginComponent
   ],
   imports: [
     CommonModule,

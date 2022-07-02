@@ -14,5 +14,6 @@ namespace InventoryManagement.Domain.Exceptions
         {
 
         }
+
     }
 }
