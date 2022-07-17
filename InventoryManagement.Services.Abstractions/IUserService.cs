@@ -15,6 +15,8 @@ namespace InventoryManagement.Services.Abstractions
         Task<IEnumerable<RoleDto>> GetRolesByUserAsync(int userId);
         Task<AuthenticatedResponseDto> Login(LoginUserDto loginUser);
 
+        Task<UserDto> Register(RegisterUserDto userDto);
+
         Task<UserDto> CreateUserAsync(UserForCreationDto User);
         Task UpdateUserAsync(int UserId, UserForUpdateDto User);
         Task DeleteUserAsync(int UserId);

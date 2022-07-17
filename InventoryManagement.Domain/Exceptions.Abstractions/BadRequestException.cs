@@ -11,6 +11,9 @@ namespace InventoryManagement.Domain.Exceptions.Abstractions
     {
         public int StatusCode { get; } = (int)HttpStatusCode.BadRequest;
 
+        public Object ValidationErrors { get; set; }
+
+
         protected BadRequestException(String message)
             :base(message)
         {

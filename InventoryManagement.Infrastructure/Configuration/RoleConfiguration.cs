@@ -15,18 +15,25 @@ namespace InventoryManagement.Infrastructure.Configuration
     {
         public void Configure(EntityTypeBuilder<Role> builder)
         {
-            builder.HasKey(r => r.Id);
+            builder.HasKey(u => u.Id);
 
-            builder.Property(r => r.Name)
-                .IsRequired()
-                .HasMaxLength(50);
+            builder.ToTable("Roles");
+
+            builder.Property(u => u.Name)
+                .IsRequired();
+
+            builder.Property(u => u.Description)
+                .HasMaxLength(500);
+
+            builder.Property(u => u.IsActive).HasDefaultValue(true);
 
             builder.HasIndex(r => r.Name).IsUnique();
 
-            builder.Property(r => r.IsActive).HasDefaultValue(true);
-
-            builder.Property(r => r.Description)
-                .HasMaxLength(500);
+            // Each Role can have many associated RoleClaims
+            builder.HasMany(e => e.RoleClaims)
+                .WithOne(e => e.Role)
+                .HasForeignKey(rc => rc.RoleId)
+                .IsRequired();
         }
     }
 }

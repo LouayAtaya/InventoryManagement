@@ -64,6 +64,7 @@ namespace InventoryManagement.Application.Helpers
             CreateMap<User, UserDto>();
             CreateMap<UserForCreationDto, User>();
             CreateMap<UserForUpdateDto, User>();
+            CreateMap<RegisterUserDto, User>();
             CreateMap<Member, MemberDto>();
             CreateMap<MemberForCreationDto, Member>();
             CreateMap<MemberForUpdateDto, Member>();

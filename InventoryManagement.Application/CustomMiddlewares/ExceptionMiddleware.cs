@@ -68,11 +68,19 @@ namespace InventoryManagement.Application.CustomMiddlewares
                 _ => "Internal Server Error."
             };
 
+            var validationErrors = exception switch
+            {
+                BadRequestException => ((BadRequestException) exception).ValidationErrors,
+                
+                _ => null
+            };
+
             await context.Response.WriteAsync(new ErrorDetails()
             {
                 StatusCode = context.Response.StatusCode,
                 Message = message,
-                details = $"{exception}"
+                validationErrors = validationErrors,
+                details = $"{exception}",
             }.ToString());
         }
         

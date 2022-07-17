@@ -15,26 +15,41 @@ namespace InventoryManagement.Infrastructure.Configuration
         {
             builder.HasKey(u => u.Id);
 
-            builder.Property(u => u.Username)
-                .IsRequired()
-                .HasMaxLength(50);
+            builder.ToTable("Users");
+
+            builder.Property(u => u.UserName)
+                .IsRequired();
 
             builder.Property(u => u.Email)
-                .IsRequired()
-                .HasMaxLength(150);
+                .IsRequired();
 
-            builder.Property(u => u.Mobile)
-                   .HasMaxLength(20);
+            builder.Property(u => u.PhoneNumber)
+                   .HasMaxLength(30);
 
-            builder.Property(u => u.Password)
-                .IsRequired()
-                .HasMaxLength(50);
-
-            builder.HasIndex(u => u.Username).IsUnique();
+         
+            builder.HasIndex(u => u.UserName).IsUnique();
             builder.HasIndex(u => u.Email).IsUnique();
 
             builder.Property(u => u.IsActive).HasDefaultValue(true);
 
+
+            // Each User can have many UserClaims
+            builder.HasMany(e => e.Claims)
+                .WithOne(e => e.User)
+                .HasForeignKey(uc => uc.UserId)
+                .IsRequired();
+
+            // Each User can have many UserLogins
+            builder.HasMany(e => e.Logins)
+                .WithOne(e => e.User)
+                .HasForeignKey(ul => ul.UserId)
+                .IsRequired();
+
+            // Each User can have many UserTokens
+            builder.HasMany(e => e.Tokens)
+                .WithOne(e => e.User)
+                .HasForeignKey(ut => ut.UserId)
+                .IsRequired();
         }
     }
 }

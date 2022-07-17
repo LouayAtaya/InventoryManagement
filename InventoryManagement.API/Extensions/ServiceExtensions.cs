@@ -126,5 +126,20 @@ namespace InventoryManagement.API.Extensions
 
         }
 
+        public static void ConfigureIdentity(this IServiceCollection services)
+        {
+            services.AddIdentity<User, Role>(
+                o =>
+                {
+                    o.SignIn.RequireConfirmedAccount = true;
+                    o.Password.RequireDigit = true;
+                    o.Lockout.MaxFailedAccessAttempts=3;
+                    o.User.RequireUniqueEmail = true;
+                }
+                ).AddEntityFrameworkStores<InventoryManagementContext>();
+
+
+        }
+
     }
 }

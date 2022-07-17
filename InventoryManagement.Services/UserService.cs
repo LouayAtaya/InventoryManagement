@@ -4,6 +4,7 @@ using InventoryManagement.Domain.Entities;
 using InventoryManagement.Domain.Exceptions;
 using InventoryManagement.Domain.Interfaces.Repositories;
 using InventoryManagement.Services.Abstractions;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -19,11 +20,13 @@ namespace InventoryManagement.Services
     {
         private readonly IRepositoryWrapper _repositoryWrapper;
         private readonly IMapper _mapper;
+        private readonly UserManager<User> _userManager;
 
-        public UserService(IRepositoryWrapper repositoryWrapper, IMapper mapper)
+        public UserService(IRepositoryWrapper repositoryWrapper, IMapper mapper,  UserManager<User> userManager)
         {
             this._repositoryWrapper = repositoryWrapper;
             _mapper = mapper;
+            this._userManager = userManager;
         }
 
         public async Task<IEnumerable<UserDto>> GetAllUsersAsync()
@@ -47,11 +50,34 @@ namespace InventoryManagement.Services
             throw new NotImplementedException();
         }
 
+        public async Task<UserDto> Register(RegisterUserDto registerUserDto)
+        {
+            var user = _mapper.Map<User>(registerUserDto);
+
+            var result = await _userManager.CreateAsync(user, registerUserDto.Password);
+            if (!result.Succeeded)
+            {
+                throw new InvalidEnteredUserInfoException(result.Errors);
+            }
+            return this._mapper.Map<UserDto>(user);
+
+        }
+
         public async Task<AuthenticatedResponseDto> Login(LoginUserDto loginUser)
         {
-            var user = await this._repositoryWrapper.User.GetUserByNameAndPassword(loginUser.Username,loginUser.Password);
+            var user = await this._userManager.FindByNameAsync(loginUser.UserName);
+
             if (user == null)
                 throw new InvalidLoginCredentialsException();
+
+            var isPasswordValid = await this._userManager.CheckPasswordAsync(user, loginUser.Password);
+
+            if (!isPasswordValid)
+            {
+
+                throw new InvalidLoginCredentialsException();
+
+            }
 
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@5215"));
             var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
@@ -59,13 +85,13 @@ namespace InventoryManagement.Services
             var claims = new List<Claim>
             {
                 //new Claim("username",user.Username),
-                new Claim(ClaimTypes.Name, user.Username),
+                new Claim(ClaimTypes.Name, user.UserName),
             };
 
-            foreach (var role in user.UserRoles)
+            /*foreach (var role in user.)
             {
                 claims.Add(new Claim(ClaimTypes.Role, role.Role.Name));
-            }
+            }*/
 
             var tokeOptions = new JwtSecurityToken(
                 issuer: "https://InventoryManagement.com",
@@ -76,6 +102,7 @@ namespace InventoryManagement.Services
             );
             var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
             return new AuthenticatedResponseDto { Token = tokenString };
+            
         }
 
 

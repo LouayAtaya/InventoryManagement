@@ -46,6 +46,8 @@ namespace InventoryManagement.API
             services.ConfigureAutoMapper();
             services.ConfigureAutomaticValidation();
             services.ConfigureValidationFilterAttribute();
+
+            services.ConfigureIdentity();
             services.ConfigureAuthentication();
 
             services.AddControllers();

@@ -1,5 +1,7 @@
 ﻿using InventoryManagement.Domain.Entities;
 using InventoryManagement.Infrastructure.Configuration;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +9,7 @@ using System.Text;
 
 namespace InventoryManagement.Infrastructure.Data
 {
-    public class InventoryManagementContext : DbContext
+    public class InventoryManagementContext : IdentityDbContext<User, Role, int, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>
     {
 
         public DbSet<Item> Items { get; set; }
@@ -19,15 +21,12 @@ namespace InventoryManagement.Infrastructure.Data
         public DbSet<SaleOrderItem> SaleOrderItems { get; set; }
         public DbSet<SaleOrder> SaleOrders { get; set; }
         public DbSet<ItemOperation> ItemOperations { get; set; }
-        public DbSet<User> Users { get; set; }
-        public DbSet<Role> Roles { get; set; }
         public DbSet<Member> Members { get; set; }
         public DbSet<Privilege> Privileges { get; set; }
-        public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<RolePrivilege> RolePrivileges { get; set; }
 
 
-        public InventoryManagementContext(DbContextOptions<InventoryManagementContext> options) 
+        public InventoryManagementContext(DbContextOptions<InventoryManagementContext> options)
             : base(options)
         {
 
@@ -57,6 +56,10 @@ namespace InventoryManagement.Infrastructure.Data
             modelBuilder.ApplyConfiguration(new RolePrivilegeConfiguration());
             modelBuilder.ApplyConfiguration(new UserRoleConfiguration());
             modelBuilder.ApplyConfiguration(new MemberConfiguration());
+            modelBuilder.ApplyConfiguration(new UserClaimConfiguration());
+            modelBuilder.ApplyConfiguration(new UserLoginConfiguration());
+            modelBuilder.ApplyConfiguration(new UserTokenConfiguration());
+            modelBuilder.ApplyConfiguration(new RoleClaimConfiguration());
 
 
         }

@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using InventoryManagement.Domain.Entities;
 using InventoryManagement.Domain.Interfaces.Repositories;
 using InventoryManagement.Services.Abstractions;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -33,7 +35,7 @@ namespace InventoryManagement.Services
 
         private readonly Lazy<IFileManagementService> _fileManagementService;
 
-        public ServiceManager(IRepositoryWrapper repositoryWrapper, IMapper mapper)
+        public ServiceManager(IRepositoryWrapper repositoryWrapper, IMapper mapper, UserManager<User> userManager)
         {
             _lazyItemService = new Lazy<IItemService>(() => new ItemService(repositoryWrapper, mapper));
 
@@ -49,7 +51,7 @@ namespace InventoryManagement.Services
 
             _lazyRoleService = new Lazy<IRoleService>(() => new RoleService(repositoryWrapper, mapper));
 
-            _lazyUserService = new Lazy<IUserService>(() => new UserService(repositoryWrapper, mapper));
+            _lazyUserService = new Lazy<IUserService>(() => new UserService(repositoryWrapper, mapper,   userManager));
 
             _lazyPrivilegeService = new Lazy<IPrivilegeService>(() => new PrivilegeService(repositoryWrapper, mapper));
 

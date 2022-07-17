@@ -15,12 +15,9 @@ namespace InventoryManagement.Infrastructure.Configuration
         {
             builder.ToTable("User_Roles");
 
-            builder.HasKey(ur => new { ur.UserId, ur.RoleId });
-
             builder.Property(ur => ur.UserId).HasColumnName("User_Id");
 
             builder.Property(ur => ur.RoleId).HasColumnName("Role_Id");
-
 
             builder.Property(ur => ur.IsActive).HasDefaultValue(true);
 

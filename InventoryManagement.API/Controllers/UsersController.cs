@@ -50,6 +50,16 @@ namespace InventoryManagement.API.Controllers
         }
 
         // POST api/<UsersController>
+        [HttpPost("register")]
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
+        public async Task<IActionResult> CreateUser([FromBody] RegisterUserDto registerUserDto)
+        {
+            var user=await this._serviceManager.UserService.Register(registerUserDto);
+
+            return CreatedAtAction("GetUserById", new { userId = user.Id }, user);
+        }
+
+        // POST api/<UsersController>
         [HttpPost("login")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> Login([FromBody] LoginUserDto loginUser)

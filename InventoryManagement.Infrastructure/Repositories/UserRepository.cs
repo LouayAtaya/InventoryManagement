@@ -26,27 +26,21 @@ namespace InventoryManagement.Infrastructure.Repositories
         {
             return await FindByCondition(u => u.Id == userId)
                             .Include(u => u.Member)
-                            .Include(u => u.UserRoles)
-                            .ThenInclude(ur => ur.Role)
+                           // .Include(u => u.UserRoles)
+                            //.ThenInclude(ur => ur.Role)
                             .SingleOrDefaultAsync();
         }
 
         public async Task<User> GetUserByNameAndPassword(string username, string password)
         {
-            return await FindByCondition(u => u.Username == username && u.Password==password)
-                            .Include(u => u.UserRoles)
-                            .ThenInclude(ur => ur.Role)
+            return await FindAll()
+                //FindByCondition(u => u.Username == username && u.Password==password)
+                            //.Include(u => u.UserRoles)
+                            //.ThenInclude(ur => ur.Role)
                             .SingleOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<Role>> GetRolesByUserAsync(int userId)
-        {
-            return await FindByCondition(u => u.Id == userId)
-                            .Include(u => u.UserRoles)
-                            .SelectMany(u=>u.UserRoles.Select(x=>x.Role))
-                            .ToListAsync();
-
-        }
+        
 
     }
 }

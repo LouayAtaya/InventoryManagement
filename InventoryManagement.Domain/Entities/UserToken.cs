@@ -7,12 +7,9 @@ using System.Threading.Tasks;
 
 namespace InventoryManagement.Domain.Entities
 {
-    public class UserRole: IdentityUserRole<int>
+    public class UserToken: IdentityUserToken<int>
     {
-        
-        public bool? IsActive { get; set; }
-
         public virtual User User { get; set; }
-        public virtual Role Role { get; set; }
+
     }
 }

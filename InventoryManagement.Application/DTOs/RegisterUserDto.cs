@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace InventoryManagement.Application.DTOs
 {
-    public class UserForCreationDto : IEntityDto
+    public class RegisterUserDto: IEntityDto
     {
-        public UserForCreationDto()
+        public RegisterUserDto()
         {
             UserRoles = new List<UserRoleForCreationDto>();
 
         }
 
         [Required(ErrorMessage = "Username is required")]
-        [StringLength(256, ErrorMessage = "Username can't be longer than 256 characters")]
+        [StringLength(256, ErrorMessage = "UserName can't be longer than 256 characters")]
         public string UserName { get; set; }
 
         [Required(ErrorMessage = "Email is required")]
@@ -33,7 +33,6 @@ namespace InventoryManagement.Application.DTOs
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
-
 
         public virtual MemberForCreationDto Member { get; set; }
         public virtual ICollection<UserRoleForCreationDto> UserRoles { get; set; }
