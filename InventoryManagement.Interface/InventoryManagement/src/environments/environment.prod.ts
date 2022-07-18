@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  baseUrl: 'http://localhost:55652/api/'
+  baseUrl: 'http://loayat-001-site1.itempurl.com/api/'
 
 };

@@ -17,7 +17,6 @@ export class HomeComponent implements OnInit {
   isAuthenticated=false;
 
   ngOnInit(): void {
-    this.contentHeaderService.setMainHeaderTitle("الصفحة الرئيسية")
 
    /* if(!this.isAuthenticated)
       this.router.navigate(['login'])*/

@@ -12,58 +12,61 @@
           </div>
           <!-- /.card-header -->
           <div class="card-body">
-            <table id="example1" class="table table-bordered table-striped">
-              <thead>
-              <tr>
-                <th>رقم الحساب</th> 
-                <th> الكود</th>
-                <th>نوع الحساب</th>
-                <th>اسم الحساب</th>
-                <th> الوصف</th>
-                <th>الرصيد</th>
-                <th>مفعل/ غير مفعل</th>
-                <th>تاريخ البدء</th>
-              </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let account of accounts">
-                  <td>{{account.id}}</td>
-                  <td>{{account.accountCode}}</td>
-                  <td>{{accountTypeMap.get(account.accountType)}}</td>
-                  <td>{{account.name}}</td>
-                  <td>{{account.description}}</td>
-                  <td>{{account.amount}}</td>
-                  <td> 
-                    <div *ngIf="account.isActive; else elseBlock">
-                        مفعل
-                    </div>
-                    <ng-template #elseBlock>
-                        غير مفعل
-                    </ng-template>
-                    </td>
-                  <td>{{account.createdAt|date:'medium'}}</td>
-                  <td> 
-                    <a [routerLink]="[account.id]" type="button" class="btn btn-block btn-info btn-sm">عرض التفاصيل</a>
-                    <a [routerLink]="['update/'+account.id]" type="button" class="btn btn-block btn-warning btn-sm">تعديل</a>
-                    <a type="button" class="btn btn-block btn-danger btn-sm">حذف</a>
-                  </td>
-  
+            <div class="table-responsive">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>رقم الحساب</th> 
+                  <th> الكود</th>
+                  <th>نوع الحساب</th>
+                  <th>اسم الحساب</th>
+                  <th> الوصف</th>
+                  <th>الرصيد</th>
+                  <th>مفعل/ غير مفعل</th>
+                  <th>تاريخ البدء</th>
                 </tr>
-             
-              </tbody>
-              <tfoot>
-              <tr>
-                <th>رقم الحساب</th> 
-                <th> الكود</th>
-                <th>نوع الحساب</th>
-                <th>اسم الحساب</th>
-                <th> الوصف</th>
-                <th>الرصيد</th>
-                <th>مفعل/ غير مفعل</th>
-                <th>تاريخ البدء</th>
-              </tr>
-              </tfoot>
-            </table>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let account of accounts">
+                    <td>{{account.id}}</td>
+                    <td>{{account.accountCode}}</td>
+                    <td>{{accountTypeMap.get(account.accountType)}}</td>
+                    <td>{{account.name}}</td>
+                    <td>{{account.description}}</td>
+                    <td>{{account.amount}}</td>
+                    <td> 
+                      <div *ngIf="account.isActive; else elseBlock">
+                          مفعل
+                      </div>
+                      <ng-template #elseBlock>
+                          غير مفعل
+                      </ng-template>
+                      </td>
+                    <td>{{account.createdAt|date:'medium'}}</td>
+                    <td> 
+                      <a [routerLink]="[account.id]" type="button" class="btn btn-block btn-info btn-sm">عرض التفاصيل</a>
+                      <a [routerLink]="['update/'+account.id]" type="button" class="btn btn-block btn-warning btn-sm">تعديل</a>
+                      <a type="button" class="btn btn-block btn-danger btn-sm">حذف</a>
+                    </td>
+    
+                  </tr>
+               
+                </tbody>
+                <tfoot>
+                <tr>
+                  <th>رقم الحساب</th> 
+                  <th> الكود</th>
+                  <th>نوع الحساب</th>
+                  <th>اسم الحساب</th>
+                  <th> الوصف</th>
+                  <th>الرصيد</th>
+                  <th>مفعل/ غير مفعل</th>
+                  <th>تاريخ البدء</th>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            
           </div>
           <!-- /.card-body -->
         </div>

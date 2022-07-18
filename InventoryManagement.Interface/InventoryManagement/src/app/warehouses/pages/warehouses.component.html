@@ -7,52 +7,56 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-          <table id="example1" class="table table-bordered table-striped">
-            <thead>
-            <tr>
-              <th>رقم المصنع/ المخزن</th>
-              <th>اسم المصنع/ المخزن</th>
-              <th>الوصف</th>
-              <th>مفعل/ غير مفعل</th>
-              <th>تاريخ البدء</th>
-            </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let warehouse of warehouses">
-                <td>{{warehouse.id}}</td>
-                <td>{{warehouse.name}}
-                </td>
-                <td>{{warehouse.description}}</td>
-                <td> 
-                  <div *ngIf="warehouse.isActive; else elseBlock">
-                      مفعل
-                  </div>
-                  <ng-template #elseBlock>
-                      غير مفعل
-                  </ng-template>
-                </td>
-                <td>{{warehouse.createdAt|date:'medium'}}</td>
-                <td> 
-                  <a type="button" class="btn btn-block btn-info btn-sm">عرض التفاصيل</a>
-                  <a type="button" class="btn btn-block btn-warning btn-sm">تعديل</a>
-                  <a type="button" class="btn btn-block btn-danger btn-sm">حذف</a>
-                </td>
-
-               
+          
+          <div class="table-responsive">
+            <table id="example1" class="table table-bordered table-striped">
+              <thead>
+              <tr>
+                <th>رقم المصنع/ المخزن</th>
+                <th>اسم المصنع/ المخزن</th>
+                <th>الوصف</th>
+                <th>مفعل/ غير مفعل</th>
+                <th>تاريخ البدء</th>
               </tr>
-           
-            
-            </tbody>
-            <tfoot>
-            <tr>
-              <th>رقم المصنع/ المخزن</th>
-              <th>اسم المصنع/ المخزن</th>
-              <th>الوصف</th>
-              <th>مفعل/ غير مفعل</th>
-              <th>تاريخ البدء</th>
-            </tr>
-            </tfoot>
-          </table>
+              </thead>
+              <tbody>
+                <tr *ngFor="let warehouse of warehouses">
+                  <td>{{warehouse.id}}</td>
+                  <td>{{warehouse.name}}
+                  </td>
+                  <td>{{warehouse.description}}</td>
+                  <td> 
+                    <div *ngIf="warehouse.isActive; else elseBlock">
+                        مفعل
+                    </div>
+                    <ng-template #elseBlock>
+                        غير مفعل
+                    </ng-template>
+                  </td>
+                  <td>{{warehouse.createdAt|date:'medium'}}</td>
+                  <td> 
+                    <a type="button" class="btn btn-block btn-info btn-sm">عرض التفاصيل</a>
+                    <a type="button" class="btn btn-block btn-warning btn-sm">تعديل</a>
+                    <a type="button" class="btn btn-block btn-danger btn-sm">حذف</a>
+                  </td>
+  
+                 
+                </tr>
+             
+              
+              </tbody>
+              <tfoot>
+              <tr>
+                <th>رقم المصنع/ المخزن</th>
+                <th>اسم المصنع/ المخزن</th>
+                <th>الوصف</th>
+                <th>مفعل/ غير مفعل</th>
+                <th>تاريخ البدء</th>
+              </tr>
+              </tfoot>
+            </table>
+          </div>
+          
         </div>
         <!-- /.card-body -->
       </div>

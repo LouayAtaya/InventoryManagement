@@ -12,57 +12,60 @@
           </div>
           <!-- /.card-header -->
           <div class="card-body">
-            <table id="example1" class="table table-bordered table-striped">
-              <thead>
-              <tr>
-                <th>رقم الطلب</th> 
-                <th> الزبون/ العميل</th>
-                <th> المصنع/ المخزن</th>
-                <th>حالة الطلب</th>
-                <th> الإجمالي</th>
-                <th>مفعل/ غير مفعل</th>
-                <th>تاريخ البدء</th>
-              </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let saleOrder of saleOrders">
-                  <td>{{saleOrder.id}}</td>
-                  <td>{{saleOrder.customerName}}</td>
-                  <td>{{saleOrder.warehouseName}}</td>
-                  <td>{{getSaleOrderStatus(saleOrder.saleOrderStatus)}}</td>
-                  <td>{{saleOrder.totalOrderPrice}}</td>
-                  <td> 
-                    <div *ngIf="saleOrder.isActive; else elseBlock">
-                        مفعل
-                    </div>
-                    <ng-template #elseBlock>
-                        غير مفعل
-                    </ng-template>
-                    </td>
-                  <td>{{saleOrder.createdAt|date:'medium'}}</td>
-                  <td> 
-                    <a [routerLink]="[saleOrder.id]" type="button" class="btn btn-block btn-info btn-sm">عرض التفاصيل</a>
-                    <a [routerLink]="['update/'+saleOrder.id]" type="button" class="btn btn-block btn-warning btn-sm">تعديل</a>
-                    <a type="button" class="btn btn-block btn-danger btn-sm">حذف</a>
-                  </td>
-  
-                 
+            <div class="table-responsive">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>رقم الطلب</th> 
+                  <th> الزبون/ العميل</th>
+                  <th> المصنع/ المخزن</th>
+                  <th>حالة الطلب</th>
+                  <th> الإجمالي</th>
+                  <th>مفعل/ غير مفعل</th>
+                  <th>تاريخ البدء</th>
                 </tr>
-             
-              
-              </tbody>
-              <tfoot>
-              <tr>
-                <th>رقم الطلب</th> 
-                <th> الزبون/ العميل</th>
-                <th> المصنع/ المخزن</th>
-                <th>حالة الطلب</th>
-                <th> الإجمالي</th>
-                <th>مفعل/ غير مفعل</th>
-                <th>تاريخ البدء</th>
-              </tr>
-              </tfoot>
-            </table>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let saleOrder of saleOrders">
+                    <td>{{saleOrder.id}}</td>
+                    <td>{{saleOrder.customerName}}</td>
+                    <td>{{saleOrder.warehouseName}}</td>
+                    <td>{{getSaleOrderStatus(saleOrder.saleOrderStatus)}}</td>
+                    <td>{{saleOrder.totalOrderPrice}}</td>
+                    <td> 
+                      <div *ngIf="saleOrder.isActive; else elseBlock">
+                          مفعل
+                      </div>
+                      <ng-template #elseBlock>
+                          غير مفعل
+                      </ng-template>
+                      </td>
+                    <td>{{saleOrder.createdAt|date:'medium'}}</td>
+                    <td> 
+                      <a [routerLink]="[saleOrder.id]" type="button" class="btn btn-block btn-info btn-sm">عرض التفاصيل</a>
+                      <a [routerLink]="['update/'+saleOrder.id]" type="button" class="btn btn-block btn-warning btn-sm">تعديل</a>
+                      <a type="button" class="btn btn-block btn-danger btn-sm">حذف</a>
+                    </td>
+    
+                   
+                  </tr>
+               
+                
+                </tbody>
+                <tfoot>
+                <tr>
+                  <th>رقم الطلب</th> 
+                  <th> الزبون/ العميل</th>
+                  <th> المصنع/ المخزن</th>
+                  <th>حالة الطلب</th>
+                  <th> الإجمالي</th>
+                  <th>مفعل/ غير مفعل</th>
+                  <th>تاريخ البدء</th>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            
           </div>
           <!-- /.card-body -->
         </div>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ContentHeaderService } from 'src/app/core';
 
 @Component({
   selector: 'app-home-content',
@@ -7,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeContentComponent implements OnInit {
 
-  constructor() { }
+  constructor(private contentHeaderService:ContentHeaderService, private router:Router) { }
 
   ngOnInit(): void {
+    this.contentHeaderService.setMainHeaderTitle("الصفحة الرئيسية")
+
   }
 
 }
